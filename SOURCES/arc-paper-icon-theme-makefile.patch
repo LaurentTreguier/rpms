@@ -1,0 +1,19 @@
+--- Makefile.am	2016-11-22 22:23:00.000000000 +0100
++++ Makefile.patched.am	2017-03-02 22:19:50.955949360 +0100
+@@ -1,5 +1,5 @@
+ EXTRA_DIST = \
+-	$(srcdir)/Arc \
++	$(srcdir)/Arc\ Paper \
+ 	$(srcdir)/COPYING \
+ 	$(srcdir)/CREDITS \
+ 	$(srcdir)/README.md
+@@ -8,7 +8,7 @@
+ 
+ install-data-hook:
+ 	test -d $(DESTDIR)$(themedir) || $(MKDIR_P) $(DESTDIR)$(themedir)
+-	cp -Rv $(srcdir)/Arc $(DESTDIR)$(themedir)/.
++	cp -Rv $(srcdir)/Arc\ Paper $(DESTDIR)$(themedir)/.
+ 
+ uninstall-hook:
+-	test -d $(DESTDIR)$(themedir)/Arc && rm -rf $(DESTDIR)$(themedir)/Arc
++	test -d $(DESTDIR)$(themedir)/Arc\ Paper && rm -rf $(DESTDIR)$(themedir)/Arc\ Paper
