@@ -13,11 +13,8 @@ fsharp
 
 ## Discord
 
-<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord/status_image/last_build.png" /></a>
-Discord
-
-<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/DiscordCanary/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/DiscordCanary/status_image/last_build.png" /></a>
-DiscordCanary
+<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord-installer/status_image/last_build.png" /></a>
+Discord-installer
 
 
 
