@@ -1,8 +1,8 @@
 %global         __python %{__python3}
 
 Name:           oomox
-Version:        1.2.1
-Release:        7%{?dist}
+Version:        1.2.2
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -66,6 +66,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/screenshot*
 
 
 %changelog
+* Sun Apr 02 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.2-1
+- new version
+
 * Thu Mar 30 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.1-7
 - cleaned up specfile a bit
 
