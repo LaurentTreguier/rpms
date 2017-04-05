@@ -4,15 +4,16 @@
 
 Name:           %{source_name}-bin
 Version:        2.78c
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        3D modeling, animation, rendering and post-production
 
-%global         filename        blender-%{version}-linux-glibc%(echo %{glibc_version} | tr -d '.')-%(uname -p)
+%global         filename        blender-%{version}-linux-glibc%(echo %{glibc_version} | tr -d '.')-%{_arch}
 
 License:        GPLv2+
 URL:            https://www.blender.org
 Source0:        http://download.blender.org/release/Blender%(echo %{version} | tr -d [:alpha:])/%{filename}.tar.bz2#/%{name}-%{version}.tar.bz2
 
+BuildArch:      x86_64
 Requires:       glibc >= %{glibc_version}
 Requires:       blender-fonts
 Requires:       fontpackages-filesystem
@@ -61,5 +62,8 @@ mv $RPM_BUILD_ROOT/opt/%{source_name}/%{source_name}.svg $RPM_BUILD_ROOT/%{_data
 
 
 %changelog
+* Wed Apr 05 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-2
+- force x86_64
+
 * Wed Apr  5 2017 Laurent Tréguier <laurent@treguier.org>
 - created specfile
