@@ -1,6 +1,6 @@
 Name:           fsharp
 Version:        4.1.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -41,6 +41,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
+%license LICENSE
+%doc README.md
 %{_bindir}/fsharp*
 %{_monodir}/fsharp
 %{_monogacdir}/FSharp.*
@@ -52,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.8-2
+- added license and doc files
+
 * Wed Apr 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.8-1
 - new version
 
