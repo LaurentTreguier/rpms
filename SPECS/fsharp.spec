@@ -1,5 +1,5 @@
 Name:           fsharp
-Version:        4.1.7
+Version:        4.1.8
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Apr 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.8-1
+- new version
+
 * Thu Mar 30 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.7-1
 - new version
 
