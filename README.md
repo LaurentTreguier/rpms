@@ -4,6 +4,13 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 
 
 
+## Blender-bin
+
+<a href="https://copr.fedorainfracloud.org/coprs/tcg/blender-bin/package/blender-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>
+blender-bin
+
+
+
 ## Devel
 
 <a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>
