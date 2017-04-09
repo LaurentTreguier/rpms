@@ -1,7 +1,7 @@
 %global         __python %{__python3}
 
 Name:           oomox
-Version:        1.2.3
+Version:        1.2.4
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
@@ -46,17 +46,13 @@ mkdir -p $RPM_BUILD_ROOT/%{_datadir}/applications
 cp -R $RPM_BUILD_DIR/%{name}-%{version}/* $RPM_BUILD_ROOT/opt/%{name}
 cp $RPM_SOURCE_DIR/*-{cli,gui} $RPM_BUILD_ROOT/%{_bindir}
 cp $RPM_SOURCE_DIR/%{name}.desktop $RPM_BUILD_ROOT/%{_datadir}/applications
-rm $RPM_BUILD_ROOT/opt/%{name}/CHANGES
-rm $RPM_BUILD_ROOT/opt/%{name}/CREDITS
-rm $RPM_BUILD_ROOT/opt/%{name}/PKGBUILD
-rm $RPM_BUILD_ROOT/opt/%{name}/circle.yml
-rm $RPM_BUILD_ROOT/opt/%{name}/screenshot*
+rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
 
 
 %files
 %defattr(-,root,root)
-%license /opt/%{name}/LICENSE
-%doc /opt/%{name}/README.md
+%license LICENSE
+%doc README.md
 /opt/%{name}
 %{_datadir}/applications/%{name}.desktop
 %defattr(755,root,root)
@@ -66,6 +62,10 @@ rm $RPM_BUILD_ROOT/opt/%{name}/screenshot*
 
 
 %changelog
+* Sun Apr 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.4-1
+- new version
+- simplified install and files sections
+
 * Sun Apr 02 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.3-1
 - new version
 
