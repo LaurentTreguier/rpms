@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -131,8 +131,11 @@ cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_li
 cp -R import $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{drt_name}
 
 cd %{build_dir}/%{phb_name}
-cp generated/$RPM_OS/release/%{arch_bits}/lib%{phb_name}2.* $RPM_BUILD_ROOT/%{_libdir}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
+cd generated/$RPM_OS/release/%{arch_bits}
+rm *.o
+cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
+ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
 
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
@@ -165,12 +168,14 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %files %{phb_name}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
-%{_libdir}/lib%{phb_name}2.*
+%{_libdir}/lib%{phb_name}2.a
+%{_libdir}/lib%{phb_name}2.so.*.*.*
 
 
 %files %{phb_name}-devel
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
+%{_libdir}/lib%{phb_name}2.so
 %{_includedir}/%{name}/%{phb_name}
 
 
@@ -189,6 +194,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-4
+- fixed libphobos so files and symlinks
+
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-3
 - added dmd dependency to dmd-tools
 
