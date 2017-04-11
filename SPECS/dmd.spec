@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -83,6 +83,7 @@ applications that use phobos.
 %package %{dto_name}
 Summary:        Ancillary tools for the D programming language compiler
 BuildRequires:  curl-devel
+Requires:       dmd
 
 %description %{dto_name}
 This repository hosts various tools redistributed with DMD or used internally
@@ -188,9 +189,12 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-3
+- added dmd dependency to dmd-tools
+
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-2
 - added curl build dependency
-- added dtools subpackage
+- added tools subpackage
 
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-1
 - created specfile
