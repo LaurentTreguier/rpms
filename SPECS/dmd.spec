@@ -1,6 +1,7 @@
 %global         dmd_name        dmd
 %global         drt_name        druntime
 %global         phb_name        phobos
+%global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
 
 %define         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits} AUTO_BOOTSTRAP=1
@@ -9,16 +10,18 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
 URL:            http://dlang.org/
-Source0:        https://github.com/dlang/%{dmd_name}/archive/v%{version}.tar.gz#/%{dmd_name}-%{version}.tar.gz
-Source1:        https://github.com/dlang/%{drt_name}/archive/v%{version}.tar.gz#/%{drt_name}-%{version}.tar.gz
-Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#/%{phb_name}-%{version}.tar.gz
-Source3:        http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
+Source0:        https://github.com/dlang/%{dmd_name}/archive/v%{version}.tar.gz#/%{name}-%{dmd_name}-%{version}.tar.gz
+Source1:        https://github.com/dlang/%{drt_name}/archive/v%{version}.tar.gz#/%{name}-%{drt_name}-%{version}.tar.gz
+Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#/%{name}-%{phb_name}-%{version}.tar.gz
+Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
+Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 
+BuildRequires:  curl
 Requires:       %{name}-%{drt_name}-devel
 Requires:       %{name}-%{phb_name}-devel
 
@@ -77,25 +80,37 @@ The phobos-devel package contains header files for developing D
 applications that use phobos.
 
 
+%package %{dto_name}
+Summary:        Ancillary tools for the D programming language compiler
+BuildRequires:  curl-devel
+
+%description %{dto_name}
+This repository hosts various tools redistributed with DMD or used internally
+during various build tasks.
+
+
 %prep
 %autosetup -b 0
 %autosetup -b 1
 %autosetup -b 2
+%autosetup -b 3
 rm -rf %{build_dir}
 mkdir -p %{build_dir}
-cp -R $RPM_BUILD_DIR/%{dmd_name}-%{version} %{build_dir}/%{dmd_name}
-cp -R $RPM_BUILD_DIR/%{drt_name}-%{version} %{build_dir}/%{drt_name}
-cp -R $RPM_BUILD_DIR/%{phb_name}-%{version} %{build_dir}/%{phb_name}
-cp %SOURCE3 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
+
+for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
+do
+    cp -R $RPM_BUILD_DIR/$component-%{version} %{build_dir}/$component
+done
+
+cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
-cd %{build_dir}/%{dmd_name}
-%make_build %{make_options}
-cd %{build_dir}/%{drt_name}
-%make_build %{make_options}
-cd %{build_dir}/%{phb_name}
-%make_build %{make_options}
+for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
+do
+    cd %{build_dir}/$component
+    %make_build %{make_options}
+done
 
 
 %install
@@ -117,6 +132,11 @@ cp -R import $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{drt_name}
 cd %{build_dir}/%{phb_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{phb_name}2.* $RPM_BUILD_ROOT/%{_libdir}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
+
+cd %{build_dir}/%{dto_name}
+cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
+cd generated/$RPM_OS/%{arch_bits}
+cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %files
@@ -153,7 +173,24 @@ cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 %{_includedir}/%{name}/%{phb_name}
 
 
+%files %{dto_name}
+%defattr(-,root,root)
+%{_bindir}/catdoc
+%{_bindir}/changed
+%{_bindir}/ddemangle
+%{_bindir}/detab
+%{_bindir}/dget
+%{_bindir}/dustmite
+%{_bindir}/rdmd
+%{_bindir}/tolf
+%{_mandir}/*/rdmd.*
+
+
 
 %changelog
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-2
+- added curl build dependency
+- added dtools subpackage
+
+* Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-1
 - created specfile
