@@ -1,0 +1,7 @@
+#
+# RPM macros for Dub applications.
+#
+# Dub executable
+%__dub %{_bindir}/dub
+# Dub build command
+%dub_build %{__dub} build --build=release-nobounds

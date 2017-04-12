@@ -1,11 +1,12 @@
 Name:           dub
 Version:        1.3.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
 URL:            http://dlang.org/
 Source0:        https://github.com/dlang/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tr.gz
+Source10:       macros.%{name}
 
 BuildRequires:  dmd
 Requires:       dmd
@@ -32,22 +33,27 @@ Any dependencies specified in dub.json are automatically downloaded and made ava
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_datadir}/{bash-completion,fish}/completions}
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_datadir}/{bash-completion,fish}/completions,%{_rpmconfigdir}/macros.d}
 cp bin/%{name} $RPM_BUILD_ROOT/%{_bindir}
 cp scripts/bash-completion/* $RPM_BUILD_ROOT/%{_datadir}/bash-completion/completions
 cp scripts/fish-completion/* $RPM_BUILD_ROOT/%{_datadir}/fish/completions
+cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %files
 %defattr(-,root,root)
 %config %{_datadir}/bash-completion/completions/*
 %config %{_datadir}/fish/completions/*
+%config %{_rpmconfigdir}/macros.d/*
 %defattr(755,root,root)
 %{_bindir}/%{name}
 
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-3
+- added dub macros
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-2
 - fixed file permissions and attributes
 
