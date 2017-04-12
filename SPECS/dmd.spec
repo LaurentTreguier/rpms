@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -155,7 +155,7 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %license LICENSE_1_0.txt
 %doc README.md
 %{_mandir}/*/*
-%{_sysconfdir}/%{name}.conf
+%config(noreplace) %{_sysconfdir}/%{name}.conf
 %defattr(755,root,root)
 %{_bindir}/%{name}
 
@@ -201,6 +201,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-6
+- added %config macro for dmd.conf
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-5
 - added more symlinks for libphobos2.so
 
