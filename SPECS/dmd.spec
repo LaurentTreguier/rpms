@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -20,10 +20,12 @@ Source1:        https://github.com/dlang/%{drt_name}/archive/v%{version}.tar.gz#
 Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#/%{name}-%{phb_name}-%{version}.tar.gz
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
+Source11:       macros.%{name}
 
 BuildRequires:  curl
-Requires:       %{name}-%{drt_name}-devel
-Requires:       %{name}-%{phb_name}-devel
+Requires:       %{name}-config                      = %{version}-%{release}
+Requires:       %{name}-%{drt_name}-devel%{?_isa}   = %{version}-%{release}
+Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
 
 %description
 D is a systems programming language. Its focus is on combining the power and
@@ -41,6 +43,15 @@ programming. The needs and contributions of the D programming community form
 the direction it goes.
 
 
+%package config
+Summary:        Config files for %{name}
+BuildArch:      noarch
+Requires:       %{name} = %{version}-%{release}
+
+%description config
+Provide configuration file to customize %{name}.
+
+
 %package %{drt_name}
 Summary:        Runtime library for D
 
@@ -53,7 +64,7 @@ startup/shutdown, etc.
 
 %package %{drt_name}-devel
 Summary:        Support for developing D application
-Requires:       %{name}-%{drt_name}
+Requires:       %{name}-%{drt_name}%{?_isa} = %{version}-%{release}
 
 %description %{drt_name}-devel
 The druntime-devel package contains header files for developing D
@@ -73,7 +84,7 @@ jobs that need to get done
 
 %package %{phb_name}-devel
 Summary:        Support for developing D application
-Requires:       %{name}-%{phb_name}
+Requires:       %{name}-%{phb_name}%{?_isa} = %{version}-%{release}
 
 %description %{phb_name}-devel
 The phobos-devel package contains header files for developing D
@@ -83,7 +94,7 @@ applications that use phobos.
 %package %{dto_name}
 Summary:        Ancillary tools for the D programming language compiler
 BuildRequires:  curl-devel
-Requires:       dmd
+Requires:       %{dmd_name}%{?_isa} = %{version}-%{release}
 
 %description %{dto_name}
 This repository hosts various tools redistributed with DMD or used internally
@@ -116,7 +127,7 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_mandir},%{_sysconfdir}}
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_mandir},%{_sysconfdir},%{_rpmconfigdir}/macros.d}
 
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
@@ -125,6 +136,8 @@ cp -R docs/man/* $RPM_BUILD_ROOT/%{_mandir}
 sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-L-L\S*lib([0-9]+)\S*,-L-L%{_prefix}/lib\1,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
+
+cp %{SOURCE11} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 cd %{build_dir}/%{drt_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_libdir}
@@ -144,9 +157,9 @@ cd generated/$RPM_OS/%{arch_bits}
 cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
+%post %{drt_name} -p /sbin/ldconfig
+%postun %{drt_name} -p /sbin/ldconfig
 %post %{phb_name} -p /sbin/ldconfig
-
-
 %postun %{phb_name} -p /sbin/ldconfig
 
 
@@ -154,10 +167,17 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
 %doc README.md
-%config(noreplace) %{_sysconfdir}/%{name}.conf
-%{_mandir}/*/*
+%{_mandir}/*/%{name}.*
+%{_mandir}/*/dumpobj.*
+%{_mandir}/*/obj2asm.*
 %defattr(755,root,root)
 %{_bindir}/%{name}
+
+
+%files config
+%defattr(-,root,root)
+%config(noreplace) %{_sysconfdir}/%{name}.conf
+%config %{_rpmconfigdir}/macros.d/*
 
 
 %files %{drt_name}
@@ -188,6 +208,8 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 %files %{dto_name}
 %defattr(-,root,root)
+%{_mandir}/*/rdmd.*
+%defattr(755,root,root)
 %{_bindir}/catdoc
 %{_bindir}/changed
 %{_bindir}/ddemangle
@@ -196,11 +218,16 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %{_bindir}/dustmite
 %{_bindir}/rdmd
 %{_bindir}/tolf
-%{_mandir}/*/rdmd.*
 
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-8
+- added macros.dmd
+- added config subpackage
+- added ldconfig run for druntime %post and %postun
+- ensured tools are marked as executable
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-7
 - started using ldconfig
 

@@ -1,0 +1,7 @@
+#
+# RPM macros for D applications.
+#
+# Include directory where all .di or .d file are installed.
+%_dmd_includedir %{_includedir}/dmd
+# Compile options for ldc and make file
+%_dmd_optflags -release -boundscheck=off -w -g -O
