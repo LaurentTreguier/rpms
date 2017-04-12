@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -134,15 +134,9 @@ cd %{build_dir}/%{phb_name}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
-lib_name=$(ls lib%{phb_name}2.so.*.*.*)
 cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
-link_name=$lib_name
-
-for i in {1..3}
-do
-    link_name=${link_name%.*}
-    ln -sf $lib_name $RPM_BUILD_ROOT/%{_libdir}/$link_name
-done
+ldconfig -N $RPM_BUILD_ROOT/%{_libdir}
+ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
 
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
@@ -150,12 +144,18 @@ cd generated/$RPM_OS/%{arch_bits}
 cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
+%post %{phb_name} -p /sbin/ldconfig
+
+
+%postun %{phb_name} -p /sbin/ldconfig
+
+
 %files
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
 %doc README.md
-%{_mandir}/*/*
 %config(noreplace) %{_sysconfdir}/%{name}.conf
+%{_mandir}/*/*
 %defattr(755,root,root)
 %{_bindir}/%{name}
 
@@ -201,6 +201,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-7
+- started using ldconfig
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-6
 - added %config macro for dmd.conf
 
