@@ -10,7 +10,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -134,8 +134,15 @@ cd %{build_dir}/%{phb_name}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
+lib_name=$(ls lib%{phb_name}2.so.*.*.*)
 cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
-ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
+link_name=$lib_name
+
+for i in {1..3}
+do
+    link_name=${link_name%.*}
+    ln -sf $lib_name $RPM_BUILD_ROOT/%{_libdir}/$link_name
+done
 
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
@@ -169,7 +176,7 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{phb_name}2.a
-%{_libdir}/lib%{phb_name}2.so.*.*.*
+%{_libdir}/lib%{phb_name}2.so.*
 
 
 %files %{phb_name}-devel
@@ -194,6 +201,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-5
+- added more symlinks for libphobos2.so
+
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-4
 - fixed libphobos so files and symlinks
 
