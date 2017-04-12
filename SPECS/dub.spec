@@ -1,6 +1,6 @@
 Name:           dub
 Version:        1.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -39,13 +39,17 @@ cp scripts/fish-completion/* $RPM_BUILD_ROOT/%{_datadir}/fish/completions
 
 
 %files
+%defattr(-,root,root)
+%config %{_datadir}/bash-completion/completions/*
+%config %{_datadir}/fish/completions/*
 %defattr(755,root,root)
 %{_bindir}/%{name}
-%{_datadir}/bash-completion/completions/*
-%{_datadir}/fish/completions/*
 
 
 
 %changelog
+* Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-2
+- fixed file permissions and attributes
+
 * Tue Apr 11 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1
 - created specfile
