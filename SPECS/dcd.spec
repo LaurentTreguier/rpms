@@ -3,12 +3,12 @@
 
 Name:           %(echo %{source_name} | tr [:upper:] [:lower:])
 Version:        %(echo %{source_version} | tr '-' '_' | sed -r 's/([a-zA-Z])\./\1/')
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The D Completion Daemon is an auto-complete program for the D programming language
 
 License:        GPLv3
 URL:            https://github.com/Hackerpilot/DCD
-Source0:        https://github.com/Hackerpilot/DCD/archive/v%{source_version}.tar.gz#/%{source_name}-%{source_version}.tar.gz
+Source0:        https://github.com/Hackerpilot/%{source_name}/archive/v%{source_version}.tar.gz#/%{source_name}-%{source_version}.tar.gz
 
 BuildRequires:  dub
 Requires:       dmd-druntime-devel
@@ -25,7 +25,6 @@ The server (dcd-server) is responsible for caching imported files, calculating a
 
 
 %build
-cd $RPM_BUILD_DIR/%{source_name}-%{source_version}
 %dub_build --config client
 %dub_build --config server
 
@@ -53,5 +52,8 @@ grep -Eo '\-I\S+' %{_sysconfdir}/dmd.conf | tr -d '\-I' | sort | uniq > $RPM_BUI
 
 
 %changelog
-* Mon Apr  3 2017 Laurent Tréguier <laurent@treguier.org> - 0.9.0-alpha.6
+* Thu Apr 13 2017 Laurent Tréguier <laurent@treguier.org> - 0.9.0_alpha6-2
+- cleaned specfile
+
+* Mon Apr  3 2017 Laurent Tréguier <laurent@treguier.org> - 0.9.0_alpha6-1
 - created specfile
