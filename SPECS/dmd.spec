@@ -1,16 +1,17 @@
+%global         debug_package   %{nil}
 %global         dmd_name        dmd
 %global         drt_name        druntime
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
+%global         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits}
 
-%define         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits}
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -22,8 +23,7 @@ Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
 
-BuildRequires:  curl
-BuildRequires:  dmd
+BuildRequires:  %{name}
 Requires:       %{name}-config                      = %{version}-%{release}
 Requires:       %{name}-%{drt_name}-devel%{?_isa}   = %{version}-%{release}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
@@ -65,7 +65,7 @@ startup/shutdown, etc.
 
 %package %{drt_name}-devel
 Summary:        Support for developing D application
-Requires:       %{name}-%{drt_name}%{?_isa} = %{version}-%{release}
+Provides:       %{name}-%{drt_name}-static%{?_isa} = %{version}-%{release}
 
 %description %{drt_name}-devel
 The druntime-devel package contains header files for developing D
@@ -85,7 +85,7 @@ jobs that need to get done
 
 %package %{phb_name}-devel
 Summary:        Support for developing D application
-Requires:       %{name}-%{phb_name}%{?_isa} = %{version}-%{release}
+Provides:       %{name}-%{phb_name}-static%{?_isa} = %{version}-%{release}
 
 %description %{phb_name}-devel
 The phobos-devel package contains header files for developing D
@@ -128,24 +128,24 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_dmd_includedir}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
 
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
 cp ini/$RPM_OS/bin%(getconf LONG_BIT)/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
 cp -R docs/man/* $RPM_BUILD_ROOT/%{_mandir}
-sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
-sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
+sed -ri 's,-I\S*%{drt_name}\S*,-I%{_dmd_includedir}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
+sed -ri 's,-I\S*%{phb_name}\S*,-I%{_dmd_includedir}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-L-L\S*lib([0-9]+)\S*,-L-L%{_prefix}/lib\1,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 
 cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 cd %{build_dir}/%{drt_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_libdir}
-cp -R import $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{drt_name}
+cp -R import $RPM_BUILD_ROOT/%{_dmd_includedir}/%{drt_name}
 
 cd %{build_dir}/%{phb_name}
-cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
+cp -R {etc,std} $RPM_BUILD_ROOT/%{_dmd_includedir}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
 cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
@@ -184,13 +184,13 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %files %{drt_name}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
-%{_libdir}/lib%{drt_name}.*
+%{_libdir}/lib%{drt_name}.a
 
 
 %files %{drt_name}-devel
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
-%{_includedir}/%{name}/%{drt_name}
+%{_dmd_includedir}/%{drt_name}
 
 
 %files %{phb_name}
@@ -204,7 +204,7 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{phb_name}2.so
-%{_includedir}/%{name}/%{phb_name}
+%{_dmd_includedir}/%{phb_name}
 
 
 %files %{dto_name}
@@ -223,6 +223,13 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-10
+- removed debuginfo package
+- removed explicit *-devel dependencies on their library counterparts
+- removed curl dependency since package isn't bootstrapped anymore
+- made *-devel provide *-static
+- replaced _includedir/dmd with _dmd_includedir
+
 * Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-9
 - dropped bootstrapping
 
