@@ -2,25 +2,26 @@
 
 Name:           oomox
 Version:        1.2.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1:        oomox-archdroid-icons-cli
-Source2:        oomox-cli
-Source3:        oomox-gnome-colors-icons-cli
-Source4:        oomoxify-cli
-Source5:        oomox-gui
-Source6:        oomox.desktop
+Source10:       oomox-archdroid-icons-cli
+Source11:       oomox-cli
+Source12:       oomox-gnome-colors-icons-cli
+Source13:       oomoxify-cli
+Source14:       oomox-gui
+Source20:       oomox.desktop
 
 BuildArch:      noarch
-BuildRequires:  %{_bindir}/bash
-BuildRequires:  %{_bindir}/bc
-BuildRequires:  %{_bindir}/xgettext
-Requires:       %{_bindir}/gdk-pixbuf-pixdata
-Requires:       %{_bindir}/glib-compile-schemas
+BuildRequires:  bash
+BuildRequires:  bc
+BuildRequires:  desktop-file-utils
+BuildRequires:  gettext
+Requires:       gdk-pixbuf2-devel
+Requires:       glib2
 Requires:       rubygem(sass)
 Requires:       gtk-murrine-engine
 Requires:       gtk2-engines
@@ -44,24 +45,38 @@ mkdir -p $RPM_BUILD_ROOT/opt/%{name}
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 mkdir -p $RPM_BUILD_ROOT/%{_datadir}/applications
 cp -R $RPM_BUILD_DIR/%{name}-%{version}/* $RPM_BUILD_ROOT/opt/%{name}
-cp $RPM_SOURCE_DIR/*-{cli,gui} $RPM_BUILD_ROOT/%{_bindir}
-cp $RPM_SOURCE_DIR/%{name}.desktop $RPM_BUILD_ROOT/%{_datadir}/applications
+cp                              \
+    %{SOURCE10}                 \
+    %{SOURCE11}                 \
+    %{SOURCE12}                 \
+    %{SOURCE13}                 \
+    %{SOURCE14}                 \
+    $RPM_BUILD_ROOT/%{_bindir}
+desktop-file-install --dir $RPM_BUILD_ROOT/%{_datadir}/applications %{SOURCE20}
 rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
 
 
 %files
 %defattr(-,root,root)
 %license LICENSE
+%license CREDITS
 %doc README.md
+%doc CHANGES
 /opt/%{name}
 %{_datadir}/applications/%{name}.desktop
 %defattr(755,root,root)
-%{_bindir}/*-cli
-%{_bindir}/%{name}-gui
+%{_bindir}/*
 
 
 
 %changelog
+* Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.4-2
+- replaced file dependencies with package dependencies
+- removed RPM_SOURCE_DIR references
+- changed .desktop file installation to use desktop-file-install
+- added CREDITS to licenses
+- added CHANGES to docs
+
 * Sun Apr 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.4-1
 - new version
 - simplified install and files sections
@@ -86,4 +101,3 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
 
 * Thu Mar 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.1-3
 - rebuilt
-
