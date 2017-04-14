@@ -4,13 +4,13 @@
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
 
-%define         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits} AUTO_BOOTSTRAP=1
+%define         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits}
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -20,9 +20,10 @@ Source1:        https://github.com/dlang/%{drt_name}/archive/v%{version}.tar.gz#
 Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#/%{name}-%{phb_name}-%{version}.tar.gz
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
-Source11:       macros.%{name}
+Source20:       macros.%{name}
 
 BuildRequires:  curl
+BuildRequires:  dmd
 Requires:       %{name}-config                      = %{version}-%{release}
 Requires:       %{name}-%{drt_name}-devel%{?_isa}   = %{version}-%{release}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
@@ -127,7 +128,7 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_mandir},%{_sysconfdir},%{_rpmconfigdir}/macros.d}
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
 
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
@@ -137,7 +138,7 @@ sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $R
 sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-L-L\S*lib([0-9]+)\S*,-L-L%{_prefix}/lib\1,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 
-cp %{SOURCE11} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
+cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 cd %{build_dir}/%{drt_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_libdir}
@@ -222,17 +223,20 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-9
+- dropped bootstrapping
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-8
 - added macros.dmd
 - added config subpackage
-- added ldconfig run for druntime %post and %postun
+- added ldconfig run for druntime post and postun
 - ensured tools are marked as executable
 
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-7
 - started using ldconfig
 
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-6
-- added %config macro for dmd.conf
+- added config macro for dmd.conf
 
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-5
 - added more symlinks for libphobos2.so
