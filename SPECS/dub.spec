@@ -1,6 +1,6 @@
 Name:           dub
 Version:        1.3.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -51,6 +51,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-4
+- rebuilt with dmd that is not bootstrapped anymore
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-3
 - added dub macros
 
