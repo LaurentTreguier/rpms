@@ -11,7 +11,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        10%{?dist}
+Release:        11%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -148,9 +148,7 @@ cd %{build_dir}/%{phb_name}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_dmd_includedir}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
-cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
-ldconfig -N $RPM_BUILD_ROOT/%{_libdir}
-ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
+cp lib%{phb_name}2.* $RPM_BUILD_ROOT/%{_libdir}
 
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
@@ -184,25 +182,26 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %files %{drt_name}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
-%{_libdir}/lib%{drt_name}.a
+# Empty for now; it doesn't seem to be meant to be compiled as a shared library
 
 
 %files %{drt_name}-devel
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
+%{_libdir}/lib%{drt_name}.a
 %{_dmd_includedir}/%{drt_name}
 
 
 %files %{phb_name}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
-%{_libdir}/lib%{phb_name}2.a
 %{_libdir}/lib%{phb_name}2.so.*
 
 
 %files %{phb_name}-devel
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
+%{_libdir}/lib%{phb_name}2.a
 %{_libdir}/lib%{phb_name}2.so
 %{_dmd_includedir}/%{phb_name}
 
@@ -223,6 +222,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Sun Apr 16 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-11
+- moved *.a static libs to *-devel subpackages
+
 * Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-10
 - removed debuginfo package
 - removed explicit *-devel dependencies on their library counterparts

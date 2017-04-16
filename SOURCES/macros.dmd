@@ -1,6 +1,7 @@
 #
 # RPM macros for D applications.
 #
+%__dmd %{_bindir}/dmd
 # Include directory where all .di or .d file are installed.
 %_dmd_includedir %{_includedir}/dmd
 # Compile options for ldc and make file
