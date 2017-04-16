@@ -11,7 +11,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        11%{?dist}
+Release:        12%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -128,24 +128,24 @@ done
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_dmd_includedir}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
 
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
 cp ini/$RPM_OS/bin%(getconf LONG_BIT)/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
 cp -R docs/man/* $RPM_BUILD_ROOT/%{_mandir}
-sed -ri 's,-I\S*%{drt_name}\S*,-I%{_dmd_includedir}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
-sed -ri 's,-I\S*%{phb_name}\S*,-I%{_dmd_includedir}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
+sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
+sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-L-L\S*lib([0-9]+)\S*,-L-L%{_prefix}/lib\1,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 
 cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 cd %{build_dir}/%{drt_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_libdir}
-cp -R import $RPM_BUILD_ROOT/%{_dmd_includedir}/%{drt_name}
+cp -R import $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{drt_name}
 
 cd %{build_dir}/%{phb_name}
-cp -R {etc,std} $RPM_BUILD_ROOT/%{_dmd_includedir}/%{phb_name}
+cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
 cp lib%{phb_name}2.* $RPM_BUILD_ROOT/%{_libdir}
@@ -189,7 +189,7 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{drt_name}.a
-%{_dmd_includedir}/%{drt_name}
+%{_includedir}/%{name}/%{drt_name}
 
 
 %files %{phb_name}
@@ -203,7 +203,7 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{phb_name}2.a
 %{_libdir}/lib%{phb_name}2.so
-%{_dmd_includedir}/%{phb_name}
+%{_includedir}/%{name}/%{phb_name}
 
 
 %files %{dto_name}
@@ -222,6 +222,9 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Sun Apr 16 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-12
+- removed references to _dmd_includedir to fix EPEL 6 build
+
 * Sun Apr 16 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-11
 - moved *.a static libs to *-devel subpackages
 
