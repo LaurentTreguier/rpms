@@ -1,5 +1,5 @@
 Name:           fsharp
-Version:        4.1.12
+Version:        4.1.13
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -8,13 +8,13 @@ URL:            http://fsharp.org/
 Source0:        https://github.com/fsharp/fsharp/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
-BuildRequires:  %{_bindir}/autoreconf
-BuildRequires:  %{_bindir}/automake
-BuildRequires:  %{_bindir}/nuget
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  nuget
 BuildRequires:  mono-devel >= 4.4.0
 BuildRequires:  mono-wcf   >= 4.4.0
-Requires:       %{_bindir}/gdb
-Requires:       %{_bindir}/valgrind
+Requires:       gdb
+Requires:       valgrind
 # Hack ! (see https://github.com/fsharp/fsharp/issues/699)
 Provides:       mono(System.Collections.Immutable) = 1.2.0.0
 
@@ -56,6 +56,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Apr 20 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.13-1
+- new version
+- moved file dependencies to package dependencies
+
 * Thu Apr 13 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.12-1
 - new version
 
