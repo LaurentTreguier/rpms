@@ -2,7 +2,7 @@
 
 Name:           arc-paper-icon-theme
 Version:        20161122
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        The Arc icon theme patched to use Paper as secondary theme
 
 License:        GPLv3
@@ -13,9 +13,13 @@ Patch0:         arc-paper-icon-theme-makefile.patch
 Patch1:         arc-paper-icon-theme-index.patch
 
 BuildArch:      noarch
-BuildRequires:  %{_bindir}/automake
+BuildRequires:  autoconf
+BuildRequires:  automake
+BuildRequires:  pkgconfig
+BuildRequires:  gtk3-devel
 Requires:       hicolor-icon-theme
 Requires:       gnome-icon-theme
+Requires:       gtk-murrine-engine
 %if "%(rpm --version | cut -d' ' -f3)" >= "4.12"
 Recommends:     paper-icon-theme
 %endif
@@ -43,7 +47,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root)
 %license COPYING
 %doc README.md
 "%{_datadir}/icons/Arc Paper/"
@@ -51,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Apr 20 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-7
+- synced build dependencies with upstream
+
 * Fri Mar 31 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-6
 - added condition to only recommend paper-icon-theme with rpm >= 4.12
 
@@ -63,5 +69,5 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Mar 12 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-3
 - updated specfile
 
-* Thu Mar  9 2017 Laurent Tréguier <laurent@treguier.org>
+* Thu Mar  9 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-2
 - rewrite specfile
