@@ -1,8 +1,10 @@
-%global         source_name Flat-Plat
+%global         source_name         Flat-Plat
+%global         source_name_light   %{source_name}-light
+%global         source_name_dark    %{source_name}-dark
 
 Name:           %{source_name}-theme
 Version:        20170323
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
@@ -17,6 +19,22 @@ Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
 
 %description
+Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
+It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+
+
+%package -n %{source_name_light}-theme
+Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
+
+%description -n %{source_name_light}-theme
+Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
+It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+
+
+%package -n %{source_name_dark}-theme
+Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
+
+%description -n %{source_name_dark}-theme
 Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
 It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
 
@@ -37,11 +55,29 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 %files
 %license COPYING
 %doc README.md
-%{_datadir}/themes/%{source_name}*
+%{_datadir}/themes/%{source_name}
+%{_datadir}/themes/%{source_name}-compact
+
+
+%files -n %{source_name_light}-theme
+%license COPYING
+%doc README.md
+%{_datadir}/themes/%{source_name_light}
+%{_datadir}/themes/%{source_name_light}-compact
+
+
+%files -n %{source_name_dark}-theme
+%license COPYING
+%doc README.md
+%{_datadir}/themes/%{source_name_dark}
+%{_datadir}/themes/%{source_name_dark}-compact
 
 
 
 %changelog
+* Fri Apr 21 2017 Laurent Tréguier <laurent@treguier.org> - 20170323-4
+- split normal, light and dark themes into subpackages
+
 * Thu Apr 20 2017 Laurent Tréguier <laurent@treguier.org> - 20170323-3
 - moved file dependencies to package dependencies
 - added license and doc
