@@ -4,14 +4,14 @@
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    -f posix.mak RELEASE=1 MODEL=%{arch_bits}
+%global         make_options    RELEASE=1 MODEL=%{arch_bits}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
 Version:        2.074.0
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -122,7 +122,7 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
-    %make_build %{make_options}
+    %make_build %{make_options} -f posix.mak
 done
 
 
@@ -130,6 +130,7 @@ done
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_name},%{phb_name}},%{_sysconfdir},%{_mandir},%{_rpmconfigdir}/macros.d}
 
+# dmd
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
 cp ini/$RPM_OS/bin%(getconf LONG_BIT)/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
@@ -138,22 +139,28 @@ sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $R
 sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-L-L\S*lib([0-9]+)\S*,-L-L%{_prefix}/lib\1,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 
-cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
-
+# druntime
 cd %{build_dir}/%{drt_name}
 cp generated/$RPM_OS/release/%{arch_bits}/lib%{drt_name}.a $RPM_BUILD_ROOT/%{_libdir}
 cp -R import $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{drt_name}
 
+# phobos
 cd %{build_dir}/%{phb_name}
 cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
-cp lib%{phb_name}2.* $RPM_BUILD_ROOT/%{_libdir}
+cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
+ldconfig -N $RPM_BUILD_ROOT/%{_libdir}
+ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
 
+# tools
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
 cd generated/$RPM_OS/%{arch_bits}
 cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
+
+# macros
+cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %post %{drt_name} -p /sbin/ldconfig
@@ -163,7 +170,6 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %files
-%defattr(-,root,root)
 %license LICENSE_1_0.txt
 %doc README.md
 %{_mandir}/*/%{name}.*
@@ -174,32 +180,27 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %files config
-%defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %config %{_rpmconfigdir}/macros.d/*
 
 
 %files %{drt_name}
-%defattr(-,root,root)
 %license LICENSE_1_0.txt
 # Empty for now; it doesn't seem to be meant to be compiled as a shared library
 
 
 %files %{drt_name}-devel
-%defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{drt_name}.a
 %{_includedir}/%{name}/%{drt_name}
 
 
 %files %{phb_name}
-%defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{phb_name}2.so.*
 
 
 %files %{phb_name}-devel
-%defattr(-,root,root)
 %license LICENSE_1_0.txt
 %{_libdir}/lib%{phb_name}2.a
 %{_libdir}/lib%{phb_name}2.so
@@ -207,7 +208,6 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %files %{dto_name}
-%defattr(-,root,root)
 %{_mandir}/*/rdmd.*
 %defattr(755,root,root)
 %{_bindir}/catdoc
@@ -222,6 +222,10 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 
 
 %changelog
+* Fri Apr 21 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-13
+- switched to using ldconfig again to ensure a single libphobos2.so file exists
+- removed unnecessary defattr macros for standard permissions
+
 * Sun Apr 16 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-12
 - removed references to _dmd_includedir to fix EPEL 6 build
 
