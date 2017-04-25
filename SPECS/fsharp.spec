@@ -1,5 +1,5 @@
 Name:           fsharp
-Version:        4.1.14
+Version:        4.1.15
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -15,8 +15,6 @@ BuildRequires:  mono-devel >= 4.4.0
 BuildRequires:  mono-wcf   >= 4.4.0
 Requires:       gdb
 Requires:       valgrind
-# Hack ! (see https://github.com/fsharp/fsharp/issues/699)
-Provides:       mono(System.Collections.Immutable) = 1.2.0.0
 
 %description
 F# is a mature, open source, cross-platform, functional-first programming language.
@@ -56,6 +54,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Apr 25 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.15-1
+- new version
+- removed hack instroduced in 4.1.5-1
+
 * Thu Apr 20 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.14-1
 - new version
 
