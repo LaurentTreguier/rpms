@@ -1,0 +1,14 @@
+diff -ur src/libponyc/codegen/genopt.cc src/libponyc/codegen/genopt.cc
+--- src/libponyc/codegen/genopt.cc	2017-05-06 12:00:54.000000000 +0200
++++ src/libponyc/codegen/genopt.cc	2017-05-11 13:13:55.085330890 +0200
+@@ -450,7 +450,10 @@
+   PassManagerBase& pm)
+ {
+   if(pmb.OptLevel >= 2)
++  {
++    pm.add(new DominatorTreeWrapperPass());
+     pm.add(new HeapToStack());
++  }
+ }
+ 
+ class DispatchPonyCtx : public FunctionPass
