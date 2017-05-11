@@ -1,6 +1,6 @@
 Name:           ponyc
 Version:        0.14.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -9,10 +9,10 @@ Source0:        https://github.com/ponylang/ponyc/archive/%{version}.tar.gz#/%{n
 # https://github.com/ponylang/ponyc/issues/1225#issuecomment-300753325
 Patch0:         %{name}-compilation-segfault.patch
 
-BuildRequires:  clang           >= 3.3
-BuildRequires:  gcc             >= 4.7
-BuildRequires:  gcc-c++         >= 4.7
-BuildRequires:  llvm-devel
+BuildRequires:  clang                   >= 3.3
+BuildRequires:  gcc                     >= 4.7
+BuildRequires:  gcc-c++                 >= 4.7
+BuildRequires:  llvm-devel-ponyc-compat
 BuildRequires:  ncurses-devel
 BuildRequires:  pcre2-devel
 BuildRequires:  openssl-devel
@@ -29,12 +29,12 @@ sed -i 's,$(prefix)/lib,$(libdir),' Makefile
 
 
 %build
-%make_build
+%make_build LLVM_CONFIG=$(rpm -ql $(rpm -qa --qf '%%{NAME}\n' | grep -E 'llvm.+devel$' | sort -r | head -1) | grep 'bin/llvm-config')
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall destdir=$RPM_BUILD_ROOT/%{_libdir}/%{name}
+%makeinstall LLVM_CONFIG=$(rpm -ql $(rpm -qa --qf '%%{NAME}\n' | grep -E 'llvm.+devel$' | sort -r | head -1) | grep 'bin/llvm-config') destdir=$RPM_BUILD_ROOT/%{_libdir}/%{name}
 
 
 %files
@@ -48,5 +48,8 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu May 11 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-2
+- fixed llvm-devel handling with llvm-devel-ponyc-compat
+
 * Tue Apr 25 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-1
 - created specfile
