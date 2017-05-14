@@ -1,6 +1,6 @@
 Name:           ponyc
 Version:        0.14.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -47,13 +47,17 @@ echo %{llvm_config}
 %doc README.md
 %doc CHANGELOG.md
 %config %{_sysconfdir}/*
-%{_bindir}/*
 %{_includedir}/*
 %{_libdir}/*
+%defattr(755,root,root)
+%{_bindir}/*
 
 
 
 %changelog
+* Sun May 14 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-4
+- ensured binary is executable
+
 * Fri May 12 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-3
 - added gcc dependency
 - added /etc/profile.d/ponyc.sh to set default $CC variable
