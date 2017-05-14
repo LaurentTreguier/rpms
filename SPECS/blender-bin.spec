@@ -4,7 +4,7 @@
 
 Name:           %{source_name}-bin
 Version:        2.78c
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        3D modeling, animation, rendering and post-production
 
 %global         filename        blender-%{version}-linux-glibc%(echo %{glibc_version} | tr -d '.')-%{_arch}
@@ -49,21 +49,24 @@ mv $RPM_BUILD_ROOT/opt/%{source_name}/%{source_name}.svg $RPM_BUILD_ROOT/%{_data
 
 
 %files
-%defattr(-,root,root)
 %license LICENSE*
 %license *-license.txt
 %license copyright.txt
 %doc readme.html
 /opt/%{source_name}
-%{_bindir}/%{source_name}*
 %{_datadir}/applications/%{source_name}.desktop
 %{_datadir}/icons/scalable/%{source_name}.svg
+%defattr(755,root,root)
+%{_bindir}/%{source_name}*
 
 
 
 %changelog
+* Sun May 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-3
+- ensured binaries are executable
+
 * Wed Apr 05 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-2
 - force x86_64
 
-* Wed Apr  5 2017 Laurent Tréguier <laurent@treguier.org>
+* Wed Apr  5 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-1
 - created specfile
