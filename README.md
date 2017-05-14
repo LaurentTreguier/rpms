@@ -8,7 +8,7 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 
 |Devel||
 |---|---|
-|fsharp|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>|
+|dart|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart/status_image/last_build.png" /></a>|
 |dmd|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-druntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-druntime-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
@@ -16,6 +16,7 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |dmd-phobos-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-tools|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dub|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/status_image/last_build.png" /></a>|
+|fsharp|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>|
 |ponyc|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/status_image/last_build.png" /></a>|
 
 |Discord||
@@ -26,7 +27,7 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |---|---|
 |arc-paper-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/status_image/last_build.png" /></a>|
 |Flat-Plat-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/Flat-Plat-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/Flat-Plat-theme/status_image/last_build.png" /></a>|
-|OSX-Arc-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/status_image/last_build.png" /></a>|
-|la-capitaine-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/status_image/last_build.png" /></a>|
 |la-capitaine-cursor-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/status_image/last_build.png" /></a>|
+|la-capitaine-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/status_image/last_build.png" /></a>|
 |oomox|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/oomox/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/oomox/status_image/last_build.png" /></a>|
+|OSX-Arc-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/status_image/last_build.png" /></a>|
