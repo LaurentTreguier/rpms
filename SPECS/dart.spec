@@ -7,12 +7,13 @@
 %global         out_arch        IA32
 %endif
 
-%define         release_dir $RPM_BUILD_DIR/%{name}-%{version}/sdk/out/Release%{out_arch}/%{name}-sdk
+%define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}/sdk/out/Release%{out_arch}/%{name}-sdk
 
 Name:           dart
 Version:        1.23.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
+Conflicts:      %{name}-bin
 
 License:        BSD
 URL:            https://www.dartlang.org
@@ -25,7 +26,7 @@ BuildRequires:  git
 BuildRequires:  ninja-build
 BuildRequires:  python2
 
-BuildRequires:  glibc(x86-32)
+BuildRequires:  ld-linux.so.2
 BuildRequires:  %{_libdir}/libtinfo.so.5
 
 %description
@@ -69,7 +70,9 @@ rm -rf %{temp_dir}
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir}/%{name},%{_includedir}}
 mv %{release_dir}/include/* $RPM_BUILD_ROOT/%{_includedir}
+rmdir %{release_dir}/include
 cp -R %{release_dir}/* $RPM_BUILD_ROOT/%{_libdir}/%{name}
+rm $RPM_BUILD_ROOT/%{_libdir}/%{name}/{LICENSE,README}
 
 for f in $(ls %{release_dir}/bin)
 do
@@ -84,12 +87,18 @@ done
 %license %{release_dir}/LICENSE
 %doc %{release_dir}/README
 %{_libdir}/%{name}
-%{_includedir}
+%{_includedir}/*
 %defattr(755,root,root)
 %{_bindir}/*
 
 
 
 %changelog
+* Mon May 15 2017 Laurent Tréguier <laurent@treguier.org> - 1.23.0-2
+- changed glibc(x86-32) dependency to ld-linux.so.2
+- removed include directory from /usr/lib/dart
+- fixed ownership of /usr/include (now /usr/include/*)
+- added conflict with dart-bin
+
 * Thu Apr 27 2017 Laurent Tréguier <laurent@treguier.org> - 1.23.0-1
 - created specfile
