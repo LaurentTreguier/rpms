@@ -3,8 +3,8 @@
 %global         source_name_dark    %{source_name}-dark
 
 Name:           %{source_name}-theme
-Version:        20170323
-Release:        4%{?dist}
+Version:        20170515
+Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
@@ -75,6 +75,9 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Mon May 15 2017 Laurent Tréguier <laurent@treguier.org> - 20170515-1
+- new version
+
 * Fri Apr 21 2017 Laurent Tréguier <laurent@treguier.org> - 20170323-4
 - split normal, light and dark themes into subpackages
 
