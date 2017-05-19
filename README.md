@@ -18,6 +18,8 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |dmd-tools|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dub|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/status_image/last_build.png" /></a>|
 |fsharp|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>|
+|libblocksruntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/status_image/last_build.png" /></a>|
+|libkqueue|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/status_image/last_build.png" /></a>|
 |ponyc|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/status_image/last_build.png" /></a>|
 
 |Discord||
