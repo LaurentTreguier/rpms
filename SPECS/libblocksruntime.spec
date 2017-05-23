@@ -1,14 +1,17 @@
 Name:           libblocksruntime
 Version:        0.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A target-independent implementation of Apple "Blocks" runtime interfaces
 
-License:        NCSA MIT
+License:        NCSA and MIT
 URL:            https://compiler-rt.llvm.org/
-Source0:        http://http.debian.net/debian/pool/main/libb/%{name}/%{name}_%{version}.orig.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        https://github.com/mheily/blocks-runtime/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildRequires:  make
+BuildRequires:  autoconf
+BuildRequires:  automake
 BuildRequires:  clang
+BuildRequires:  libtool
+BuildRequires:  make
 
 %description
 A target-independent implementation of Apple "Blocks" runtime interfaces.
@@ -24,10 +27,11 @@ developing applications that use %{name}.
 
 
 %prep
-%autosetup
+%autosetup -n blocks-runtime-%{version}
 
 
 %build
+autoreconf -i
 %configure --disable-static
 %make_build
 
@@ -52,5 +56,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue May 23 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-2
+- fixed licenses
+- changed source from debian pool to github
+
 * Fri May 19 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-1
 - created specfile
