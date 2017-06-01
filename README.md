@@ -21,6 +21,7 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |libblocksruntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/status_image/last_build.png" /></a>|
 |libkqueue|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/status_image/last_build.png" /></a>|
 |ponyc|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/status_image/last_build.png" /></a>|
+|swift-language|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
 
 |Discord||
 |---|---|
