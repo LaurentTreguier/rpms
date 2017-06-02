@@ -4,7 +4,7 @@
 
 Name:           %{source_name}-language
 Version:        3.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -62,6 +62,7 @@ disassembler.
 %package lldb-devel
 Summary:        Development files for %{name}-lldb
 Requires:       %{name}-lldb%{?_isa} = %{version}-%{release}
+Provides:       lldb
 
 %description lldb-devel
 The %{name}-lldb-devel package contains libraries and header files for
@@ -144,8 +145,14 @@ rmdir -p local/include
 cp -RL lib/* %{_lib}
 rm -r lib
 cd %{_lib}
+find -name '*.so' -exec sh -c 'ln -s {} $(basename {})' ';'
 ln -sf liblldb.so.*.*.* liblldb.so
+rm _lldb.so readline.so
 
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
 
 %post lldb -p /sbin/ldconfig
 
@@ -157,6 +164,11 @@ ln -sf liblldb.so.*.*.* liblldb.so
 %doc %{_mandir}/*/*
 %attr(755,root,root) %{_bindir}/%{source_name}*
 %{_libdir}/%{source_name}
+%{_libdir}/lib%{source_name}*.so
+%{_libdir}/libdispatch.so
+%{_libdir}/libFoundation.so
+%{_libdir}/libPackageDescription.so
+%{_libdir}/libXCTest.so
 %{_libdir}/libsourcekitdInProc.so
 %{_libexecdir}/*
 
@@ -177,5 +189,8 @@ ln -sf liblldb.so.*.*.* liblldb.so
 
 
 %changelog
+* Thu Jun 01 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-2
+- added libraries symlinks
+
 * Tue May 23 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-1
 - created specfile
