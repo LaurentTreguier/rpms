@@ -1,17 +1,19 @@
+%{?_with_bootstrap: %global bootstrap 1}
+
 %global         debug_package   %{nil}
 %global         dmd_name        dmd
 %global         drt_name        druntime
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    RELEASE=1 MODEL=%{arch_bits}
+%global         make_options    RELEASE=1 MODEL=%{arch_bits} %{?_with_bootstrap: AUTO_BOOTSTRAP=1}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.074.0
-Release:        13%{?dist}
+Version:        2.074.1
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -23,7 +25,12 @@ Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
 
+%if 0%{?bootstrap}
+BuildRequires:  curl
+%else
 BuildRequires:  %{name}
+%endif
+
 Requires:       %{name}-config                      = %{version}-%{release}
 Requires:       %{name}-%{drt_name}-devel%{?_isa}   = %{version}-%{release}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
@@ -133,7 +140,7 @@ mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_na
 # dmd
 cd %{build_dir}/%{dmd_name}
 cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
-cp ini/$RPM_OS/bin%(getconf LONG_BIT)/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
+cp ini/$RPM_OS/bin%{arch_bits}/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
 cp -R docs/man/* $RPM_BUILD_ROOT/%{_mandir}
 sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
 sed -ri 's,-I\S*%{phb_name}\S*,-I%{_includedir}/%{name}/%{phb_name},g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
@@ -175,8 +182,7 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %{_mandir}/*/%{name}.*
 %{_mandir}/*/dumpobj.*
 %{_mandir}/*/obj2asm.*
-%defattr(755,root,root)
-%{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/%{name}
 
 
 %files config
@@ -222,6 +228,10 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Fri Jun 02 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-1
+- new version
+- added togglable bootstrapping
+
 * Fri Apr 21 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.0-13
 - switched to using ldconfig again to ensure a single libphobos2.so file exists
 - removed unnecessary defattr macros for standard permissions
