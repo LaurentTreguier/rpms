@@ -13,7 +13,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -32,8 +32,9 @@ BuildRequires:  %{name}
 %endif
 
 Requires:       %{name}-config                      = %{version}-%{release}
-Requires:       %{name}-%{drt_name}-devel%{?_isa}   = %{version}-%{release}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
+Obsoletes:      %{name}-%{drt_name}                 < %{version}-%{release}
+Obsoletes:      %{name}-%{drt_name}-devel           < %{version}-%{release}
 
 %description
 D is a systems programming language. Its focus is on combining the power and
@@ -58,25 +59,6 @@ Requires:       %{name} = %{version}-%{release}
 
 %description config
 Provide configuration file to customize %{name}.
-
-
-%package %{drt_name}
-Summary:        Runtime library for D
-
-%description %{drt_name}
-Druntime is the minimum library required to support the D programming
-language. It includes the system code required to support the garbage
-collector, associative arrays, exception handling, array vector operations,
-startup/shutdown, etc.
-
-
-%package %{drt_name}-devel
-Summary:        Support for developing D application
-Provides:       %{name}-%{drt_name}-static%{?_isa} = %{version}-%{release}
-
-%description %{drt_name}-devel
-The druntime-devel package contains header files for developing D
-applications that use druntime.
 
 
 %package %{phb_name}
@@ -170,15 +152,20 @@ cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
 cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
-%post %{drt_name} -p /sbin/ldconfig
-%postun %{drt_name} -p /sbin/ldconfig
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
 %post %{phb_name} -p /sbin/ldconfig
+
 %postun %{phb_name} -p /sbin/ldconfig
 
 
 %files
 %license LICENSE_1_0.txt
 %doc README.md
+%{_libdir}/lib%{drt_name}.a
+%{_includedir}/%{name}/%{drt_name}
 %{_mandir}/*/%{name}.*
 %{_mandir}/*/dumpobj.*
 %{_mandir}/*/obj2asm.*
@@ -188,17 +175,6 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %files config
 %config(noreplace) %{_sysconfdir}/%{name}.conf
 %config %{_rpmconfigdir}/macros.d/*
-
-
-%files %{drt_name}
-%license LICENSE_1_0.txt
-# Empty for now; it doesn't seem to be meant to be compiled as a shared library
-
-
-%files %{drt_name}-devel
-%license LICENSE_1_0.txt
-%{_libdir}/lib%{drt_name}.a
-%{_includedir}/%{name}/%{drt_name}
 
 
 %files %{phb_name}
@@ -228,6 +204,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sat Jun 03 2017 Laurent Tréguier <laurent@treguier.org>
+- merged druntime packages into dmd
+
 * Fri Jun 02 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-1
 - new version
 - added togglable bootstrapping
