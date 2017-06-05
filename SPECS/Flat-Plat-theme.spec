@@ -3,7 +3,7 @@
 %global         source_name_dark    %{source_name}-dark
 
 Name:           %{source_name}-theme
-Version:        20170515
+Version:        20170605
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -19,24 +19,27 @@ Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
 
 %description
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
-It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
+environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
+LightDM, GDM, Chrome theme, etc.
 
 
 %package -n %{source_name_light}-theme
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 %description -n %{source_name_light}-theme
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
-It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
+environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
+LightDM, GDM, Chrome theme, etc.
 
 
 %package -n %{source_name_dark}-theme
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 %description -n %{source_name_dark}-theme
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop environments.
-It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE, LightDM, GDM, Chrome theme, etc.
+Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
+environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
+LightDM, GDM, Chrome theme, etc.
 
 
 %prep
@@ -75,6 +78,9 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Mon Jun 05 2017 Laurent Tréguier <laurent@treguier.org> - 20170605-1
+- new version
+
 * Mon May 15 2017 Laurent Tréguier <laurent@treguier.org> - 20170515-1
 - new version
 
