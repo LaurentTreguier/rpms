@@ -4,7 +4,7 @@
 
 Name:           %{source_name}-language
 Version:        3.1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -25,7 +25,7 @@ BuildRequires:  clang
 BuildRequires:  cmake
 BuildRequires:  libtool
 BuildRequires:  ninja-build
-BuildRequires:  python
+BuildRequires:  python2
 BuildRequires:  rsync
 BuildRequires:  swig
 BuildRequires:  pkgconfig
@@ -40,7 +40,7 @@ BuildRequires:  libsqlite3x-devel
 BuildRequires:  libuuid-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  ncurses-devel
-BuildRequires:  python-devel
+BuildRequires:  python2-devel
 BuildRequires:  systemtap-sdt-devel
 
 %description
@@ -51,6 +51,7 @@ It has a clean and modern syntax, offers seamless access to existing C and Objec
 %package lldb
 Summary:        Next generation high-performance debugger (swift version)
 Conflicts:      lldb
+Provides:       lldb
 
 %description lldb
 LLDB is a next generation, high-performance debugger. It is built as a set
@@ -62,7 +63,6 @@ disassembler.
 %package lldb-devel
 Summary:        Development files for %{name}-lldb
 Requires:       %{name}-lldb%{?_isa} = %{version}-%{release}
-Provides:       lldb
 
 %description lldb-devel
 The %{name}-lldb-devel package contains libraries and header files for
@@ -142,12 +142,18 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 cd $RPM_BUILD_ROOT/%{_prefix}
 rmdir -p local/include
-cp -RL lib/* %{_lib}
-rm -r lib
-cd %{_lib}
-find -name '*.so' -exec sh -c 'ln -s {} $(basename {})' ';'
-ln -sf liblldb.so.*.*.* liblldb.so
-rm _lldb.so readline.so
+
+for part in $(ls lib)
+do
+    if [[ $part != %{source_name} ]]
+    then
+        cp -R lib/$part %{_lib}
+        rm -r lib/$part
+    fi
+done
+
+cp -R %{_lib}/%{source_name}/* lib/%{source_name}
+rm -r %{_lib}/%{source_name}
 
 
 %post -p /sbin/ldconfig
@@ -163,12 +169,7 @@ rm _lldb.so readline.so
 %license $RPM_BUILD_DIR/%{source_name}/LICENSE.txt
 %doc %{_mandir}/*/*
 %attr(755,root,root) %{_bindir}/%{source_name}*
-%{_libdir}/%{source_name}
-%{_libdir}/lib%{source_name}*.so
-%{_libdir}/libdispatch.so
-%{_libdir}/libFoundation.so
-%{_libdir}/libPackageDescription.so
-%{_libdir}/libXCTest.so
+%{_prefix}/*/%{source_name}
 %{_libdir}/libsourcekitdInProc.so
 %{_libexecdir}/*
 
@@ -189,6 +190,11 @@ rm _lldb.so readline.so
 
 
 %changelog
+* Sat Jun 03 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-3
+- made swift directory always go to /usr/lib
+- changed python related dependencies to python2*
+- fixed lldb being provided by swift-language-lldb-devel
+
 * Thu Jun 01 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-2
 - added libraries symlinks
 
