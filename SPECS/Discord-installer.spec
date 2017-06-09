@@ -2,16 +2,17 @@
 
 Name:           Discord-installer
 Version:        1.0.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
 License:        MIT
 URL:            https://github.com/LaurentTreguier/Discord-installer
 Source0:        https://github.com/LaurentTreguier/Discord-installer/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildArch:      x86_64
+ExclusiveArch:  x86_64
 BuildRequires:  make
 BuildRequires:  systemd
+Requires:       curl
 Requires:       dos2unix
 Requires:       rpm-build
 Requires:       rpmdevtools
@@ -63,8 +64,12 @@ rm -f %{_var}/lib/discord-installer/discord-installer-rebuild-DiscordCanary
 
 
 %changelog
+* Fri Jun 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.0.2-3
+- added forgotten curl dependency
+- changed BuildArch to ExclusiveArch
+
 * Wed Apr 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.0.2-2
-- started using %systemd_* macros
+- started using systemd_* macros
 - fixed source archive named into [...].zip instead of .tar.gz
 
 * Sat Apr 01 2017 Laurent Tréguier <laurent@treguier.org> - 1.0.2-1
