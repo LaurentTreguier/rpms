@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           Discord-installer
-Version:        1.0.2
-Release:        3%{?dist}
+Version:        1.1.0
+Release:        1%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
 License:        MIT
@@ -12,8 +12,11 @@ Source0:        https://github.com/LaurentTreguier/Discord-installer/archive/%{v
 ExclusiveArch:  x86_64
 BuildRequires:  make
 BuildRequires:  systemd
+Requires:       coreutils
 Requires:       curl
 Requires:       dos2unix
+Requires:       libnotify
+Requires:       polkit
 Requires:       rpm-build
 Requires:       rpmdevtools
 Requires:       systemd
@@ -37,8 +40,14 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %post
-touch %{_var}/lib/discord-installer-rebuild-Discord
-touch %{_var}/lib/discord-installer-rebuild-DiscordCanary
+for p in Discord DiscordCanary
+do
+    if rpm -q $p &> /dev/null
+    then
+        touch %{_var}/lib/discord-installer-rebuild-$p
+    fi
+done
+
 %systemd_post discord-installer.service
 %systemd_post discord-canary-installer.service
 
@@ -64,6 +73,10 @@ rm -f %{_var}/lib/discord-installer/discord-installer-rebuild-DiscordCanary
 
 
 %changelog
+* Sat Jun 10 2017 Laurent Tréguier <laurent@treguier.org> - 1.1.0-1
+- new version
+- fixed unnecessary potential package rebuilds
+
 * Fri Jun 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.0.2-3
 - added forgotten curl dependency
 - changed BuildArch to ExclusiveArch
