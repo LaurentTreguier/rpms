@@ -12,7 +12,7 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
-Version:        1.23.0
+Version:        1.24.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -53,11 +53,13 @@ done
 %license %{release_dir}/LICENSE
 %doc %{release_dir}/README
 %{_libdir}/%{source_name}
-%defattr(755,root,root)
-%{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Mon Jun 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.0-1
+- new version
+
 * Mon May 15 2017 Laurent Tréguier <laurent@treguier.org> - 1.23.0-1
 - created specfile
