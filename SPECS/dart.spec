@@ -10,8 +10,8 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}/sdk/out/Release%{out_arch}/%{name}-sdk
 
 Name:           dart
-Version:        1.23.0
-Release:        2%{?dist}
+Version:        1.24.0
+Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{name}-bin
 
@@ -68,9 +68,8 @@ rm -rf %{temp_dir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir}/%{name},%{_includedir}}
-mv %{release_dir}/include/* $RPM_BUILD_ROOT/%{_includedir}
-rmdir %{release_dir}/include
+mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir}/%{name}}
+rm -r %{release_dir}/include
 cp -R %{release_dir}/* $RPM_BUILD_ROOT/%{_libdir}/%{name}
 rm $RPM_BUILD_ROOT/%{_libdir}/%{name}/{LICENSE,README}
 
@@ -87,13 +86,15 @@ done
 %license %{release_dir}/LICENSE
 %doc %{release_dir}/README
 %{_libdir}/%{name}
-%{_includedir}/*
-%defattr(755,root,root)
-%{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Mon Jun 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.0-1
+- new version
+- removed header files
+
 * Mon May 15 2017 Laurent Tréguier <laurent@treguier.org> - 1.23.0-2
 - changed glibc(x86-32) dependency to ld-linux.so.2
 - removed include directory from /usr/lib/dart
