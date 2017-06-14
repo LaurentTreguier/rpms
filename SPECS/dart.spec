@@ -10,7 +10,7 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}/sdk/out/Release%{out_arch}/%{name}-sdk
 
 Name:           dart
-Version:        1.24.0
+Version:        1.24.1
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{name}-bin
@@ -91,6 +91,9 @@ done
 
 
 %changelog
+* Wed Jun 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.1-1
+- new version
+
 * Mon Jun 12 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.0-1
 - new version
 - removed header files
