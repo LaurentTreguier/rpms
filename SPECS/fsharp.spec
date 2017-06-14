@@ -1,6 +1,9 @@
+%{!?_monodir:%global _monodir %{_prefix}/lib/mono}
+%{!?_monogacdir:%global _monogacdir %{_monodir}/gac}
+
 Name:           fsharp
 Version:        4.1.18
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -11,6 +14,7 @@ BuildArch:      noarch
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  nuget
+BuildRequires:  make
 BuildRequires:  mono-devel >= 4.4.0
 BuildRequires:  mono-wcf   >= 4.4.0
 Requires:       gdb
@@ -38,7 +42,6 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root)
 %license LICENSE
 %doc README.md
 %{_monodir}/*/FSharp.*
@@ -48,12 +51,16 @@ rm -rf $RPM_BUILD_ROOT
 "%{_monodir}/Microsoft F#"
 "%{_monodir}/Microsoft SDKs/F#"
 %{_monodir}/xbuild/Microsoft/VisualStudio/*/FSharp
-%defattr(755,root,root)
-%{_bindir}/fsharp*
+%attr(755,root,root) %{_bindir}/fsharp*
 
 
 
 %changelog
+* Wed Jun 14 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.18-2
+- explicited make build dependency
+- added redhat-rpm-config build dependency
+- added mono macros for CentOS 6
+
 * Sat Apr 29 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.18-1
 - new version
 
