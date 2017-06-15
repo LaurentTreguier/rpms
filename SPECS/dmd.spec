@@ -1,5 +1,3 @@
-%global         _with_bootstrap 1
-
 %global         debug_package   %{nil}
 %global         dmd_name        dmd
 %global         drt_name        druntime
@@ -13,7 +11,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -24,7 +22,7 @@ Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
-# Fixes segfault when compilng druntime (take from https://github.com/dlang/dmd/commit/2da4534cdaf7451a46a5c87ec15ca02d7af59b9f)
+# Fixes segfault when compiling druntime (take from https://github.com/dlang/dmd/commit/2da4534cdaf7451a46a5c87ec15ca02d7af59b9f)
 Patch0:         %{name}-segv.patch
 
 %if 0%{?_with_bootstrap}
@@ -216,6 +214,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Jun 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-5
+- dropped bootstrapping
+
 * Thu Jun 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-4
 - added patch to fix segfault when compiling druntime with gcc7
 - fixed bootstrapping
