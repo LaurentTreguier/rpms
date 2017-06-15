@@ -1,19 +1,17 @@
-%{?_with_bootstrap: %global bootstrap 1}
-
 %global         debug_package   %{nil}
 %global         dmd_name        dmd
 %global         drt_name        druntime
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    RELEASE=1 MODEL=%{arch_bits} %{?_with_bootstrap: AUTO_BOOTSTRAP=1}
+%global         make_options    RELEASE=1 MODEL=%{arch_bits}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
 Version:        2.074.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -26,7 +24,7 @@ Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
 
 %if 0%{?bootstrap}
-BuildRequires:  curl
+BuildRequires:  ldc
 %else
 BuildRequires:  %{name}
 %endif
@@ -108,10 +106,16 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
-for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
+cd %{build_dir}/%{dmd_name}
+%make_build %{?_with_bootstrap: HOST_DMD=ldmd2} \
+            %{make_options} -f posix.mak
+
+for component in %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
-    %make_build %{make_options} -f posix.mak
+    %make_build %{?_with_bootstrap: HOST_DMD=ldmd2} \
+                %{!?_with_bootstrap: DMD=../%{dmd_name}/src/%{name}} \
+                %{make_options} -f posix.mak
 done
 
 
@@ -204,6 +208,10 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Jun 04 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-3
+- switched to using ldc for bootstrapping process
+- fixed build using host dmd instead of just compiled dmd for compiling other components
+
 * Sat Jun 03 2017 Laurent Tréguier <laurent@treguier.org>
 - merged druntime packages into dmd
 
