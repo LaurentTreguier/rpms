@@ -1,6 +1,8 @@
+%global         debug_package   %{nil}
+
 Name:           dub
 Version:        1.3.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -13,14 +15,16 @@ Requires:       dmd
 
 %description
 DUB emerged as a more general replacement for vibe.d's package manager.
-It does not imply a dependency to vibe.d for packages and was extended to not only directly build projects,
-but also to generate project files (currently VisualD).
-Mono-D also supports the use of dub.json (dub's package description) as the project file.
-
-The project's philosophy is to keep things as simple as possible.
-All that is needed to make a project a dub package is to write a short dub.json file and put the source code into a source subfolder.
-It can then be registered on the public package registry to be made available for everyone.
-Any dependencies specified in dub.json are automatically downloaded and made available to the project during the build process.
+It does not imply a dependency to vibe.d for packages and was extended to not
+only directly build projects, but also to generate project files (currently
+VisualD). Mono-D also supports the use of dub.json (dub's package description)
+as the project file.
+The project's philosophy is to keep things as simple as possible. All that is
+needed to make a project a dub package is to write a short dub.json file and put
+the source code into a source subfolder. It can then be registered on the public
+package registry to be made available for everyone. Any dependencies specified
+in dub.json are automatically downloaded and made available to the project
+during the build process.
 
 
 %prep
@@ -41,16 +45,17 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %files
-%defattr(-,root,root)
 %config %{_datadir}/bash-completion/completions/*
 %config %{_datadir}/fish/completions/*
 %config %{_rpmconfigdir}/macros.d/*
-%defattr(755,root,root)
-%{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Wed Apr 26 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-5
+- removed debuginfo subpackage
+
 * Fri Apr 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-4
 - rebuilt with dmd that is not bootstrapped anymore
 
