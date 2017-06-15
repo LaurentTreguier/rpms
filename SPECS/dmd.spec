@@ -1,3 +1,5 @@
+%global         _with_bootstrap 1
+
 %global         debug_package   %{nil}
 %global         dmd_name        dmd
 %global         drt_name        druntime
@@ -11,7 +13,7 @@
 
 Name:           %{dmd_name}
 Version:        2.074.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -22,9 +24,11 @@ Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
+# Fixes segfault when compilng druntime (take from https://github.com/dlang/dmd/commit/2da4534cdaf7451a46a5c87ec15ca02d7af59b9f)
+Patch0:         %{name}-segv.patch
 
-%if 0%{?bootstrap}
-BuildRequires:  ldc
+%if 0%{?_with_bootstrap}
+BuildRequires:  curl
 %else
 BuildRequires:  %{name}
 %endif
@@ -90,10 +94,14 @@ during various build tasks.
 
 
 %prep
-%autosetup -b 0
-%autosetup -b 1
-%autosetup -b 2
-%autosetup -b 3
+%setup -q -b 0
+%setup -q -b 1
+%setup -q -b 2
+%setup -q -b 3
+
+cd $RPM_BUILD_DIR/%{dmd_name}-%{version}
+%patch0
+
 rm -rf %{build_dir}
 mkdir -p %{build_dir}
 
@@ -107,7 +115,7 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 %build
 cd %{build_dir}/%{dmd_name}
-%make_build %{?_with_bootstrap: HOST_DMD=ldmd2} \
+%make_build %{?_with_bootstrap: AUTO_BOOTSTRAP=1} \
             %{make_options} -f posix.mak
 
 for component in %{drt_name} %{phb_name} %{dto_name}
@@ -208,6 +216,11 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Jun 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-4
+- added patch to fix segfault when compiling druntime with gcc7
+- fixed bootstrapping
+- enabled bootstrapping for Fedora versions that didn't build dmd
+
 * Sun Jun 04 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-3
 - switched to using ldc for bootstrapping process
 - fixed build using host dmd instead of just compiled dmd for compiling other components
