@@ -12,7 +12,7 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
-Version:        1.24.1
+Version:        1.24.2
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -23,7 +23,8 @@ Source0:        https://storage.googleapis.com/dart-archive/channels/stable/rele
 Source1:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-x64.zip
 
 %description
-Dart is an open-source, scalable programming language, with robust libraries and runtimes, for building web, server, and mobile apps.
+Dart is an open-source, scalable programming language, with robust libraries and
+runtimes, for building web, server, and mobile apps.
 
 
 %prep
@@ -58,6 +59,9 @@ done
 
 
 %changelog
+* Fri Jun 23 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.2-1
+- new version
+
 * Wed Jun 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.1-1
 - new version
 
