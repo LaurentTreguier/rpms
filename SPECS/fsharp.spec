@@ -1,18 +1,18 @@
-%{!?_monodir:%global _monodir %{_prefix}/lib/mono}
-%{!?_monogacdir:%global _monogacdir %{_monodir}/gac}
+%global         debug_package   %{nil}
 
 Name:           fsharp
 Version:        4.1.18
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
 URL:            http://fsharp.org/
 Source0:        https://github.com/fsharp/fsharp/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-BuildArch:      noarch
+ExclusiveArch:  %{mono_arches}
 BuildRequires:  autoconf
 BuildRequires:  automake
+BuildRequires:  ca-certificates
 BuildRequires:  nuget
 BuildRequires:  make
 BuildRequires:  mono-devel >= 4.4.0
@@ -21,8 +21,9 @@ Requires:       gdb
 Requires:       valgrind
 
 %description
-F# is a mature, open source, cross-platform, functional-first programming language.
-It empowers users and organizations to tackle complex computing problems with simple, maintainable and robust code.
+F# is a mature, open source, cross-platform, functional-first programming
+language. It empowers users and organizations to tackle complex computing
+problems with simple, maintainable and robust code.
 
 
 %prep
@@ -44,18 +45,23 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %license LICENSE
 %doc README.md
-%{_monodir}/*/FSharp.*
+%doc CHANGELOG-fsharp.md
+%{_monodir}/*/FSharp*
 %{_monodir}/fsharp
-%{_monogacdir}/FSharp.*
-%{_monogacdir}/*.FSharp.Core
+%{_monodir}/xbuild/Microsoft/VisualStudio/*/FSharp
 "%{_monodir}/Microsoft F#"
 "%{_monodir}/Microsoft SDKs/F#"
-%{_monodir}/xbuild/Microsoft/VisualStudio/*/FSharp
-%attr(755,root,root) %{_bindir}/fsharp*
+%{_monogacdir}/*
+%attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Sat Jun 24 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.18-3
+- changed architecture from noarch to mono_arches
+- added ca-certificates as explicit build dependency
+- added CHANGLOG as doc
+
 * Wed Jun 14 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.18-2
 - explicited make build dependency
 - added redhat-rpm-config build dependency
