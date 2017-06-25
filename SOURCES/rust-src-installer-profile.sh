@@ -1,0 +1,1 @@
+export RUST_SRC_PATH=%{_usrsrc}/rust
