@@ -22,6 +22,7 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |libkqueue|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libkqueue/status_image/last_build.png" /></a>|
 |nim|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/status_image/last_build.png" /></a>|
 |ponyc|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/status_image/last_build.png" /></a>|
+|rust-src-installer|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/rust-src-installer/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/rust-src-installer/status_image/last_build.png" /></a>|
 |swift-language|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
 |swift-language-lldb|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
 |swift-language-lldb-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
