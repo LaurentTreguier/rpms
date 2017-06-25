@@ -11,8 +11,6 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |dart|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart/status_image/last_build.png" /></a>|
 |dart-bin|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/status_image/last_build.png" /></a>|
 |dmd|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
-|dmd-druntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
-|dmd-druntime-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-phobos|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-phobos-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-tools|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
