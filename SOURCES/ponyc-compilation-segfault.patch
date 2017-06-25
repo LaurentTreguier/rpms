@@ -1,6 +1,6 @@
-diff -ur src/libponyc/codegen/genopt.cc src/libponyc/codegen/genopt.cc
---- src/libponyc/codegen/genopt.cc	2017-05-06 12:00:54.000000000 +0200
-+++ src/libponyc/codegen/genopt.cc	2017-05-11 13:13:55.085330890 +0200
+diff -ur a/src/libponyc/codegen/genopt.cc b/src/libponyc/codegen/genopt.cc
+--- a/src/libponyc/codegen/genopt.cc	2017-06-25 12:58:03.426580762 +0200
++++ b/src/libponyc/codegen/genopt.cc	2017-06-25 12:56:23.764481259 +0200
 @@ -450,7 +450,10 @@
    PassManagerBase& pm)
  {
