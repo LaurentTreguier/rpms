@@ -1,9 +1,9 @@
-%global         llvm_version_pref    3.9
-%global         llvm_version_roof    4.0
+%global         llvm_version_pref   3.9
+%global         llvm_version_roof   4.0
 
 Name:           ponyc
 Version:        0.14.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -15,15 +15,15 @@ Patch00:        %{name}-compilation-segfault.patch
 # https://github.com/ponylang/ponyc/issues/1756#issuecomment-310779018
 Patch01:        %{name}-gcc7.patch
 
-BuildRequires:  clang                   >= 3.3
-BuildRequires:  gcc                     >= 4.7
-BuildRequires:  gcc-c++                 >= 4.7
+BuildRequires:  clang               >= 3.3
+BuildRequires:  gcc                 >= 4.7
+BuildRequires:  gcc-c++             >= 4.7
 BuildRequires:  libatomic
 BuildRequires:  ncurses-devel
 BuildRequires:  pcre2-devel
 BuildRequires:  openssl-devel
 BuildRequires:  zlib-devel
-BuildRequires:  %(if [[ '%{dist}' = .el* ]]; \
+BuildRequires:  %(if [[ $(rpm -q --qf '%%{VERSION}' rpm) < 4.12 ]]; \
                     then echo 'llvm%{llvm_version_pref}-devel'; \
                     else echo '(llvm%{llvm_version_pref}-devel or llvm-devel < %{llvm_version_roof})'; \
                     fi)
@@ -35,9 +35,7 @@ performance programming language.
 
 
 %prep
-%autosetup -N
-%patch00 -p1
-%patch01 -p1
+%autosetup -p1
 sed -i 's,$(prefix)/lib,$(libdir),' Makefile
 
 
@@ -64,6 +62,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-6
+- cleaned up specfile
+
 * Thu Jun 15 2017 Laurent Tréguier <laurent@treguier.org> - 0.14.0-5
 - cleaned up specfile
 - removed llvm-devel-ponyc-compat build dependency
