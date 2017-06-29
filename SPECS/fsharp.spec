@@ -2,7 +2,7 @@
 
 Name:           fsharp
 Version:        4.1.19
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -15,8 +15,8 @@ BuildRequires:  automake
 BuildRequires:  ca-certificates
 BuildRequires:  nuget
 BuildRequires:  make
-BuildRequires:  mono-devel              >=  4.4.0
-BuildRequires:  mono-wcf                >=  4.4.0
+BuildRequires:  mono-devel      >=  4.4.0
+BuildRequires:  mono-wcf        >=  4.4.0
 Requires:       gdb
 Requires:       valgrind
 
@@ -41,6 +41,7 @@ autoreconf
 rm -rf $RPM_BUILD_ROOT
 %make_install
 cd $RPM_BUILD_DIR/%{name}-%{version}/packages/System.ValueTuple.4.3.1/lib/netstandard1.0
+chmod +x System.ValueTuple.dll
 cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
@@ -59,6 +60,9 @@ cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.19-3
+- fixed permissions on System.ValueTuple.dll
+
 * Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.19-2
 - added System.ValueTuple.dll to package to fix missing dependency error
 
