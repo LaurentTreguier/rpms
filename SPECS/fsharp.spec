@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.18
-Release:        3%{?dist}
+Version:        4.1.19
+Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -15,8 +15,8 @@ BuildRequires:  automake
 BuildRequires:  ca-certificates
 BuildRequires:  nuget
 BuildRequires:  make
-BuildRequires:  mono-devel >= 4.4.0
-BuildRequires:  mono-wcf   >= 4.4.0
+BuildRequires:  mono-devel  >= 4.4.0
+BuildRequires:  mono-wcf    >= 4.4.0
 Requires:       gdb
 Requires:       valgrind
 
@@ -57,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.19-1
+- new version
+
 * Sat Jun 24 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.18-3
 - changed architecture from noarch to mono_arches
 - added ca-certificates as explicit build dependency
