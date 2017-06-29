@@ -1,6 +1,6 @@
 Name:           libblocksruntime
 Version:        0.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A target-independent implementation of Apple "Blocks" runtime interfaces
 
 License:        NCSA and MIT
@@ -31,6 +31,14 @@ developing applications that use %{name}.
 
 
 %build
+export CFLAGS="%{optflags}"
+
+if [[ -z $(clang --help | grep '\-fstack-protector-strong') ]]
+then
+    export CFLAGS=${CFLAGS/-fstack-protector-strong/}
+fi
+
+export CXXFLAGS="$CFLAGS"
 autoreconf -i
 %configure --disable-static
 %make_build
@@ -56,6 +64,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-3
+- fixed compilation on CentOS
+
 * Tue May 23 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-2
 - fixed licenses
 - changed source from debian pool to github
