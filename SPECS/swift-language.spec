@@ -1,10 +1,23 @@
 %global         debug_package       %{nil}
 %global         source_name         swift
-%global         build_script_flags  %{?_smp_mflags} --install-prefix=%{_prefix} --release --lldb --llbuild --swiftpm --xctest true --foundation true --libdispatch true
+%global         export_flags                                                                                            \
+                    _CFLAGS="%{optflags} -fPIC";                                                                        \
+                    export CFLAGS=$(echo $_CFLAGS | sed -r 's/((-g)|(-Werror=format-security)|(-fexceptions))\\s//g');  \
+                    export CXXFLAGS="$CFLAGS";
+%global         cmake_flags         -DCMAKE_C_FLAGS='$CFLAGS',-DCMAKE_CXX_FLAGS='$CXXFLAGS'
+%global         build_script_flags  %{?_smp_mflags}                 \\\
+                                        --install-prefix=%{_prefix} \\\
+                                        --release                   \\\
+                                        --lldb                      \\\
+                                        --llbuild                   \\\
+                                        --swiftpm                   \\\
+                                        --xctest true               \\\
+                                        --foundation true           \\\
+                                        --libdispatch true
 
 Name:           %{source_name}-language
 Version:        3.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -14,11 +27,13 @@ Source1:        https://github.com/apple/%{source_name}-clang/archive/%{source_n
 Source2:        https://github.com/apple/%{source_name}-cmark/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-cmark-%{version}.tar.gz
 Source3:        https://github.com/apple/%{source_name}-corelibs-foundation/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-corelibs-foundation-%{version}.tar.gz
 Source4:        https://github.com/apple/%{source_name}-corelibs-libdispatch/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-corelibs-libdispatch-%{version}.tar.gz
-Source5:        https://github.com/apple/%{source_name}-corelibs-xctest/archive/%{source_name}-%{version}-RELEASE.tar.gz#/#/%{name}-corelibs-xctest-%{version}.tar.gz
+Source5:        https://github.com/apple/%{source_name}-corelibs-xctest/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-corelibs-xctest-%{version}.tar.gz
 Source6:        https://github.com/apple/%{source_name}-llbuild/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-llbuild-%{version}.tar.gz
 Source7:        https://github.com/apple/%{source_name}-lldb/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-lldb-%{version}.tar.gz
 Source8:        https://github.com/apple/%{source_name}-llvm/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-llvm-%{version}.tar.gz
 Source9:        https://github.com/apple/%{source_name}-package-manager/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-package-manager-%{version}.tar.gz
+Patch30:         %{name}-corelibs-foundation-asprintf.patch
+Patch70:         %{name}-lldb-missing-include.patch
 
 BuildRequires:  autoconf
 BuildRequires:  clang
@@ -51,7 +66,6 @@ It has a clean and modern syntax, offers seamless access to existing C and Objec
 %package lldb
 Summary:        Next generation high-performance debugger (swift version)
 Conflicts:      lldb
-Provides:       lldb
 
 %description lldb
 LLDB is a next generation, high-performance debugger. It is built as a set
@@ -70,16 +84,18 @@ developing applications that use %{name}-lldb.
 
 
 %prep
-%autosetup -b 0 -n %{source_name}-%{source_name}-%{version}-RELEASE
-%autosetup -b 1 -n %{source_name}-clang-%{source_name}-%{version}-RELEASE
-%autosetup -b 2 -n %{source_name}-cmark-%{source_name}-%{version}-RELEASE
-%autosetup -b 3 -n %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
-%autosetup -b 4 -n %{source_name}-corelibs-libdispatch-%{source_name}-%{version}-RELEASE
-%autosetup -b 5 -n %{source_name}-corelibs-xctest-%{source_name}-%{version}-RELEASE
-%autosetup -b 6 -n %{source_name}-llbuild-%{source_name}-%{version}-RELEASE
-%autosetup -b 7 -n %{source_name}-lldb-%{source_name}-%{version}-RELEASE
-%autosetup -b 8 -n %{source_name}-llvm-%{source_name}-%{version}-RELEASE
-%autosetup -b 9 -n %{source_name}-package-manager-%{source_name}-%{version}-RELEASE
+%setup -q -b 0 -n %{source_name}-%{source_name}-%{version}-RELEASE
+%setup -q -b 1 -n %{source_name}-clang-%{source_name}-%{version}-RELEASE
+%setup -q -b 2 -n %{source_name}-cmark-%{source_name}-%{version}-RELEASE
+%setup -q -b 3 -n %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
+%patch30 -p1
+%setup -q -b 4 -n %{source_name}-corelibs-libdispatch-%{source_name}-%{version}-RELEASE
+%setup -q -b 5 -n %{source_name}-corelibs-xctest-%{source_name}-%{version}-RELEASE
+%setup -q -b 6 -n %{source_name}-llbuild-%{source_name}-%{version}-RELEASE
+%setup -q -b 7 -n %{source_name}-lldb-%{source_name}-%{version}-RELEASE
+%patch70
+%setup -q -b 8 -n %{source_name}-llvm-%{source_name}-%{version}-RELEASE
+%setup -q -b 9 -n %{source_name}-package-manager-%{source_name}-%{version}-RELEASE
 
 cd $RPM_BUILD_DIR
 
@@ -100,9 +116,11 @@ ln -sf %{source_name}-package-manager-%{source_name}-%{version}-RELEASE swiftpm
 %build
 export SWIFT_SOURCE_ROOT="$RPM_BUILD_DIR"
 cd $RPM_BUILD_DIR/%{source_name}
-./utils/build-script %{build_script_flags}
+%export_flags
 ./utils/build-script %{build_script_flags} \
-    --extra-cmake-options="-DSWIFT_BUILD_SOURCEKIT=TRUE" \
+    --extra-cmake-options="%{cmake_flags}"
+./utils/build-script %{build_script_flags} \
+    --extra-cmake-options="%{cmake_flags},-DSWIFT_BUILD_SOURCEKIT=TRUE" \
     --reconfigure
 
 
@@ -114,7 +132,9 @@ cd $RPM_BUILD_DIR/build/Ninja-ReleaseAssert/lldb-linux-*/scripts
 find . -type f -exec sed -ri 's,lib/python2\.7,%{_lib}/python2.7,g' {} ';'
 
 cd $RPM_BUILD_DIR/%{source_name}
+%export_flags
 ./utils/build-script %{build_script_flags} \
+    --extra-cmake-options="%{cmake_flags},-DSWIFT_BUILD_SOURCEKIT=TRUE" \
     --install-destdir $RPM_BUILD_ROOT \
     --install-lldb \
     --install-llbuild \
@@ -190,6 +210,10 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-4
+- fixed compilation on Fedora 26 with patch30 and patch70
+- started compiling with Fedora CFLAGS and CXXFLAGS
+
 * Sat Jun 03 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-3
 - made swift directory always go to /usr/lib
 - changed python related dependencies to python2*

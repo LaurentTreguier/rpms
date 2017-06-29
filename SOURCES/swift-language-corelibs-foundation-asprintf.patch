@@ -1,0 +1,45 @@
+diff -ur a/CoreFoundation/Base.subproj/CFPlatform.c b/CoreFoundation/Base.subproj/CFPlatform.c
+--- a/CoreFoundation/Base.subproj/CFPlatform.c	2017-04-13 09:34:00.000000000 +0200
++++ b/CoreFoundation/Base.subproj/CFPlatform.c	2017-06-29 18:15:21.680670490 +0200
+@@ -1250,29 +1250,6 @@
+ 
+ #include <stdio.h>
+ 
+-CF_PRIVATE int asprintf(char **ret, const char *format, ...) {
+-    va_list args;
+-    size_t sz = 1024;
+-    *ret = (char *) malloc(sz * sizeof(char));
+-    if (!*ret) return -1;
+-    va_start(args, format);
+-    int cnt = vsnprintf(*ret, sz, format, args);
+-    va_end(args);
+-    if (cnt < sz - 1) return cnt;
+-    sz = cnt + 8;
+-    char *oldret = *ret;
+-    *ret = (char *) realloc(*ret, sz * sizeof(char));
+-    if (!*ret && oldret) free(oldret);
+-    if (!*ret) return -1;
+-    va_start(args, format);
+-    cnt = vsnprintf(*ret, sz, format, args);
+-    va_end(args);
+-    if (cnt < sz - 1) return cnt;
+-    free(*ret);
+-    *ret = NULL;
+-    return -1;
+-}
+-
+ #endif
+ 
+ #if DEPLOYMENT_RUNTIME_SWIFT
+diff -ur a/CoreFoundation/Base.subproj/CoreFoundation_Prefix.h b/CoreFoundation/Base.subproj/CoreFoundation_Prefix.h
+--- a/CoreFoundation/Base.subproj/CoreFoundation_Prefix.h	2017-04-13 09:34:00.000000000 +0200
++++ b/CoreFoundation/Base.subproj/CoreFoundation_Prefix.h	2017-06-29 18:15:00.618479398 +0200
+@@ -478,7 +478,7 @@
+     return count;
+ }
+ 
+-CF_PRIVATE int asprintf(char **ret, const char *format, ...);
++#include <stdio.h>
+ 
+ #endif
+ 
