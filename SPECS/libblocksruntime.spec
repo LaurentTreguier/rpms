@@ -1,6 +1,10 @@
+%if el6
+%global         debug_package   %{nil}
+%endif
+
 Name:           libblocksruntime
 Version:        0.4.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A target-independent implementation of Apple "Blocks" runtime interfaces
 
 License:        NCSA and MIT
@@ -64,6 +68,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-4
+- fixed compilation on CentOS 6
+
 * Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-3
 - fixed compilation on CentOS
 
