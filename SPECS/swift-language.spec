@@ -17,7 +17,7 @@
 
 Name:           %{source_name}-language
 Version:        3.1.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -32,8 +32,10 @@ Source6:        https://github.com/apple/%{source_name}-llbuild/archive/%{source
 Source7:        https://github.com/apple/%{source_name}-lldb/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-lldb-%{version}.tar.gz
 Source8:        https://github.com/apple/%{source_name}-llvm/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-llvm-%{version}.tar.gz
 Source9:        https://github.com/apple/%{source_name}-package-manager/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-package-manager-%{version}.tar.gz
-Patch30:         %{name}-corelibs-foundation-asprintf.patch
-Patch70:         %{name}-lldb-missing-include.patch
+# asprintf is already a GNU extension and its redefinition causes problems on Fedora 26+
+Patch30:        %{name}-corelibs-foundation-asprintf.patch
+# std::bind is used in a file with a missing <functional> header include
+Patch70:        %{name}-lldb-missing-include.patch
 
 BuildRequires:  autoconf
 BuildRequires:  clang
@@ -44,23 +46,23 @@ BuildRequires:  python2
 BuildRequires:  rsync
 BuildRequires:  swig
 BuildRequires:  pkgconfig
-BuildRequires:  python2-sphinx
+BuildRequires:  python-sphinx
 BuildRequires:  libblocksruntime-devel
 BuildRequires:  libbsd-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libedit-devel
 BuildRequires:  libicu-devel
-BuildRequires:  libkqueue-devel
 BuildRequires:  libsqlite3x-devel
 BuildRequires:  libuuid-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  ncurses-devel
-BuildRequires:  python2-devel
+BuildRequires:  python-devel
 BuildRequires:  systemtap-sdt-devel
 
 %description
 Swift is a high-performance system programming language.
-It has a clean and modern syntax, offers seamless access to existing C and Objective-C code and frameworks, and is memory safe by default.
+It has a clean and modern syntax, offers seamless access to existing C and
+Objective-C code and frameworks, and is memory safe by default.
 
 
 %package lldb
@@ -70,8 +72,7 @@ Conflicts:      lldb
 %description lldb
 LLDB is a next generation, high-performance debugger. It is built as a set
 of reusable components which highly leverage existing libraries in the
-larger LLVM Project, such as the Clang expression parser and LLVM
-disassembler.
+larger LLVM Project, such as the Clang expression parser and LLVM disassembler.
 
 
 %package lldb-devel
@@ -88,16 +89,28 @@ developing applications that use %{name}-lldb.
 %setup -q -b 1 -n %{source_name}-clang-%{source_name}-%{version}-RELEASE
 %setup -q -b 2 -n %{source_name}-cmark-%{source_name}-%{version}-RELEASE
 %setup -q -b 3 -n %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
-%patch30 -p1
 %setup -q -b 4 -n %{source_name}-corelibs-libdispatch-%{source_name}-%{version}-RELEASE
 %setup -q -b 5 -n %{source_name}-corelibs-xctest-%{source_name}-%{version}-RELEASE
 %setup -q -b 6 -n %{source_name}-llbuild-%{source_name}-%{version}-RELEASE
 %setup -q -b 7 -n %{source_name}-lldb-%{source_name}-%{version}-RELEASE
-%patch70
 %setup -q -b 8 -n %{source_name}-llvm-%{source_name}-%{version}-RELEASE
 %setup -q -b 9 -n %{source_name}-package-manager-%{source_name}-%{version}-RELEASE
 
 cd $RPM_BUILD_DIR
+find -regex '.*\.\(h\|c\|cpp\|swift\)' -exec sed -ri 's/SIGUNUSED/SIGSYS/g' {} ';'
+
+if [[ ! -f %{_includedir}/xlocale.h ]]
+then
+    find -regex '.*\.\(h\|c\|cpp\)' -exec sed -ri 's/<xlocale\.h>/<locale.h>/g' {} ';'
+fi
+
+pushd %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
+%patch30 -p1
+popd
+
+pushd %{source_name}-lldb-%{source_name}-%{version}-RELEASE
+%patch70 -p1
+popd
 
 for sdir in llvm clang lldb cmark llbuild
 do
@@ -210,6 +223,11 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Fri Jun 30 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-5
+- fixed compilation with Fedora 27 with patch00 and SYSUNUSED replacement
+- changed python2-* dependencies back to python-* to fix building on CentOS
+- removed libkqueue-devel dependency
+
 * Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-4
 - fixed compilation on Fedora 26 with patch30 and patch70
 - started compiling with Fedora CFLAGS and CXXFLAGS

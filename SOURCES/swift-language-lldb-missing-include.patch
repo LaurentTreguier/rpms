@@ -1,5 +1,6 @@
---- include/lldb/Utility/TaskPool.h	2017-03-28 02:21:04.000000000 +0200
-+++ include/lldb/Utility/TaskPool.patched.h	2017-06-26 18:07:59.590894125 +0200
+diff -ur a/include/lldb/Utility/TaskPool.h b/include/lldb/Utility/TaskPool.h
+--- a/include/lldb/Utility/TaskPool.h	2017-03-28 02:21:04.000000000 +0200
++++ b/include/lldb/Utility/TaskPool.h	2017-06-30 16:16:09.243676311 +0200
 @@ -28,6 +28,7 @@
  
  #include <cassert>
