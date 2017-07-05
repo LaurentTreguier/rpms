@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.19
-Release:        3%{?dist}
+Version:        4.1.20
+Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -49,17 +49,20 @@ cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 %license LICENSE
 %doc README.md
 %doc CHANGELOG-fsharp.md
+%attr(755,root,root) %{_bindir}/*
 %{_monodir}/*/FSharp*
 %{_monodir}/fsharp
 %{_monodir}/xbuild/Microsoft/VisualStudio/*/FSharp
 "%{_monodir}/Microsoft F#"
 "%{_monodir}/Microsoft SDKs/F#"
 %{_monogacdir}/*
-%attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Wed Jul 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.20-1
+- new version
+
 * Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.19-3
 - fixed permissions on System.ValueTuple.dll
 
