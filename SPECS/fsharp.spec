@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.20
+Version:        4.1.21
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -60,6 +60,9 @@ cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
 %changelog
+* Wed Jul 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.21-1
+- new version
+
 * Wed Jul 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.20-1
 - new version
 
