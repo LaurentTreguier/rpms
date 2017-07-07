@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.21
+Version:        4.1.23
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -40,9 +40,6 @@ autoreconf
 %install
 rm -rf $RPM_BUILD_ROOT
 %make_install
-cd $RPM_BUILD_DIR/%{name}-%{version}/packages/System.ValueTuple.4.3.1/lib/netstandard1.0
-chmod +x System.ValueTuple.dll
-cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
 %files
@@ -60,6 +57,10 @@ cp System.ValueTuple.dll $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
 %changelog
+* Fri Jul 07 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.23-1
+- new version
+- removed System.ValueTuple.dll
+
 * Wed Jul 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.21-1
 - new version
 
