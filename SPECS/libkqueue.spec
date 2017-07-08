@@ -1,6 +1,6 @@
 Name:           libkqueue
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        kqueue(2) compatibility library
 
 License:        BSD
@@ -14,7 +14,9 @@ BuildRequires:  gcc
 BuildRequires:  libtool
 
 %description
-A user space implementation of the kqueue(2) kernel event notification mechanism libkqueue acts as a translator between the kevent structure and the native kernel facilities on Linux, Android, Solaris, and Windows.
+A user space implementation of the kqueue(2) kernel event notification
+mechanism libkqueue acts as a translator between the kevent structure and the
+native kernel facilities on Linux, Android, Solaris, and Windows.
 
 
 %package        devel
@@ -32,7 +34,7 @@ developing applications that use %{name}.
 
 %build
 autoreconf -i
-%configure --disable-static
+%configure --disable-static --disable-dependency-tracking
 %make_build
 
 
@@ -60,5 +62,8 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Jul 08 2017 Laurent Tréguier <laurent@treguier.org> - 2.1.0-2
+- ensured --disable-dependency-tracking option is used
+
 * Fri May 19 2017 Laurent Tréguier <laurent@treguier.org> - 2.1.0-1
 - created specfile
