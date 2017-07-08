@@ -4,7 +4,7 @@
 
 Name:           libblocksruntime
 Version:        0.4.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A target-independent implementation of Apple "Blocks" runtime interfaces
 
 License:        NCSA and MIT
@@ -44,7 +44,7 @@ fi
 
 export CXXFLAGS="$CFLAGS"
 autoreconf -i
-%configure --disable-static
+%configure --disable-static --disable-dependency-tracking
 %make_build
 
 
@@ -68,6 +68,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Jul 08 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-5
+- ensured --disable-dependency-tracking option is used
+
 * Thu Jun 29 2017 Laurent Tréguier <laurent@treguier.org> - 0.4.1-4
 - fixed compilation on CentOS 6
 
