@@ -2,7 +2,7 @@
 
 Name:           %{source_name}-theme
 Version:        2.9.90
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modern Desktop Theme Suite
 
 License:        GPLv3
@@ -15,6 +15,19 @@ BuildRequires:  automake
 BuildRequires:  make
 
 %description
+EvoPop is a modern desktop theme suite. Its design is mostly flat with a
+minimal use of shadows for depth. Requires Gtk 3.20 to function properly. The
+theme is primarily build for the Solus Project, this means I can only provide
+Budgie, Mate and Gnome support.
+EvoPop has been developed primarily with modern GTK3 (GNOME-based) desktop
+environments in mind, legacy-toolkit and GTK2 environments will not provide an
+ideal experience, as much of the visual design relies on modern GTK3+ widgets.
+
+
+%package -n %{source_name}-Azure-theme
+Summary:        Modern Desktop Theme Suite
+
+%description -n %{source_name}-Azure-theme
 EvoPop is a modern desktop theme suite. Its design is mostly flat with a
 minimal use of shadows for depth. Requires Gtk 3.20 to function properly. The
 theme is primarily build for the Solus Project, this means I can only provide
@@ -43,11 +56,19 @@ rm -rf $RPM_BUILD_ROOT
 %license LICENSE
 %doc README.md
 %{_datadir}/themes/%{source_name}
+
+
+%files -n %{source_name}-Azure-theme
+%license LICENSE
+%doc README.md
 %{_datadir}/themes/%{source_name}-Azure
 
 
 
 %changelog
+* Sun Jul 09 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.90-2
+- split package between EvoPop and EvoPop-Azure
+
 * Sun Jul 09 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.90-1
 - new version
 
