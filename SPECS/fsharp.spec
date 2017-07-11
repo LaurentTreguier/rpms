@@ -2,7 +2,7 @@
 
 Name:           fsharp
 Version:        4.1.23
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -12,13 +12,17 @@ Source0:        https://github.com/fsharp/fsharp/archive/%{version}.tar.gz#/%{na
 ExclusiveArch:  %{mono_arches}
 BuildRequires:  autoconf
 BuildRequires:  automake
-BuildRequires:  ca-certificates
 BuildRequires:  nuget
 BuildRequires:  make
-BuildRequires:  mono-devel      >=  4.4.0
-BuildRequires:  mono-wcf        >=  4.4.0
+BuildRequires:  mono-devel                          >=  4.4.0
+BuildRequires:  mono-wcf                            >=  4.4.0
+BuildRequires:  %{_sysconfdir}/pki/tls/certs/ca-bundle.crt
 Requires:       gdb
 Requires:       valgrind
+Requires:       mono-core
+Requires:       mono-devel
+Requires:       mono-winforms
+AutoReq:        no
 
 %description
 F# is a mature, open source, cross-platform, functional-first programming
@@ -57,6 +61,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jul 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.23-2
+- changed ca-certificates dependency to /etc/pki/tls/certs/ca-bundle.crt
+- switched to manual dependencies to work around wrong automatic ones
+
 * Fri Jul 07 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.23-1
 - new version
 - removed System.ValueTuple.dll
