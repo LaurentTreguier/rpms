@@ -11,7 +11,7 @@
 
 Name:           dart
 Version:        1.24.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{name}-bin
 
@@ -50,7 +50,7 @@ git remote add origin https://chromium.googlesource.com/chromium/tools/depot_too
 git pull origin master
 git checkout $(git rev-list -n 1 --before "$tag_date" master)
 
-cp %SOURCE0 ./c++
+rpm --eval "$(cat %SOURCE0)" > ./c++
 chmod +x c++
 export PATH="$PWD:$PATH"
 
@@ -86,12 +86,15 @@ done
 %files
 %license %{release_dir}/LICENSE
 %doc %{release_dir}/README
-%{_libdir}/%{name}
+%attr(-,root,root) %{_libdir}/%{name}
 %attr(755,root,root) %{_bindir}/*
 
 
 
 %changelog
+* Fri Jul 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.2-2
+- fixed permission issue
+
 * Fri Jun 23 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.2-1
 - new version
 
