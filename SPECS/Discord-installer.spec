@@ -2,7 +2,7 @@
 
 Name:           Discord-installer
 Version:        1.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
 License:        MIT
@@ -45,6 +45,8 @@ do
     if rpm -q $p &> /dev/null
     then
         touch %{_var}/lib/discord-installer-rebuild-$p
+    else
+        rm -f %{_var}/lib/discord-installer-rebuild-$p
     fi
 done
 
@@ -58,21 +60,21 @@ fi
 
 
 %preun
-rm -f %{_var}/lib/discord-installer/discord-installer-rebuild-Discord
-rm -f %{_var}/lib/discord-installer/discord-installer-rebuild-DiscordCanary
 %systemd_preun discord-installer.service
 %systemd_preun discord-canary-installer.service
 
 
 %files
-%defattr(-,root,root)
-%{_unitdir}/discord*.service
-%{_libexecdir}/discord-installer
-%{_datadir}/discord-installer
+%{_unitdir}/*
+%{_libexecdir}/*
+%{_datadir}/*
 
 
 
 %changelog
+* Fri Jul 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.1.0-2
+- correctly fixed potential rebuilds issue
+
 * Sat Jun 10 2017 Laurent Tréguier <laurent@treguier.org> - 1.1.0-1
 - new version
 - fixed unnecessary potential package rebuilds
