@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           Discord-installer
-Version:        1.1.0
-Release:        2%{?dist}
+Version:        1.2.0
+Release:        1%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
 License:        MIT
@@ -51,17 +51,22 @@ do
 done
 
 %systemd_post discord-installer.service
+%systemd_post discord-installer.timer
 %systemd_post discord-canary-installer.service
+%systemd_post discord-canary-installer.timer
 
 if [[ $1 = 1 ]]
 then
     systemctl enable --now --no-block discord-installer.service
+    systemctl enable --now --no-block discord-installer.timer
 fi
 
 
 %preun
 %systemd_preun discord-installer.service
+%systemd_preun discord-installer.timer
 %systemd_preun discord-canary-installer.service
+%systemd_preun discord-canary-installer.timer
 
 
 %files
@@ -72,6 +77,9 @@ fi
 
 
 %changelog
+* Sat Jul 15 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.0-1
+- new version
+
 * Fri Jul 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.1.0-2
 - correctly fixed potential rebuilds issue
 
