@@ -10,8 +10,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.074.1
-Release:        5%{?dist}
+Version:        2.075.0
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -22,8 +22,6 @@ Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
-# Fixes segfault when compiling druntime (take from https://github.com/dlang/dmd/commit/2da4534cdaf7451a46a5c87ec15ca02d7af59b9f)
-Patch0:         %{name}-segv.patch
 
 %if 0%{?_with_bootstrap}
 BuildRequires:  curl
@@ -31,7 +29,6 @@ BuildRequires:  curl
 BuildRequires:  %{name}
 %endif
 
-Requires:       %{name}-config                      = %{version}-%{release}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}                 < %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}-devel           < %{version}-%{release}
@@ -50,15 +47,6 @@ syntax family, and its appearance is very similar to that of C++.
 It is not governed by a corporate agenda or any overarching theory of
 programming. The needs and contributions of the D programming community form
 the direction it goes.
-
-
-%package config
-Summary:        Config files for %{name}
-BuildArch:      noarch
-Requires:       %{name} = %{version}-%{release}
-
-%description config
-Provide configuration file to customize %{name}.
 
 
 %package %{phb_name}
@@ -96,9 +84,6 @@ during various build tasks.
 %setup -q -b 1
 %setup -q -b 2
 %setup -q -b 3
-
-cd $RPM_BUILD_DIR/%{dmd_name}-%{version}
-%patch0
 
 rm -rf %{build_dir}
 mkdir -p %{build_dir}
@@ -174,17 +159,14 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %files
 %license LICENSE_1_0.txt
 %doc README.md
+%config(noreplace) %{_sysconfdir}/%{name}.conf
+%config %{_rpmconfigdir}/macros.d/*
+%attr(755,root,root) %{_bindir}/%{name}
 %{_libdir}/lib%{drt_name}.a
 %{_includedir}/%{name}/%{drt_name}
 %{_mandir}/*/%{name}.*
 %{_mandir}/*/dumpobj.*
 %{_mandir}/*/obj2asm.*
-%attr(755,root,root) %{_bindir}/%{name}
-
-
-%files config
-%config(noreplace) %{_sysconfdir}/%{name}.conf
-%config %{_rpmconfigdir}/macros.d/*
 
 
 %files %{phb_name}
@@ -214,6 +196,10 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.0-1
+- new version
+- merged dmd-config into dmd
+
 * Thu Jun 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.074.1-5
 - dropped bootstrapping
 
