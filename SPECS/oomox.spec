@@ -1,7 +1,7 @@
 %global         __python    %{__python3}
 
 Name:           oomox
-Version:        1.2.7
+Version:        1.2.8
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
@@ -20,6 +20,7 @@ BuildRequires:  bash
 BuildRequires:  bc
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
+Requires:       coreutils
 Requires:       gdk-pixbuf2-devel
 Requires:       glib2
 Requires:       gtk-murrine-engine
@@ -27,7 +28,6 @@ Requires:       gtk2-engines
 Requires:       imagemagick
 Requires:       inkscape
 Requires:       polkit
-Requires:       procps-ng
 Requires:       python3-gobject
 Requires:       sassc
 Requires:       xorg-x11-server-utils
@@ -73,6 +73,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
 
 
 %changelog
+* Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8-1
+- new version
+
 * Tue Jul 18 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.7-1
 - new version
 - added some dependencies
