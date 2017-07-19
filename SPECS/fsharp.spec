@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.23
-Release:        2%{?dist}
+Version:        4.1.24
+Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -61,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.24-1
+- new version
+
 * Sat Jul 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.23-2
 - changed ca-certificates dependency to /etc/pki/tls/certs/ca-bundle.crt
 - switched to manual dependencies to work around wrong automatic ones
