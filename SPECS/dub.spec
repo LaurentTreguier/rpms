@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           dub
-Version:        1.3.0
-Release:        5%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -53,6 +53,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.0-1
+- new version
+
 * Wed Apr 26 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-5
 - removed debuginfo subpackage
 
