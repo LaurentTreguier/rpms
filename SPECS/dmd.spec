@@ -11,7 +11,7 @@
 
 Name:           %{dmd_name}
 Version:        2.075.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -32,6 +32,7 @@ BuildRequires:  %{name}
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}                 < %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}-devel           < %{version}-%{release}
+Obsoletes:      %{name}-config                      < %{version}-%{release}
 
 %description
 D is a systems programming language. Its focus is on combining the power and
@@ -196,6 +197,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Jul 20 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.0-2
+- added obsolotes for dmd-config to fix upgrading
+
 * Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.0-1
 - new version
 - merged dmd-config into dmd
