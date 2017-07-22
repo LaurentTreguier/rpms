@@ -2,7 +2,7 @@
 
 Name:           oomox
 Version:        1.2.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -25,7 +25,7 @@ Requires:       gdk-pixbuf2-devel
 Requires:       glib2
 Requires:       gtk-murrine-engine
 Requires:       gtk2-engines
-Requires:       imagemagick
+Requires:       ImageMagick
 Requires:       inkscape
 Requires:       polkit
 Requires:       python3-gobject
@@ -73,6 +73,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
 
 
 %changelog
+* Sat Jul 22 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8-2
+- fixed ImageMagick dependency
+
 * Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8-1
 - new version
 
