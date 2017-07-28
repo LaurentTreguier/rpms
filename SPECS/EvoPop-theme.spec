@@ -1,8 +1,8 @@
 %global         source_name EvoPop
 
 Name:           %{source_name}-theme
-Version:        2.9.90
-Release:        2%{?dist}
+Version:        2.9.91
+Release:        1%{?dist}
 Summary:        Modern Desktop Theme Suite
 
 License:        GPLv3
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jul 28 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.91-1
+- new version
+
 * Sun Jul 09 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.90-2
 - split package between EvoPop and EvoPop-Azure
 
