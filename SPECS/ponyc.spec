@@ -2,7 +2,7 @@
 %global         llvm_version_roof   4.0
 
 Name:           ponyc
-Version:        0.15.0
+Version:        0.16.0
 Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
@@ -72,6 +72,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Jul 28 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.0-1
+- new version
+
 * Sat Jul 08 2017 Laurent Tréguier <laurent@treguier.org> - 0.15.0-1
 - new version
 - changed libatomic build dependency to libatomic.so.1
