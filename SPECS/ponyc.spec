@@ -6,8 +6,8 @@
 %global         llvm_version_roof   4.0
 
 Name:           ponyc
-Version:        0.16.0
-Release:        2%{?dist}
+Version:        0.16.1
+Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -76,6 +76,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Sun Jul 30 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.1-1
+- new version
+
 * Fri Jul 28 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.0-2
 - fixed mageia build failing because of debuginfo
 
