@@ -2,7 +2,7 @@
 
 Name:           fsharp
 Version:        4.1.24
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
 License:        Apache-2.0
@@ -32,10 +32,13 @@ problems with simple, maintainable and robust code.
 
 %prep
 %autosetup
+sed -i 's/msbuild/xbuild/g' Makefile
+ln -s %{_bindir}/xbuild ./msbuild
 cert-sync --user /etc/pki/tls/certs/ca-bundle.crt
 
 
 %build
+export PATH="$PATH:$(pwd)"
 autoreconf
 %configure --libexecdir=%{_monodir}/.. --libdir=%{_monodir}/..
 %make_build
@@ -61,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Jul 30 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.24-2
+- fake msbuild usage
+
 * Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.24-1
 - new version
 
