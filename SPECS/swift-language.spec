@@ -17,7 +17,7 @@
 
 Name:           %{source_name}-language
 Version:        3.1.1
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -32,6 +32,8 @@ Source6:        https://github.com/apple/%{source_name}-llbuild/archive/%{source
 Source7:        https://github.com/apple/%{source_name}-lldb/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-lldb-%{version}.tar.gz
 Source8:        https://github.com/apple/%{source_name}-llvm/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-llvm-%{version}.tar.gz
 Source9:        https://github.com/apple/%{source_name}-package-manager/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-package-manager-%{version}.tar.gz
+# taken from https://aur.archlinux.org/cgit/aur.git/tree/sphinx1.6.patch?h=swift-language
+Patch00:        %{name}-sphinx-1.6.patch
 # asprintf is already a GNU extension and its redefinition causes problems on Fedora 26+
 Patch30:        %{name}-corelibs-foundation-asprintf.patch
 # std::bind is used in a file with a missing <functional> header include
@@ -52,12 +54,13 @@ BuildRequires:  libbsd-devel
 BuildRequires:  libcurl-devel
 BuildRequires:  libedit-devel
 BuildRequires:  libicu-devel
-BuildRequires:  libsqlite3x-devel
 BuildRequires:  libuuid-devel
 BuildRequires:  libxml2-devel
 BuildRequires:  ncurses-devel
 BuildRequires:  python-devel
-BuildRequires:  systemtap-sdt-devel
+BuildRequires:  pkgconfig(sqlite3)
+Requires:       util-linux
+Requires:       python2
 
 %description
 Swift is a high-performance system programming language.
@@ -103,6 +106,10 @@ if [[ ! -f %{_includedir}/xlocale.h ]]
 then
     find -regex '.*\.\(h\|c\|cpp\)' -exec sed -ri 's/<xlocale\.h>/<locale.h>/g' {} ';'
 fi
+
+pushd %{source_name}-%{source_name}-%{version}-RELEASE
+%patch00 -p1
+popd
 
 pushd %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
 %patch30 -p1
@@ -223,8 +230,14 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Mon Jul 03 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-6
+- removed systemtap-sdt-devel dependency
+- added python2 and util-linux dependencies
+- changed libsqlite3x-devel dependency to pkgconfig(sqlite3)
+- fixed compilation with sphinx 1.6 with patch00
+
 * Fri Jun 30 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-5
-- fixed compilation with Fedora 27 with patch00 and SYSUNUSED replacement
+- fixed compilation with Fedora 27 with SYGUNUSED replacement
 - changed python2-* dependencies back to python-* to fix building on CentOS
 - removed libkqueue-devel dependency
 
