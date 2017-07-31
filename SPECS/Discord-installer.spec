@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           Discord-installer
-Version:        1.2.2
+Version:        1.3.0
 Release:        1%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
@@ -11,11 +11,12 @@ Source0:        https://github.com/LaurentTreguier/Discord-installer/archive/%{v
 
 ExclusiveArch:  x86_64
 BuildRequires:  make
-BuildRequires:  systemd
+BuildRequires:  pkgconfig(systemd)
 Requires:       coreutils
 Requires:       curl
 Requires:       dos2unix
 Requires:       libnotify
+Requires:       PackageKit
 Requires:       polkit
 Requires:       rpm-build
 Requires:       rpmdevtools
@@ -77,6 +78,10 @@ fi
 
 
 %changelog
+* Mon Jul 31 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1
+- new version
+- changed systemd build dependency to pkgconfig(systemd) to fix package on Mageia
+
 * Wed Jul 19 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.2-1
 - new version
 
