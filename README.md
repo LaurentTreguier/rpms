@@ -28,6 +28,8 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |Discord||
 |---|---|
 |Discord-installer|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord-installer/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord-installer/status_image/last_build.png" /></a>|
+|libcxx|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxx/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxx/status_image/last_build.png" /></a>|
+|libcxxabi|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxxabi/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxxabi/status_image/last_build.png" /></a>|
 
 |Themes||
 |---|---|
