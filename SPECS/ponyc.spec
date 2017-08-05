@@ -7,7 +7,7 @@
 
 Name:           ponyc
 Version:        0.16.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -22,10 +22,9 @@ BuildRequires:  clang               >= 3.3
 BuildRequires:  gcc                 >= 4.7
 BuildRequires:  gcc-c++             >= 4.7
 BuildRequires:  rpmdevtools
-BuildRequires:  ncurses-devel
-BuildRequires:  pcre2-devel
-BuildRequires:  openssl-devel
-BuildRequires:  zlib-devel
+BuildRequires:  pkgconfig(ncurses)
+BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(zlib)
 BuildRequires:  %{_libdir}/libatomic.so.1
 BuildRequires:  %(if [[ $(rpm -q --qf '%%{VERSION}' rpm) < 4.12 ]]; \
                     then echo 'llvm%{llvm_version_pref}-devel'; \
@@ -76,6 +75,10 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.1-2
+- remove useless pcre2-devel build dependency
+- change dependency names to pkgconfig()
+
 * Sun Jul 30 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.1-1
 - new version
 
