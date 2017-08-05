@@ -1,8 +1,12 @@
+%if mageia
+%global         debug_package       %{nil}
+%endif
+
 %global         bootstrap   0
 
 Name:           libcxx
 Version:        4.0.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        C++ standard library targeting C++11
 
 License:        MIT or NCSA
@@ -95,6 +99,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-3
+- stop producing debuginfo on Mageia
+
 * Thu Aug 03 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-2
 - drop bootstrapping
 
