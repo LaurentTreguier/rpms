@@ -1,6 +1,10 @@
+%if mageia
+%global         debug_package       %{nil}
+%endif
+
 Name:           libcxxabi
 Version:        4.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Low level support for a standard C++ library
 
 License:        MIT or NCSA
@@ -85,5 +89,8 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-2
+- stop producing debuginfo on Mageia
+
 * Thu Aug  3 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-1
 - created specfile
