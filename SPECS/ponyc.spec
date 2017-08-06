@@ -6,17 +6,14 @@
 %global         llvm_version_roof   4.0
 
 Name:           ponyc
-Version:        0.16.1
-Release:        2%{?dist}
+Version:        0.17.0
+Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
 URL:            http://www.ponylang.org
 Source0:        https://github.com/ponylang/ponyc/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        ponyc.sh
-Patch00:        %{name}-fallthrough.patch
-# https://github.com/ponylang/ponyc/issues/1756#issuecomment-310779018
-Patch01:        %{name}-gcc7.patch
 
 BuildRequires:  clang               >= 3.3
 BuildRequires:  gcc                 >= 4.7
@@ -39,15 +36,6 @@ performance programming language.
 
 %prep
 %autosetup -N
-%patch00 -p1
-
-ret=0
-rpmdev-vercmp $(rpm -q --qf '%%{VERSION}' gcc) 7 || ret=$?
-
-if [[ $ret -ne 12 ]]
-then
-%patch01 -p1
-fi
 
 sed -i 's,$(prefix)/lib,$(libdir),' Makefile
 
@@ -75,6 +63,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Sun Aug 06 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.0-1
+- new version
+
 * Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 0.16.1-2
 - remove useless pcre2-devel build dependency
 - change dependency names to pkgconfig()
