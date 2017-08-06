@@ -1,13 +1,11 @@
-%if mageia
 %global         debug_package       %{nil}
-%endif
 
 %global         llvm_version_pref   3.9
 %global         llvm_version_roof   4.0
 
 Name:           ponyc
 Version:        0.17.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -22,7 +20,11 @@ BuildRequires:  rpmdevtools
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(zlib)
+%if 0%{?mageia}
+BuildRequires:  %{_libdir}/libatomic.so
+%else
 BuildRequires:  %{_libdir}/libatomic.so.1
+%endif
 BuildRequires:  %(if [[ $(rpm -q --qf '%%{VERSION}' rpm) < 4.12 ]]; \
                     then echo 'llvm%{llvm_version_pref}-devel'; \
                     else echo '(llvm%{llvm_version_pref}-devel or llvm-devel < %{llvm_version_roof})'; \
@@ -63,6 +65,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Sun Aug 06 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.0-2
+- fixed build on Mageia
+
 * Sun Aug 06 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.0-1
 - new version
 
