@@ -1,12 +1,12 @@
-%if mageia
-%global         debug_package       %{nil}
+%if 0%{?mageia}
+%global         debug_package   %{nil}
 %endif
 
-%global         bootstrap   0
+%global         bootstrap       0
 
 Name:           libcxx
 Version:        4.0.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        C++ standard library targeting C++11
 
 License:        MIT or NCSA
@@ -99,6 +99,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Aug 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-4
+- fixed debuginfo generation
+
 * Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-3
 - stop producing debuginfo on Mageia
 
