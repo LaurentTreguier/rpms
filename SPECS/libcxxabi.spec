@@ -1,10 +1,10 @@
-%if mageia
-%global         debug_package       %{nil}
+%if 0%{?mageia}
+%global         debug_package   %{nil}
 %endif
 
 Name:           libcxxabi
 Version:        4.0.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Low level support for a standard C++ library
 
 License:        MIT or NCSA
@@ -89,6 +89,9 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Tue Aug 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-3
+- fixed debuginfo generation
+
 * Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-2
 - stop producing debuginfo on Mageia
 
