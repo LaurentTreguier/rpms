@@ -1,12 +1,8 @@
-%if 0%{?mageia}
-%global         debug_package   %{nil}
-%endif
-
 %global         bootstrap       0
 
 Name:           libcxx
 Version:        4.0.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        C++ standard library targeting C++11
 
 License:        MIT or NCSA
@@ -99,6 +95,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Mon Aug 14 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-5
+- added debuginfo again
+
 * Tue Aug 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-4
 - fixed debuginfo generation
 
