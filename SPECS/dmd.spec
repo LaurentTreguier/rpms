@@ -10,8 +10,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.075.0
-Release:        2%{?dist}
+Version:        2.075.1
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -197,6 +197,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Tue Aug 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.1-1
+- new version
+
 * Thu Jul 20 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.0-2
 - added obsolotes for dmd-config to fix upgrading
 
