@@ -1,13 +1,14 @@
 %global         __python    %{__python3}
 
 Name:           oomox
-Version:        1.2.8
-Release:        2%{?dist}
+Version:        1.2.8.1
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix theme, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{version}.tar.gz#/%{name}-gtk-theme-%{version}.tar.gz
 Source10:       oomox-archdroid-icons-cli
 Source11:       oomox-cli
 Source12:       oomox-gnome-colors-icons-cli
@@ -21,6 +22,7 @@ BuildRequires:  bc
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 Requires:       coreutils
+Requires:       grep
 Requires:       gdk-pixbuf2-devel
 Requires:       glib2
 Requires:       gtk-murrine-engine
@@ -30,6 +32,7 @@ Requires:       inkscape
 Requires:       polkit
 Requires:       python3-gobject
 Requires:       sassc
+Requires:       sed
 Requires:       xorg-x11-server-utils
 
 %description
@@ -37,7 +40,9 @@ Graphical application for generating different color variations of Numix theme (
 
 
 %prep
-%autosetup
+%autosetup -b 0
+%autosetup -b 1
+cp -pr $RPM_BUILD_DIR/%{name}-gtk-theme-%{version}/* $RPM_BUILD_DIR/%{name}-%{version}/gtk-theme
 
 
 %build
@@ -49,7 +54,7 @@ rm -rf $RPM_BUILD_ROOT/*
 mkdir -p $RPM_BUILD_ROOT/opt/%{name}
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 mkdir -p $RPM_BUILD_ROOT/%{_datadir}/applications
-cp -R $RPM_BUILD_DIR/%{name}-%{version}/* $RPM_BUILD_ROOT/opt/%{name}
+cp -pr $RPM_BUILD_DIR/%{name}-%{version}/* $RPM_BUILD_ROOT/opt/%{name}
 cp                              \
     %{SOURCE10}                 \
     %{SOURCE11}                 \
@@ -58,21 +63,23 @@ cp                              \
     %{SOURCE14}                 \
     $RPM_BUILD_ROOT/%{_bindir}
 desktop-file-install --dir $RPM_BUILD_ROOT/%{_datadir}/applications %{SOURCE20}
-rm $RPM_BUILD_ROOT/opt/%{name}/{CHANGES,CREDITS,PKGBUILD,circle.yml,screenshot*}
+rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %files
 %license LICENSE
-%license CREDITS
+%doc CREDITS
 %doc README.md
-%doc CHANGES
 %attr(755,root,root) %{_bindir}/*
-/opt/%{name}
 %{_datadir}/applications/%{name}.desktop
+/opt/%{name}
 
 
 
 %changelog
+* Sun Aug 20 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8.1-1
+- new version
+
 * Sat Jul 22 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8-2
 - fixed ImageMagick dependency
 
