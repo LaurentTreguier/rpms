@@ -4,7 +4,7 @@
 %global         llvm_version_roof   4.0
 
 Name:           ponyc
-Version:        0.18.0
+Version:        0.18.1
 Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
@@ -65,6 +65,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Fri Aug 25 2017 Laurent Tréguier <laurent@treguier.org> - 0.18.1-1
+- new version
+
 * Sat Aug 19 2017 Laurent Tréguier <laurent@treguier.org> - 0.18.0-1
 - new version
 
