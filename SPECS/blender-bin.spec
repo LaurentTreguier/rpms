@@ -1,10 +1,11 @@
+%global         debug_package   %{nil}
 %global         __python        %{_bindir}/python3
 %global         source_name     blender
 %global         glibc_version   2.19
 
 Name:           %{source_name}-bin
 Version:        2.78c
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        3D modeling, animation, rendering and post-production
 
 %global         filename        blender-%{version}-linux-glibc%(echo %{glibc_version} | tr -d '.')-%{_arch}
@@ -13,7 +14,7 @@ License:        GPLv2+
 URL:            https://www.blender.org
 Source0:        http://download.blender.org/release/Blender%(echo %{version} | tr -d [:alpha:])/%{filename}.tar.bz2#/%{name}-%{version}.tar.bz2
 
-BuildArch:      x86_64
+ExclusiveArch:  x86_64
 Requires:       glibc >= %{glibc_version}
 Requires:       blender-fonts
 Requires:       fontpackages-filesystem
@@ -56,12 +57,14 @@ mv $RPM_BUILD_ROOT/opt/%{source_name}/%{source_name}.svg $RPM_BUILD_ROOT/%{_data
 /opt/%{source_name}
 %{_datadir}/applications/%{source_name}.desktop
 %{_datadir}/icons/scalable/%{source_name}.svg
-%defattr(755,root,root)
-%{_bindir}/%{source_name}*
+%attr(755,root,root) %{_bindir}/%{source_name}*
 
 
 
 %changelog
+* Sun Aug 27 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-4
+- changed BuildArch to ExclusiveArch
+
 * Sun May 14 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-3
 - ensured binaries are executable
 
