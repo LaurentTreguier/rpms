@@ -1,17 +1,20 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
 %global         flatplat_version    20170605
+%global         flatplat_commit     96bffc0b13c81a0a608e036da5b1c720e647a11a
+%global         flatplat_githash    %(c=%{flatplat_commit}; echo ${c:0:7})
+%global         flatplat_gitdate    20170827
 
 Name:           oomox
 Version:        1.3.0
-Release:        1_%{numix_version}.1_%{flatplat_version}.1%{?dist}
+Release:        1_%{numix_version}.1_%{flatplat_gitdate}git%{flatplat_githash}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Flat-Plat themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
-Source2:        https://github.com/nana-4/Flat-Plat/archive/v%{flatplat_version}.tar.gz#/Flat-Plat-%{flatplat_version}.tar.gz
+Source2:        https://github.com/nana-4/Flat-Plat/archive/%{flatplat_commit}.zip#/Flat-Plat-%{flatplat_commit}.zip
 Source10:       oomox-archdroid-icons-cli
 Source11:       oomox-cli
 Source12:       oomox-gnome-colors-icons-cli
@@ -51,7 +54,7 @@ hack for HiDPI in gtk2.
 %autosetup -b 1
 %autosetup -b 2
 cp -pr $RPM_BUILD_DIR/%{name}-gtk-theme-%{numix_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gtk-theme
-cp -pr $RPM_BUILD_DIR/Flat-Plat-%{flatplat_version}/* $RPM_BUILD_DIR/%{name}-%{version}/flat-plat-theme
+cp -pr $RPM_BUILD_DIR/Flat-Plat-%{flatplat_commit}/* $RPM_BUILD_DIR/%{name}-%{version}/flat-plat-theme
 
 
 %build
@@ -86,7 +89,10 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
-* Mon Aug 28 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1
+* Mon Aug 28 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1_1.2.8.1.1_20170827git96bffc0.1
+- updated Flat-Plat to a functional version
+
+* Mon Aug 28 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1_1.2.8.1.1_20170605.1
 - new version
 
 * Sun Aug 20 2017 Laurent Tréguier <laurent@treguier.org> - 1.2.8.1-1
