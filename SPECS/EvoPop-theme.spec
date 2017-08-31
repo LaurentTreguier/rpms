@@ -1,7 +1,7 @@
 %global         source_name EvoPop
 
 Name:           %{source_name}-theme
-Version:        2.9.96
+Version:        2.9.97
 Release:        1%{?dist}
 Summary:        Modern Desktop Theme Suite
 
@@ -66,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Aug 31 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.97-1
+- new version
+
 * Mon Aug 28 2017 Laurent Tréguier <laurent@treguier.org> - 2.9.96-1
 - new version
 
