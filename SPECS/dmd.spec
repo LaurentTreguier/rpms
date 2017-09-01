@@ -1,4 +1,5 @@
 %global         debug_package   %{nil}
+
 %global         dmd_name        dmd
 %global         drt_name        druntime
 %global         phb_name        phobos
@@ -10,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.075.1
+Version:        2.076.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -187,6 +188,7 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %defattr(755,root,root)
 %{_bindir}/catdoc
 %{_bindir}/changed
+%{_bindir}/checkwhitespace
 %{_bindir}/ddemangle
 %{_bindir}/detab
 %{_bindir}/dget
@@ -197,6 +199,12 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Fri Sep 01 2017 Laurent Tréguier <laurent@treguier.org> - 2.076.0-1
+- new version
+
+* Wed Aug 16 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.1-2
+- removed debuginfo package the proper way
+
 * Tue Aug 15 2017 Laurent Tréguier <laurent@treguier.org> - 2.075.1-1
 - new version
 
