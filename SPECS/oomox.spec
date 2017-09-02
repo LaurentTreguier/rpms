@@ -1,9 +1,9 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
 %global         flatplat_version    20170605
-%global         flatplat_commit     96bffc0b13c81a0a608e036da5b1c720e647a11a
+%global         flatplat_commit     0ed1caf6bb359b8508bac6d12c62670da87fec9a
 %global         flatplat_githash    %(c=%{flatplat_commit}; echo ${c:0:7})
-%global         flatplat_gitdate    20170827
+%global         flatplat_gitdate    20170902
 
 Name:           oomox
 Version:        1.3.0
@@ -89,6 +89,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sat Sep 02 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1_1.2.8.1.1_20170902git0ed1caf.1
+- updated Flat-Plat
+
 * Mon Aug 28 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1_1.2.8.1.1_20170827git96bffc0.1
 - updated Flat-Plat to a functional version
 
