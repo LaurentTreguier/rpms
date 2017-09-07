@@ -1,9 +1,9 @@
-%global         nimble_version  0.8.6
+%global         nimble_version  0.8.8
 %global         koch_options    -d:release -d:useGnuReadline
 
 Name:           nim
-Version:        0.17.0
-Release:        2%{?dist}
+Version:        0.17.2
+Release:        1%{?dist}
 Summary:        A compiled, garbage-collected systems programming language
 
 License:        MIT and BSD
@@ -50,13 +50,19 @@ done
 
 %files
 %license copying.txt
-%doc doc/*
-%{_bindir}/*
+%doc doc
+%doc examples
+%attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 
 
 
 %changelog
+* Thu Sep 07 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.2-1
+- new version
+- forced executable bit on binaries
+- added examples to doc
+
 * Wed Jun 21 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.0-2
 - added nimble provides tag
 - added docs
