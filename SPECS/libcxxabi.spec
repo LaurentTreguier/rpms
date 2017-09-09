@@ -1,10 +1,6 @@
-%if 0%{?mageia}
-%global         debug_package   %{nil}
-%endif
-
 Name:           libcxxabi
-Version:        4.0.1
-Release:        3%{?dist}
+Version:        5.0.0
+Release:        1%{?dist}
 Summary:        Low level support for a standard C++ library
 
 License:        MIT or NCSA
@@ -89,6 +85,10 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Sat Sep 09 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.0-1
+- new version
+- added debuginfo again
+
 * Tue Aug 08 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.1-3
 - fixed debuginfo generation
 
