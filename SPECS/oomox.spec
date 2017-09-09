@@ -1,12 +1,12 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
 %global         flatplat_version    20170605
-%global         flatplat_commit     0ed1caf6bb359b8508bac6d12c62670da87fec9a
+%global         flatplat_commit     a96196d966c172c760b0e9ee471e103f3686832c
 %global         flatplat_githash    %(c=%{flatplat_commit}; echo ${c:0:7})
-%global         flatplat_gitdate    20170902
+%global         flatplat_gitdate    20170909
 
 Name:           oomox
-Version:        1.3.0
+Version:        1.3.1
 Release:        1_%{numix_version}.1_%{flatplat_gitdate}git%{flatplat_githash}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Flat-Plat themes, gnome-colors and ArchDroid icon themes
 
@@ -89,6 +89,10 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sat Sep 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.1-1_1.2.8.1.1_20170909gita96196d.1
+- new version
+- updated Flat-Plat
+
 * Sat Sep 02 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.0-1_1.2.8.1.1_20170902git0ed1caf.1
 - updated Flat-Plat
 
