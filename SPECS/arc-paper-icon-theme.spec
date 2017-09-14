@@ -2,7 +2,7 @@
 
 Name:           arc-paper-icon-theme
 Version:        20161122
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        The Arc icon theme patched to use Paper as secondary theme
 
 License:        GPLv3
@@ -15,12 +15,10 @@ Patch1:         arc-paper-icon-theme-index.patch
 BuildArch:      noarch
 BuildRequires:  autoconf
 BuildRequires:  automake
-BuildRequires:  pkgconfig
-BuildRequires:  gtk3-devel
 Requires:       hicolor-icon-theme
 Requires:       gnome-icon-theme
 Requires:       gtk-murrine-engine
-%if "%(rpm --version | cut -d' ' -f3)" >= "4.12"
+%if "0%{?epel}" == "0"
 Recommends:     paper-icon-theme
 %endif
 
@@ -54,6 +52,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Sep 14 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-8
+- fixed building on EPEL
+- removed useless gtk3-devel build dependency
+
 * Thu Apr 20 2017 Laurent Tréguier <laurent@treguier.org> - 20161122-7
 - synced build dependencies with upstream
 
