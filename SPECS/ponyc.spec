@@ -1,11 +1,8 @@
 %global         debug_package       %{nil}
 
-%global         llvm_version_pref   3.9
-%global         llvm_version_roof   4.0
-
 Name:           ponyc
 Version:        0.19.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -14,22 +11,20 @@ Source0:        https://github.com/ponylang/ponyc/archive/%{version}.tar.gz#/%{n
 Source1:        ponyc.sh
 Patch0:         %{name}-fallthrough.patch
 
-BuildRequires:  clang               >= 3.3
-BuildRequires:  gcc                 >= 4.7
-BuildRequires:  gcc-c++             >= 4.7
+BuildRequires:  clang               >=  3.3
+BuildRequires:  gcc                 >=  4.7
+BuildRequires:  gcc-c++             >=  4.7
 BuildRequires:  rpmdevtools
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(zlib)
 %if 0%{?mageia}
+BuildRequires:  llvm-devel
 BuildRequires:  %{_libdir}/libatomic.so
 %else
+BuildRequires:  cmake(LLVM)         <   4.0.0
 BuildRequires:  %{_libdir}/libatomic.so.1
 %endif
-BuildRequires:  %(if [[ $(rpm -q --qf '%%{VERSION}' rpm) < 4.12 ]]; \
-                    then echo 'llvm%{llvm_version_pref}-devel'; \
-                    else echo '(llvm%{llvm_version_pref}-devel or llvm-devel < %{llvm_version_roof})'; \
-                    fi)
 Requires:       gcc
 
 %description
@@ -66,6 +61,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Thu Sep 14 2017 Laurent Tréguier <laurent@treguier.org> - 0.19.1-2
+- changed LLVM devel dependency to cmake(LLVM) < 4.0.0 to fix building on EPEL
+
 * Thu Sep 14 2017 Laurent Tréguier <laurent@treguier.org> - 0.19.1-1
 - new version
 - added patch for fallthrough error
