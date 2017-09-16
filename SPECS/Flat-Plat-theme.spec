@@ -3,7 +3,7 @@
 %global         source_name_dark    %{source_name}-dark
 
 Name:           %{source_name}-theme
-Version:        20170605
+Version:        20170916
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -14,6 +14,7 @@ Source0:        https://github.com/nana-4/%{source_name}/archive/v%{version}.tar
 BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  glib2-devel
+BuildRequires:  gnome-shell
 Requires:       gdk-pixbuf2
 Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
@@ -78,6 +79,10 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Sat Sep 16 2017 Laurent Tréguier <laurent@treguier.org> - 20170916-1
+- new version
+- added gnome-shell build dependency
+
 * Mon Jun 05 2017 Laurent Tréguier <laurent@treguier.org> - 20170605-1
 - new version
 
