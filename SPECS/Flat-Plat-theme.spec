@@ -3,7 +3,7 @@
 %global         source_name_dark    %{source_name}-dark
 
 Name:           %{source_name}-theme
-Version:        20170916
+Version:        20170917
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -79,6 +79,9 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Sun Sep 17 2017 Laurent Tréguier <laurent@treguier.org> - 20170917-1
+- new version
+
 * Sat Sep 16 2017 Laurent Tréguier <laurent@treguier.org> - 20170916-1
 - new version
 - added gnome-shell build dependency
