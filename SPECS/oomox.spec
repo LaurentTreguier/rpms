@@ -1,17 +1,17 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
-%global         flatplat_version    20170916
+%global         flatplat_version    20170917
 
 Name:           oomox
 Version:        1.3.1
-Release:        1_%{numix_version}.1_%{flatplat_version}.2%{?dist}
+Release:        1_%{numix_version}.1_%{flatplat_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Flat-Plat themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
-Source2:        https://github.com/nana-4/Flat-Plat/archive/%{flatplat_version}.tar.gz#/Flat-Plat-%{flatplat_version}.tar.gz
+Source2:        https://github.com/nana-4/Flat-Plat/archive/v%{flatplat_version}.tar.gz#/Flat-Plat-%{flatplat_version}.tar.gz
 Source10:       oomox-archdroid-icons-cli
 Source11:       oomox-cli
 Source12:       oomox-gnome-colors-icons-cli
@@ -86,6 +86,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sun Sep 17 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.1-1_1.2.8.1.1_20170917.1
+- rebuilt
+
 * Sat Sep 16 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.1-1_1.2.8.1.1_20170916.2
 - fixed Flat-Plat source
 
