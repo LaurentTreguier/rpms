@@ -4,8 +4,8 @@
 %global         glibc_version   2.19
 
 Name:           %{source_name}-bin
-Version:        2.78c
-Release:        4%{?dist}
+Version:        2.79
+Release:        1%{?dist}
 Summary:        3D modeling, animation, rendering and post-production
 
 %global         filename        blender-%{version}-linux-glibc%(echo %{glibc_version} | tr -d '.')-%{_arch}
@@ -19,8 +19,8 @@ Requires:       glibc >= %{glibc_version}
 Requires:       blender-fonts
 Requires:       fontpackages-filesystem
 Requires:       google-droid-sans-fonts
-Requires:       python3-numpy
-Requires:       python3-requests
+Requires:       python3dist(numpy)
+Requires:       python3dist(requests)
 Conflicts:      blender
 
 %description
@@ -54,14 +54,17 @@ mv $RPM_BUILD_ROOT/opt/%{source_name}/%{source_name}.svg $RPM_BUILD_ROOT/%{_data
 %license *-license.txt
 %license copyright.txt
 %doc readme.html
-/opt/%{source_name}
+%attr(755,root,root) %{_bindir}/%{source_name}*
 %{_datadir}/applications/%{source_name}.desktop
 %{_datadir}/icons/scalable/%{source_name}.svg
-%attr(755,root,root) %{_bindir}/%{source_name}*
+/opt/%{source_name}
 
 
 
 %changelog
+* Sun Sep 17 2017 Laurent Tréguier <laurent@treguier.org> - 2.79-1
+- new version
+
 * Sun Aug 27 2017 Laurent Tréguier <laurent@treguier.org> - 2.78c-4
 - changed BuildArch to ExclusiveArch
 
