@@ -16,8 +16,8 @@
                                         --libdispatch true
 
 Name:           %{source_name}-language
-Version:        3.1.1
-Release:        6%{?dist}
+Version:        4.0
+Release:        1%{?dist}
 Summary:        The Swift programming language
 
 License:        Apache-2.0
@@ -32,8 +32,6 @@ Source6:        https://github.com/apple/%{source_name}-llbuild/archive/%{source
 Source7:        https://github.com/apple/%{source_name}-lldb/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-lldb-%{version}.tar.gz
 Source8:        https://github.com/apple/%{source_name}-llvm/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-llvm-%{version}.tar.gz
 Source9:        https://github.com/apple/%{source_name}-package-manager/archive/%{source_name}-%{version}-RELEASE.tar.gz#/%{name}-package-manager-%{version}.tar.gz
-# taken from https://aur.archlinux.org/cgit/aur.git/tree/sphinx1.6.patch?h=swift-language
-Patch00:        %{name}-sphinx-1.6.patch
 # asprintf is already a GNU extension and its redefinition causes problems on Fedora 26+
 Patch30:        %{name}-corelibs-foundation-asprintf.patch
 # std::bind is used in a file with a missing <functional> header include
@@ -42,6 +40,7 @@ Patch70:        %{name}-lldb-missing-include.patch
 BuildRequires:  autoconf
 BuildRequires:  clang
 BuildRequires:  cmake
+BuildRequires:  icu
 BuildRequires:  libtool
 BuildRequires:  ninja-build
 BuildRequires:  python2
@@ -50,15 +49,21 @@ BuildRequires:  swig
 BuildRequires:  pkgconfig
 BuildRequires:  python-sphinx
 BuildRequires:  libblocksruntime-devel
-BuildRequires:  libbsd-devel
-BuildRequires:  libcurl-devel
-BuildRequires:  libedit-devel
-BuildRequires:  libicu-devel
-BuildRequires:  libuuid-devel
-BuildRequires:  libxml2-devel
-BuildRequires:  ncurses-devel
-BuildRequires:  python-devel
+BuildRequires:  pkgconfig(icu-i18n)
+BuildRequires:  pkgconfig(icu-uc)
+BuildRequires:  pkgconfig(libbsd)
+BuildRequires:  pkgconfig(libcurl)
+BuildRequires:  pkgconfig(libedit)
+BuildRequires:  pkgconfig(libxml-2.0)
+BuildRequires:  pkgconfig(ncurses)
+BuildRequires:  pkgconfig(python2)
 BuildRequires:  pkgconfig(sqlite3)
+BuildRequires:  pkgconfig(uuid)
+%if 0%{?mageia}
+BuildRequires:  %{_libdir}/libatomic.so
+%else
+BuildRequires:  %{_libdir}/libatomic.so.1
+%endif
 Requires:       util-linux
 Requires:       python2
 
@@ -106,10 +111,6 @@ if [[ ! -f %{_includedir}/xlocale.h ]]
 then
     find -regex '.*\.\(h\|c\|cpp\)' -exec sed -ri 's/<xlocale\.h>/<locale.h>/g' {} ';'
 fi
-
-pushd %{source_name}-%{source_name}-%{version}-RELEASE
-%patch00 -p1
-popd
 
 pushd %{source_name}-corelibs-foundation-%{source_name}-%{version}-RELEASE
 %patch30 -p1
@@ -211,13 +212,14 @@ rm -r %{_lib}/%{source_name}
 %attr(755,root,root) %{_bindir}/%{source_name}*
 %{_prefix}/*/%{source_name}
 %{_libdir}/libsourcekitdInProc.so
+%{_libdir}/%{source_name}*
 %{_libexecdir}/*
 
 
 %files lldb
 %{_libdir}/liblldb.so.*
 %{_libdir}/lldb
-%{_libdir}/python2.7/*
+%{python2_sitearch}
 %defattr(755,root,root)
 %{_bindir}/lldb*
 %{_bindir}/repl_swift
@@ -230,6 +232,11 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Wed Sep 20 2017 Laurent Tréguier <laurent@treguier.org> - 4.0-1
+- new version
+- switched most build dependencies to pkgconfig()
+- removed patch00
+
 * Mon Jul 03 2017 Laurent Tréguier <laurent@treguier.org> - 3.1.1-6
 - removed systemtap-sdt-devel dependency
 - added python2 and util-linux dependencies
