@@ -1,8 +1,8 @@
 %global         debug_package       %{nil}
 
 Name:           ponyc
-Version:        0.19.1
-Release:        2%{?dist}
+Version:        0.19.2
+Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -61,6 +61,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Mon Sep 25 2017 Laurent Tréguier <laurent@treguier.org> - 0.19.2-1
+- new version
+
 * Thu Sep 14 2017 Laurent Tréguier <laurent@treguier.org> - 0.19.1-2
 - changed LLVM devel dependency to cmake(LLVM) < 4.0.0 to fix building on EPEL
 
