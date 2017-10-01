@@ -3,7 +3,7 @@
 %global         flatplat_version    20170917
 
 Name:           oomox
-Version:        1.4.0
+Version:        1.4.1
 Release:        1_%{numix_version}.1_%{flatplat_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Flat-Plat themes, gnome-colors and ArchDroid icon themes
 
@@ -86,6 +86,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sun Oct 01 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.1-1_1.2.8.1.1_20170917.1
+- new version
+
 * Fri Sep 29 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.0-1_1.2.8.1.1_20170917.1
 - new version
 
