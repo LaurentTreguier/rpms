@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.25
+Version:        4.1.26
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -14,8 +14,8 @@ BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  nuget
 BuildRequires:  make
-BuildRequires:  mono-devel                          >=  4.4.0
-BuildRequires:  mono-wcf                            >=  4.4.0
+BuildRequires:  mono-devel                                  >=  4.4.0
+BuildRequires:  mono-wcf                                    >=  4.4.0
 BuildRequires:  %{_sysconfdir}/pki/tls/certs/ca-bundle.crt
 Requires:       gdb
 Requires:       valgrind
@@ -64,6 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 03 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.26-1
+- new version
+
 * Sat Aug 05 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.25-1
 - new version
 
