@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.26
+Version:        4.1.27
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -50,9 +50,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%license LICENSE
+%license License.txt
 %doc README.md
 %doc CHANGELOG-fsharp.md
+%doc CHANGELOG-visualfsharp.md
 %attr(755,root,root) %{_bindir}/*
 %{_monodir}/*/FSharp*
 %{_monodir}/fsharp
@@ -64,6 +65,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Oct 04 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.27-1
+- new version
+
 * Tue Oct 03 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.26-1
 - new version
 
