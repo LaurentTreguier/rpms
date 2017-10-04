@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           fsharp
-Version:        4.1.27
+Version:        4.1.28
 Release:        1%{?dist}
 Summary:        The Open Edition of the F# compiler, core library and tools
 
@@ -47,6 +47,8 @@ autoreconf
 %install
 rm -rf $RPM_BUILD_ROOT
 %make_install
+cp $RPM_BUILD_DIR/%{name}-%{version}/Release/net40/bin/System.ValueTuple.dll \
+    $RPM_BUILD_ROOT/%{_monodir}/%{name}
 
 
 %files
@@ -60,11 +62,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_monodir}/xbuild/Microsoft/VisualStudio/*/FSharp
 "%{_monodir}/Microsoft F#"
 "%{_monodir}/Microsoft SDKs/F#"
-%{_monogacdir}/*
 
 
 
 %changelog
+* Wed Oct 04 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.28-1
+- new version
+- added System.ValueTuple.dll to package to fix missing dependency error
+
 * Wed Oct 04 2017 Laurent Tréguier <laurent@treguier.org> - 4.1.27-1
 - new version
 
