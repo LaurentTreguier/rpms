@@ -40,8 +40,8 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |---|---|
 |arc-paper-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/status_image/last_build.png" /></a>|
 |EvoPop-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/EvoPop-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/EvoPop-theme/status_image/last_build.png" /></a>|
-|Flat-Plat-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/Flat-Plat-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/Flat-Plat-theme/status_image/last_build.png" /></a>|
 |la-capitaine-cursor-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/status_image/last_build.png" /></a>|
 |la-capitaine-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/status_image/last_build.png" /></a>|
+|materia-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/materia-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/materia-theme/status_image/last_build.png" /></a>|
 |oomox|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/oomox/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/oomox/status_image/last_build.png" /></a>|
 |OSX-Arc-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/OSX-Arc-theme/status_image/last_build.png" /></a>|
