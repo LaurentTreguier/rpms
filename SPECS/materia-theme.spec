@@ -1,15 +1,13 @@
-%global         source_name         Flat-Plat
-%global         source_name_light   %{source_name}-light
-%global         source_name_dark    %{source_name}-dark
+%global         source_name         materia
 
 Name:           %{source_name}-theme
-Version:        20170917
+Version:        20171005
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
-URL:            https://github.com/nana-4/Flat-Plat
-Source0:        https://github.com/nana-4/%{source_name}/archive/v%{version}.tar.gz#/%{source_name}-%{version}.tar.gz
+URL:            https://github.com/nana-4/materia-theme
+Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -18,33 +16,18 @@ BuildRequires:  gnome-shell
 Requires:       gdk-pixbuf2
 Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
+Obsoletes:      Flat-Plat-theme         < %{version}
+Obsoletes:      Flat-Plat-light-theme   < %{version}
+Obsoletes:      Flat-Plat-dark-theme    < %{version}
 
 %description
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
-environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
-LightDM, GDM, Chrome theme, etc.
-
-
-%package -n %{source_name_light}-theme
-Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
-
-%description -n %{source_name_light}-theme
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
-environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
-LightDM, GDM, Chrome theme, etc.
-
-
-%package -n %{source_name_dark}-theme
-Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
-
-%description -n %{source_name_dark}-theme
-Flat-Plat is a Material Design-like theme for GNOME/GTK+ based desktop
+Materia is a Material Design-like theme for GNOME/GTK+ based desktop
 environments. It supports GTK3, GTK2, Metacity, GNOME Shell, Unity, MATE,
 LightDM, GDM, Chrome theme, etc.
 
 
 %prep
-%autosetup -n %{source_name}-%{version}
+%autosetup
 
 
 %build
@@ -52,33 +35,23 @@ LightDM, GDM, Chrome theme, etc.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd $RPM_BUILD_DIR/%{source_name}-%{version}
+cd $RPM_BUILD_DIR/%{name}-%{version}
 destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %files
 %license COPYING
 %doc README.md
-%{_datadir}/themes/%{source_name}
-%{_datadir}/themes/%{source_name}-compact
-
-
-%files -n %{source_name_light}-theme
-%license COPYING
-%doc README.md
-%{_datadir}/themes/%{source_name_light}
-%{_datadir}/themes/%{source_name_light}-compact
-
-
-%files -n %{source_name_dark}-theme
-%license COPYING
-%doc README.md
-%{_datadir}/themes/%{source_name_dark}
-%{_datadir}/themes/%{source_name_dark}-compact
+%{_datadir}/themes/Materia*
 
 
 
 %changelog
+* Thu Oct 05 2017 Laurent Tréguier <laurent@treguier.org> - 20171005-1
+- new version
+- renamed package to materia-theme
+- merged all variants of the theme
+
 * Sun Sep 17 2017 Laurent Tréguier <laurent@treguier.org> - 20170917-1
 - new version
 
