@@ -2,7 +2,7 @@
 
 Name:           dub
 Version:        1.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -53,6 +53,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Mon Oct 09 2017 Laurent Tréguier <laurent@treguier.org> - 1.5.0-2
+- rebuilt
+
 * Fri Sep 01 2017 Laurent Tréguier <laurent@treguier.org> - 1.5.0-1
 - new version
 
