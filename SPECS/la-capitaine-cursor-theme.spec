@@ -1,7 +1,7 @@
 %global         source_name capitaine-cursors
 
 Name:           la-capitaine-cursor-theme
-Version:        2
+Version:        2.1
 Release:        1%{?dist}
 Summary:        An x-cursor theme inspired by macOS and based on KDE Breeze
 
@@ -22,14 +22,13 @@ Designed to pair well with the associated icon pack, La Capitaine.
 
 
 %build
-cd $RPM_BUILD_DIR/%{source_name}-r%{version}/src
 ./build.sh
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine"
-cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/bin/xcursors/cursors "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine"
+cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/dist/cursors "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine"
 
 
 %files
@@ -40,5 +39,8 @@ cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/bin/xcursors/cursors "$RPM_BUILD
 
 
 %changelog
-* Wed Mar 15 2017 Laurent Tréguier <laurent@treguier.org>
+* Wed Oct 18 2017 Laurent Tréguier <laurent@treguier.org> - 2.1-1
+- new version
+
+* Wed Mar 15 2017 Laurent Tréguier <laurent@treguier.org> - 2-1
 - created specfile
