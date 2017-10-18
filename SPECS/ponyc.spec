@@ -1,7 +1,7 @@
 %global         debug_package       %{nil}
 
 Name:           ponyc
-Version:        0.19.2
+Version:        0.20.0
 Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
@@ -9,7 +9,6 @@ License:        BSD
 URL:            http://www.ponylang.org
 Source0:        https://github.com/ponylang/ponyc/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        ponyc.sh
-Patch0:         %{name}-fallthrough.patch
 
 BuildRequires:  clang               >=  3.3
 BuildRequires:  gcc                 >=  4.7
@@ -33,8 +32,7 @@ performance programming language.
 
 
 %prep
-%autosetup -p1
-
+%autosetup
 sed -i 's,$(prefix)/lib,$(libdir),' Makefile
 
 
@@ -61,6 +59,10 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Wed Oct 18 2017 Laurent Tréguier <laurent@treguier.org> - 0.20.0-1
+- new version
+- removed patch for fallthrough errors
+
 * Mon Sep 25 2017 Laurent Tréguier <laurent@treguier.org> - 0.19.2-1
 - new version
 
