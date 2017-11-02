@@ -16,7 +16,7 @@
                                         --libdispatch true
 
 Name:           %{source_name}-language
-Version:        4.0
+Version:        4.0.2
 Release:        1%{?dist}
 Summary:        The Swift programming language
 
@@ -232,6 +232,9 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Tue Oct 10 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.2-1
+- new version
+
 * Wed Sep 20 2017 Laurent Tréguier <laurent@treguier.org> - 4.0-1
 - new version
 - switched most build dependencies to pkgconfig()
