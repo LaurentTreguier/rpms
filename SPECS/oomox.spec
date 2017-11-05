@@ -1,17 +1,17 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
-%global         flatplat_version    20170917
+%global         materia_version     20171005
 
 Name:           oomox
-Version:        1.4.1
-Release:        1_%{numix_version}.1_%{flatplat_version}.1%{?dist}
-Summary:        GUI for generating variations of Numix/Flat-Plat themes, gnome-colors and ArchDroid icon themes
+Version:        1.4.2
+Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
+Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
-Source2:        https://github.com/nana-4/Flat-Plat/archive/v%{flatplat_version}.tar.gz#/Flat-Plat-%{flatplat_version}.tar.gz
+Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
 Source10:       oomox-archdroid-icons-cli
 Source11:       oomox-cli
 Source12:       oomox-gnome-colors-icons-cli
@@ -41,9 +41,8 @@ Requires:       sed
 Requires:       xorg-x11-server-utils
 
 %description
-Graphical application for generating different color variations of Numix and
-Flat-Plat themes (GTK2, GTK3), gnome-colors and ArchDroid icon themes. Have a
-hack for HiDPI in gtk2.
+Graphical application for generating different color variations of a
+Numix-based and Materia themes (GTK2, GTK3), Gnome-Colors and Archdroid icons.
 
 
 %prep
@@ -51,7 +50,7 @@ hack for HiDPI in gtk2.
 %autosetup -b 1
 %autosetup -b 2
 cp -pr $RPM_BUILD_DIR/%{name}-gtk-theme-%{numix_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gtk-theme
-cp -pr $RPM_BUILD_DIR/Flat-Plat-%{flatplat_version}/* $RPM_BUILD_DIR/%{name}-%{version}/flat-plat-theme
+cp -pr $RPM_BUILD_DIR/materia-theme-%{materia_version}/* $RPM_BUILD_DIR/%{name}-%{version}/materia-theme
 
 
 %build
@@ -86,6 +85,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sun Nov 05 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171005.1
+- new version
+
 * Sun Oct 01 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.1-1_1.2.8.1.1_20170917.1
 - new version
 
