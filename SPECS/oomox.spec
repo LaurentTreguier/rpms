@@ -1,6 +1,6 @@
 %global         __python            %{__python3}
 %global         numix_version       1.2.8.1
-%global         materia_version     20171005
+%global         materia_version     20171112
 
 Name:           oomox
 Version:        1.4.2
@@ -85,6 +85,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Mon Nov 13 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171112.1
+- rebuilt
+
 * Sun Nov 05 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171005.1
 - new version
 
