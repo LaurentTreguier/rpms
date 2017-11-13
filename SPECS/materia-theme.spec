@@ -1,7 +1,7 @@
 %global         source_name         materia
 
 Name:           %{source_name}-theme
-Version:        20171005
+Version:        20171112
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -12,7 +12,7 @@ Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{
 BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  glib2-devel
-BuildRequires:  gnome-shell
+BuildRequires:  %{_bindir}/gnome-shell
 Requires:       gdk-pixbuf2
 Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
@@ -47,6 +47,9 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Mon Nov 13 2017 Laurent Tréguier <laurent@treguier.org> - 20171112-1
+- new version
+
 * Thu Oct 05 2017 Laurent Tréguier <laurent@treguier.org> - 20171005-1
 - new version
 - renamed package to materia-theme
