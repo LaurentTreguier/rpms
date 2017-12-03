@@ -1,9 +1,9 @@
 %global         __python            %{__python3}
-%global         numix_version       1.2.8.1
+%global         numix_version       1.2.9
 %global         materia_version     20171112
 
 Name:           oomox
-Version:        1.4.2
+Version:        1.4.3
 Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
@@ -85,6 +85,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sun Dec 03 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.3-1_1.2.9.1_20171112.1
+- rebuilt
+
 * Mon Nov 13 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171112.1
 - rebuilt
 
