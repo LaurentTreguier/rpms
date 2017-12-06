@@ -16,7 +16,7 @@
                                         --libdispatch true
 
 Name:           %{source_name}-language
-Version:        4.0.2
+Version:        4.0.3
 Release:        1%{?dist}
 Summary:        The Swift programming language
 
@@ -232,6 +232,9 @@ rm -r %{_lib}/%{source_name}
 
 
 %changelog
+* Wed Dec 06 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.3-1
+- new version
+
 * Tue Oct 10 2017 Laurent Tréguier <laurent@treguier.org> - 4.0.2-1
 - new version
 
