@@ -1,6 +1,6 @@
 %global         __python            %{__python3}
-%global         numix_version       1.2.9
-%global         materia_version     20171112
+%global         numix_version       1.3.0
+%global         materia_version     20171213
 
 Name:           oomox
 Version:        1.4.3
@@ -85,11 +85,14 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Sat Dec 16 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.3-1_1.3.0.1_20171213.1
+- updated Numix and Materia
+
 * Sun Dec 03 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.3-1_1.2.9.1_20171112.1
-- rebuilt
+- updated Numix
 
 * Mon Nov 13 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171112.1
-- rebuilt
+- updated Materia
 
 * Sun Nov 05 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.2-1_1.2.8.1.1_20171005.1
 - new version
@@ -101,7 +104,7 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 - new version
 
 * Sun Sep 17 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.1-1_1.2.8.1.1_20170917.1
-- rebuilt
+- updated Flat-Plat
 
 * Sat Sep 16 2017 Laurent Tréguier <laurent@treguier.org> - 1.3.1-1_1.2.8.1.1_20170916.2
 - fixed Flat-Plat source
