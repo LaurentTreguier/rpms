@@ -12,10 +12,11 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
-Version:        1.24.2
-Release:        2%{?dist}
+Version:        1.24.3
+Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
+Obsoletes:      %{source_name}  < %{version}
 
 License:        BSD
 URL:            https://www.dartlang.org
@@ -28,8 +29,8 @@ runtimes, for building web, server, and mobile apps.
 
 
 %prep
-%autosetup -b 0 -c -T -n %{name}-%{version}-ia32
-%autosetup -b 1 -c -T -n %{name}-%{version}-x64
+%setup -q -a 0 -T -c -n %{name}-%{version}-ia32
+%setup -q -a 1 -T -c -n %{name}-%{version}-x64
 
 
 %build
@@ -59,6 +60,9 @@ done
 
 
 %changelog
+* Sun Dec 17 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.3-1
+- new version
+
 * Fri Jul 14 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.2-2
 - fixed permission issue
 
