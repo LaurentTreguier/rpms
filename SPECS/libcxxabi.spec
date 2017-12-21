@@ -1,5 +1,5 @@
 Name:           libcxxabi
-Version:        5.0.0
+Version:        5.0.1
 Release:        1%{?dist}
 Summary:        Low level support for a standard C++ library
 
@@ -85,6 +85,9 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Thu Dec 21 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.1-1
+- new version
+
 * Sat Sep 09 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.0-1
 - new version
 - added debuginfo again
