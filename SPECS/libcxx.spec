@@ -1,7 +1,7 @@
 %global         bootstrap       0
 
 Name:           libcxx
-Version:        5.0.0
+Version:        5.0.1
 Release:        1%{?dist}
 Summary:        C++ standard library targeting C++11
 
@@ -95,6 +95,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Dec 21 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.1-1
+- new version
+
 * Sat Sep 09 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.0-1
 - new version
 
