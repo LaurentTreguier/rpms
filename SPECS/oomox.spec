@@ -3,10 +3,11 @@
 %global         materia_version         20171213
 %global         archdroid_version       1bf91f49f76112d48415bfa997aabc2cea84f01d
 %global         gnome_colors_version    3c8596ea630b8255b9cf5d5bf90a69658dd32b79
+%global         oomoxify_version        5640e1c2323a319ede50b24b2d2f45b49e76e112
 
 Name:           oomox
 Version:        1.4.4.1
-Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
+Release:        2_%{numix_version}.1_%{materia_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -16,6 +17,7 @@ Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_
 Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
 Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.zip#/%{name}-archdroid-icon-theme-%{archdroid_version}.zip
 Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.zip#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.zip
+Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.zip#/%{name}-oomoxify-%{oomoxify_version}.zip
 Source10:       oomox-gui
 Source11:       oomox-cli
 Source12:       oomox-materia-cli
@@ -56,10 +58,12 @@ Numix-based and Materia themes (GTK2, GTK3), Gnome-Colors and Archdroid icons.
 %autosetup -b 2
 %autosetup -b 3
 %autosetup -b 4
+%autosetup -b 5
 cp -pr $RPM_BUILD_DIR/%{name}-gtk-theme-%{numix_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gtk-theme
 cp -pr $RPM_BUILD_DIR/materia-theme-%{materia_version}/* $RPM_BUILD_DIR/%{name}-%{version}/materia-theme
 cp -pr $RPM_BUILD_DIR/%{name}-archdroid-icon-theme-%{archdroid_version}/* $RPM_BUILD_DIR/%{name}-%{version}/archdroid-icon-theme
 cp -pr $RPM_BUILD_DIR/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gnome-colors-icon-theme
+cp -pr $RPM_BUILD_DIR/oomoxify-%{oomoxify_version}/* $RPM_BUILD_DIR/%{name}-%{version}/oomoxify
 
 
 %build
@@ -96,6 +100,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 %changelog
 * Sat Dec 23 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.4.1-2_1.3.1.1.1_20171213.1
+- fixed missing oomoxify submodule
+
+* Sat Dec 23 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.4.1-1_1.3.1.1.1_20171213.1
 - new version
 
 * Sat Dec 16 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.3-1_1.3.0.1_20171213.1
