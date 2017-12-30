@@ -8,7 +8,7 @@
 %global         source_name_shadow  %{source_name}-%{source_shadow}
 
 Name:           %{source_name}-theme
-Version:        1.4.5
+Version:        1.4.7
 Release:        1%{?dist}
 Summary:        A flat theme collection based on arc with transparent elements for GTK 3, GTK 2 and GTK based desktops
 
@@ -106,6 +106,9 @@ cp -R $RPM_BUILD_ROOT/%{_datadir}/themes/%{source_name_white}/extra/Arc-Plank \
 
 
 %changelog
+* Sat Dec 30 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.7-1
+- new version
+
 * Fri Nov 24 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.5-1
 - new version
 
