@@ -6,8 +6,8 @@
 %global         oomoxify_version        5640e1c2323a319ede50b24b2d2f45b49e76e112
 
 Name:           oomox
-Version:        1.4.4.1
-Release:        2_%{numix_version}.1_%{materia_version}.1%{?dist}
+Version:        1.4.5
+Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -18,13 +18,6 @@ Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_versi
 Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.zip#/%{name}-archdroid-icon-theme-%{archdroid_version}.zip
 Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.zip#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.zip
 Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.zip#/%{name}-oomoxify-%{oomoxify_version}.zip
-Source10:       oomox-gui
-Source11:       oomox-cli
-Source12:       oomox-materia-cli
-Source13:       oomox-archdroid-icons-cli
-Source14:       oomox-gnome-colors-icons-cli
-Source15:       oomoxify-cli
-Source20:       oomox.desktop
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -67,25 +60,11 @@ cp -pr $RPM_BUILD_DIR/oomoxify-%{oomoxify_version}/* $RPM_BUILD_DIR/%{name}-%{ve
 
 
 %build
-%{__make} -C $RPM_BUILD_DIR/%{name}-%{version} -f po.mk install
 
 
 %install
 rm -rf $RPM_BUILD_ROOT/*
-mkdir -p $RPM_BUILD_ROOT/opt/%{name}
-mkdir -p $RPM_BUILD_ROOT/%{_bindir}
-mkdir -p $RPM_BUILD_ROOT/%{_datadir}/applications
-cp -pr $RPM_BUILD_DIR/%{name}-%{version}/* $RPM_BUILD_ROOT/opt/%{name}
-cp                              \
-    %{SOURCE10}                 \
-    %{SOURCE11}                 \
-    %{SOURCE12}                 \
-    %{SOURCE13}                 \
-    %{SOURCE14}                 \
-    %{SOURCE15}                 \
-    $RPM_BUILD_ROOT/%{_bindir}
-desktop-file-install --dir $RPM_BUILD_ROOT/%{_datadir}/applications %{SOURCE20}
-rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
+./packaging/install.sh . $RPM_BUILD_ROOT
 
 
 %files
@@ -99,6 +78,9 @@ rm $RPM_BUILD_ROOT/opt/%{name}/{CREDITS,PKGBUILD,screenshot*}
 
 
 %changelog
+* Mon Jan 01 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.5-1_1.3.1.1.1_20171213.1
+- new version
+
 * Sat Dec 23 2017 Laurent Tréguier <laurent@treguier.org> - 1.4.4.1-2_1.3.1.1.1_20171213.1
 - fixed missing oomoxify submodule
 
