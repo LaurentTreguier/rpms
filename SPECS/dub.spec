@@ -1,13 +1,13 @@
 %global         debug_package   %{nil}
 
 Name:           dub
-Version:        1.6.0
+Version:        1.7.0
 Release:        1%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
 URL:            http://dlang.org/
-Source0:        https://github.com/dlang/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tr.gz
+Source0:        https://github.com/dlang/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source10:       macros.%{name}
 
 BuildRequires:  dmd
@@ -53,6 +53,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jan 03 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0-1
+- new version
+
 * Thu Nov 02 2017 Laurent Tréguier <laurent@treguier.org> - 1.6.0-1
 - new version
 
