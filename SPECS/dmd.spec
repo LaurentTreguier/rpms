@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.077.1
+Version:        2.078.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -107,7 +107,7 @@ for component in %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
     %make_build %{?_with_bootstrap: HOST_DMD=ldmd2} \
-                %{!?_with_bootstrap: DMD=../%{dmd_name}/src/%{name}} \
+                %{!?_with_bootstrap: DMD=../%{dmd_name}/generated/$RPM_OS/release/%{arch_bits}/%{name}} \
                 %{make_options} -f posix.mak
 done
 
@@ -118,7 +118,7 @@ mkdir -p $RPM_BUILD_ROOT/{%{_bindir},%{_libdir},%{_includedir}/%{name}/{%{drt_na
 
 # dmd
 cd %{build_dir}/%{dmd_name}
-cp src/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
+cp generated/$RPM_OS/release/%{arch_bits}/%{dmd_name} $RPM_BUILD_ROOT/%{_bindir}
 cp ini/$RPM_OS/bin%{arch_bits}/*.conf $RPM_BUILD_ROOT/%{_sysconfdir}
 cp -R docs/man/* $RPM_BUILD_ROOT/%{_mandir}
 sed -ri 's,-I\S*%{drt_name}\S*,-I%{_includedir}/%{name}/%{drt_name}/import,g' $RPM_BUILD_ROOT/%{_sysconfdir}/%{dmd_name}.conf
@@ -189,6 +189,7 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %{_bindir}/catdoc
 %{_bindir}/changed
 %{_bindir}/checkwhitespace
+%{_bindir}/contributors
 %{_bindir}/ddemangle
 %{_bindir}/detab
 %{_bindir}/dget
@@ -199,6 +200,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jan 03 2018 Laurent Tréguier <laurent@treguier.org> - 2.078.0-1
+- new version
+
 * Fri Dec 01 2017 Laurent Tréguier <laurent@treguier.org> - 2.077.1-1
 - new version
 
