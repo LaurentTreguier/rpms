@@ -6,7 +6,7 @@
 %global         oomoxify_version        5640e1c2323a319ede50b24b2d2f45b49e76e112
 
 Name:           oomox
-Version:        1.4.5.1
+Version:        1.4.5.2
 Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
@@ -78,6 +78,9 @@ rm -rf $RPM_BUILD_ROOT/*
 
 
 %changelog
+* Wed Jan 03 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.5.2-1_1.4.0.1.1_20171213.1
+- new version
+
 * Tue Jan 02 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.5.1-1_1.4.0.1.1_20171213.1
 - new version
 
