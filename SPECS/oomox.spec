@@ -1,13 +1,13 @@
 %global         __python                %{__python3}
-%global         numix_version           1.4.0.1
+%global         numix_version           1.4.0.2
 %global         materia_version         20171213
-%global         archdroid_version       1bf91f49f76112d48415bfa997aabc2cea84f01d
-%global         gnome_colors_version    3c8596ea630b8255b9cf5d5bf90a69658dd32b79
+%global         archdroid_version       1.0.1
+%global         gnome_colors_version    1.0
 %global         oomoxify_version        5640e1c2323a319ede50b24b2d2f45b49e76e112
 
 Name:           oomox
-Version:        1.4.5.2
-Release:        1_%{numix_version}.1_%{materia_version}.1%{?dist}
+Version:        1.4.99
+Release:        1
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -15,9 +15,10 @@ URL:            https://github.com/actionless/oomox
 Source0:        https://github.com/actionless/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
 Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
-Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.zip#/%{name}-archdroid-icon-theme-%{archdroid_version}.zip
-Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.zip#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.zip
+Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_version}.tar.gz
+Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.tar.gz
 Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.zip#/%{name}-oomoxify-%{oomoxify_version}.zip
+Patch0:         %{name}-install.patch
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -30,6 +31,7 @@ Requires:       gdk-pixbuf2-devel
 Requires:       glib2
 Requires:       gtk-murrine-engine
 Requires:       gtk2-engines
+Requires:       gtk3
 Requires:       ImageMagick
 Requires:       inkscape
 Requires:       optipng
@@ -46,17 +48,20 @@ Numix-based and Materia themes (GTK2, GTK3), Gnome-Colors and Archdroid icons.
 
 
 %prep
-%autosetup -b 0
-%autosetup -b 1
-%autosetup -b 2
-%autosetup -b 3
-%autosetup -b 4
-%autosetup -b 5
-cp -pr $RPM_BUILD_DIR/%{name}-gtk-theme-%{numix_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gtk-theme
-cp -pr $RPM_BUILD_DIR/materia-theme-%{materia_version}/* $RPM_BUILD_DIR/%{name}-%{version}/materia-theme
-cp -pr $RPM_BUILD_DIR/%{name}-archdroid-icon-theme-%{archdroid_version}/* $RPM_BUILD_DIR/%{name}-%{version}/archdroid-icon-theme
-cp -pr $RPM_BUILD_DIR/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}/* $RPM_BUILD_DIR/%{name}-%{version}/gnome-colors-icon-theme
-cp -pr $RPM_BUILD_DIR/oomoxify-%{oomoxify_version}/* $RPM_BUILD_DIR/%{name}-%{version}/oomoxify
+%setup -q -b 0
+%setup -q -b 1
+%setup -q -b 2
+%setup -q -b 3
+%setup -q -b 4
+%setup -q -b 5
+cd $RPM_BUILD_DIR/%{name}-%{version}
+%patch0 -p1
+cd $RPM_BUILD_DIR
+cp -pr %{name}-gtk-theme-%{numix_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
+cp -pr materia-theme-%{materia_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr %{name}-archdroid-icon-theme-%{archdroid_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
+cp -pr %{name}-gnome-colors-icon-theme-%{gnome_colors_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
+cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/oomoxify
 
 
 %build
@@ -78,6 +83,10 @@ rm -rf $RPM_BUILD_ROOT/*
 
 
 %changelog
+* Sat Jan 06 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.99-1
+- new version
+- removed version numbers from release
+
 * Wed Jan 03 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.5.2-1_1.4.0.1.1_20171213.1
 - new version
 
