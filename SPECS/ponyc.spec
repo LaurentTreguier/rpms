@@ -2,7 +2,7 @@
 
 Name:           ponyc
 Version:        0.21.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
 License:        BSD
@@ -10,19 +10,16 @@ URL:            http://www.ponylang.org
 Source0:        https://github.com/ponylang/ponyc/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        ponyc.sh
 
-%if 0%{?el6}
-BuildRequires:  clang               >=  3.4
-BuildRequires:  llvm-devel
-%else
-BuildRequires:  gcc-c++             >=  4.7
-BuildRequires:  cmake(LLVM)
-%endif
+BuildRequires:  gcc-c++                     >=  4.7
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(zlib)
 %if 0%{?mageia}
+BuildRequires:  llvm-devel                  >=  3.9.1
 BuildRequires:  %{_libdir}/libatomic.so
 %else
+BuildRequires:  cmake(LLVM)                 >=  3.9.1
+BuildRequires:  cmake(LLVM)                 <   4.0
 BuildRequires:  %{_libdir}/libatomic.so.1
 %endif
 Requires:       gcc
@@ -38,7 +35,7 @@ sed -i 's,$(prefix)/lib,$(libdir),' Makefile
 
 
 %build
-%if 0%{?el7}
+%if %{?mageia:0}%{!?mageia:1}
 export LLVM_CONFIG=%{_libdir}/llvm*.*/bin/llvm-config
 %endif
 %make_build
@@ -46,7 +43,7 @@ export LLVM_CONFIG=%{_libdir}/llvm*.*/bin/llvm-config
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%if 0%{?el7}
+%if %{?mageia:0}%{!?mageia:1}
 export LLVM_CONFIG=%{_libdir}/llvm*.*/bin/llvm-config
 %endif
 %makeinstall destdir=$RPM_BUILD_ROOT/%{_libdir}/%{name}
@@ -66,6 +63,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Wed Jan 17 2018 Laurent Tréguier <laurent@treguier.org> - 0.21.3-3
+- update dependencies
+
 * Tue Jan 16 2018 Laurent Tréguier <laurent@treguier.org> - 0.21.3-2
 - update dependencies
 
