@@ -1,6 +1,8 @@
+%global         debug_package   %{nil}
+
 Name:           libcxxabi
 Version:        5.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Low level support for a standard C++ library
 
 License:        MIT or NCSA
@@ -85,6 +87,9 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Sat Jan 27 2018 Laurent Tréguier <laurent@treguier.org> - 5.0.1-2
+- remove debug package
+
 * Thu Dec 21 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.1-1
 - new version
 
