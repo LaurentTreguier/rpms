@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.078.1
+Version:        2.078.2
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -143,7 +143,7 @@ ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
 cd %{build_dir}/%{dto_name}
 cp -R man/* $RPM_BUILD_ROOT/%{_mandir}
 cd generated/$RPM_OS/%{arch_bits}
-cp $(ls -I '*.o') $RPM_BUILD_ROOT/%{_bindir}
+cp ddemangle dustmite rdmd $RPM_BUILD_ROOT/%{_bindir}
 
 # macros
 cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
@@ -186,20 +186,16 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 %files %{dto_name}
 %{_mandir}/*/rdmd.*
 %defattr(755,root,root)
-%{_bindir}/catdoc
-%{_bindir}/changed
-%{_bindir}/checkwhitespace
-%{_bindir}/contributors
 %{_bindir}/ddemangle
-%{_bindir}/detab
-%{_bindir}/dget
 %{_bindir}/dustmite
 %{_bindir}/rdmd
-%{_bindir}/tolf
 
 
 
 %changelog
+* Thu Feb 08 2018 Laurent Tréguier <laurent@treguier.org> - 2.078.2-1
+- new version
+
 * Mon Jan 22 2018 Laurent Tréguier <laurent@treguier.org> - 2.078.1-1
 - new version
 
