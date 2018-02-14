@@ -1,12 +1,12 @@
 %global         __python                %{__python3}
-%global         numix_version           1.4.0.2
-%global         materia_version         20171213
-%global         archdroid_version       1.0.1
-%global         gnome_colors_version    1.0
-%global         oomoxify_version        5640e1c2323a319ede50b24b2d2f45b49e76e112
+%global         numix_version           1.6.0
+%global         materia_version         20180110
+%global         archdroid_version       1.0.2
+%global         gnome_colors_version    5.5.3
+%global         oomoxify_version        675fedce9a47745212b062e13a7e51b01f2bb581
 
 Name:           oomox
-Version:        1.4.99
+Version:        1.5.0
 Release:        1
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
@@ -18,7 +18,6 @@ Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_versi
 Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_version}.tar.gz
 Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.tar.gz
 Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.zip#/%{name}-oomoxify-%{oomoxify_version}.zip
-Patch0:         %{name}-install.patch
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -27,20 +26,27 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 Requires:       coreutils
 Requires:       grep
-Requires:       gdk-pixbuf2-devel
 Requires:       glib2
 Requires:       gtk-murrine-engine
-Requires:       gtk2-engines
-Requires:       gtk3
 Requires:       ImageMagick
 Requires:       inkscape
+Requires:       librsvg2
 Requires:       optipng
 Requires:       parallel
 Requires:       polkit
+Requires:       sed
+Requires:       %{_bindir}/gdk-pixbuf-pixdata
+Requires:       %{_bindir}/xrdb
+Requires:       %{_libdir}/libgtk-3.so
+%if 0%{?mageia}
+Requires:       gtk2-theme-engines
+Requires:       python3-gobject3
+Requires:       ruby-sass
+%else
+Requires:       gtk2-engines
 Requires:       python3-gobject
 Requires:       sassc
-Requires:       sed
-Requires:       xorg-x11-server-utils
+%endif
 
 %description
 Graphical application for generating different color variations of a
@@ -54,14 +60,12 @@ Numix-based and Materia themes (GTK2, GTK3), Gnome-Colors and Archdroid icons.
 %setup -q -b 3
 %setup -q -b 4
 %setup -q -b 5
-cd $RPM_BUILD_DIR/%{name}-%{version}
-%patch0 -p1
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
 cp -pr materia-theme-%{materia_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
 cp -pr %{name}-archdroid-icon-theme-%{archdroid_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr %{name}-gnome-colors-icon-theme-%{gnome_colors_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
-cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/oomoxify
+cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/plugins/oomoxify
 
 
 %build
@@ -70,6 +74,9 @@ cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/oomoxify
 %install
 rm -rf $RPM_BUILD_ROOT/*
 ./packaging/install.sh . $RPM_BUILD_ROOT
+%if 0%{?mageia}
+ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
+%endif
 
 
 %files
@@ -77,12 +84,16 @@ rm -rf $RPM_BUILD_ROOT/*
 %doc CREDITS
 %doc README.md
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/org.gtk.%{name}.desktop
 /opt/%{name}
 
 
 
 %changelog
+* Wed Feb 14 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0-1
+- new version
+- fixed Mageia compatibility
+
 * Sat Jan 06 2018 Laurent Tréguier <laurent@treguier.org> - 1.4.99-1
 - new version
 - removed version numbers from release
