@@ -1,5 +1,5 @@
 %global         __python                %{__python3}
-%global         numix_version           1.6.0
+%global         numix_version           1.6.1
 %global         materia_version         20180110
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
@@ -7,7 +7,7 @@
 
 Name:           oomox
 Version:        1.5.0
-Release:        1
+Release:        2
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -90,6 +90,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Wed Feb 14 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0-2
+- updated oomox-gtk-theme
+
 * Wed Feb 14 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0-1
 - new version
 - fixed Mageia compatibility
