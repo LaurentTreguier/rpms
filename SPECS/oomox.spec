@@ -7,7 +7,7 @@
 
 Name:           oomox
 Version:        1.5.0.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -44,8 +44,12 @@ Requires:       python3-gobject3
 Requires:       ruby-sass
 %else
 Requires:       gtk2-engines
-Requires:       python3-gobject
 Requires:       sassc
+%if 0%{?fedora}
+Requires:       python3-gobject
+%else
+Requires:       python34-gobject
+%endif
 %endif
 
 %description
@@ -73,6 +77,7 @@ cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/plugins/oomoxify
 
 %install
 rm -rf $RPM_BUILD_ROOT/*
+install -d $RPM_BUILD_ROOT/%{_bindir}
 ./packaging/install.sh . $RPM_BUILD_ROOT
 %if 0%{?mageia}
 ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
@@ -92,6 +97,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Mon Feb 19 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0.5-2
+- fixed build on EPEL 7
+
 * Mon Feb 19 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0.5-1
 - new version
 
