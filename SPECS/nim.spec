@@ -1,10 +1,10 @@
 %global         debug_package   %{nil}
-%global         nimble_version  0.8.8
+%global         nimble_version  0.8.10
 %global         koch_options    -d:release -d:useGnuReadline
 
 Name:           nim
-Version:        0.17.2
-Release:        2%{?dist}
+Version:        0.18.0
+Release:        1%{?dist}
 Summary:        A compiled, garbage-collected systems programming language
 
 License:        MIT and BSD
@@ -59,6 +59,9 @@ done
 
 
 %changelog
+* Fri Mar 02 2018 Laurent Tréguier <laurent@treguier.org> - 0.18.0-1
+- new version
+
 * Thu Sep 07 2017 Laurent Tréguier <laurent@treguier.org> - 0.17.2-2
 - removed debuginfo
 
