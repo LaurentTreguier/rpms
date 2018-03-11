@@ -1,7 +1,7 @@
 %global         source_name         materia
 
 Name:           %{source_name}-theme
-Version:        20180110
+Version:        20180311
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -11,6 +11,7 @@ Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{
 
 BuildArch:      noarch
 BuildRequires:  bash
+BuildRequires:  bc
 BuildRequires:  glib2-devel
 BuildRequires:  %{_bindir}/gnome-shell
 Requires:       gdk-pixbuf2
@@ -35,8 +36,9 @@ LightDM, GDM, Chrome theme, etc.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/%{_datadir}/themes
 cd $RPM_BUILD_DIR/%{name}-%{version}
-destdir=$RPM_BUILD_ROOT ./install.sh
+./install.sh --dest $RPM_BUILD_ROOT/%{_datadir}/themes
 
 
 %files
@@ -47,6 +49,9 @@ destdir=$RPM_BUILD_ROOT ./install.sh
 
 
 %changelog
+* Sun Mar 11 2018 Laurent Tréguier <laurent@treguier.org> - 20180311-1
+- new version
+
 * Wed Jan 10 2018 Laurent Tréguier <laurent@treguier.org> - 20180110-1
 - new version
 
