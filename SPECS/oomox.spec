@@ -3,11 +3,11 @@
 %global         materia_version         20180311
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
-%global         oomoxify_version        675fedce9a47745212b062e13a7e51b01f2bb581
+%global         oomoxify_version        1.0
 
 Name:           oomox
 Version:        1.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -17,7 +17,7 @@ Source1:        https://github.com/actionless/%{name}-gtk-theme/archive/%{numix_
 Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
 Source3:        https://github.com/actionless/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_version}.tar.gz
 Source4:        https://github.com/actionless/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.tar.gz
-Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.zip#/%{name}-oomoxify-%{oomoxify_version}.zip
+Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_version}.tar.gz#/%{name}-oomoxify-%{oomoxify_version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -98,6 +98,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Fri Mar 16 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.0-2
+- switched to tagged oomoxify
+
 * Fri Mar 16 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.0-1
 - new version
 
