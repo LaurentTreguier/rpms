@@ -1,7 +1,7 @@
 %global         source_name         materia
 
 Name:           %{source_name}-theme
-Version:        20180311
+Version:        20180321
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -49,6 +49,9 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %changelog
+* Wed Mar 21 2018 Laurent Tréguier <laurent@treguier.org> - 20180321-1
+- new version
+
 * Sun Mar 11 2018 Laurent Tréguier <laurent@treguier.org> - 20180311-1
 - new version
 
