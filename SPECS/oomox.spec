@@ -1,13 +1,13 @@
 %global         __python                %{__python3}
-%global         numix_version           1.7.0
+%global         numix_version           1.8.0
 %global         materia_version         20180311
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
 %global         oomoxify_version        1.0
 
 Name:           oomox
-Version:        1.6.0
-Release:        2%{?dist}
+Version:        1.6.1
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -21,10 +21,11 @@ Source5:        https://github.com/actionless/oomoxify/archive/%{oomoxify_versio
 
 BuildArch:      noarch
 BuildRequires:  bash
-BuildRequires:  bc
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
+Requires:       bc
 Requires:       coreutils
+Requires:       findutils
 Requires:       grep
 Requires:       glib2
 Requires:       gtk-murrine-engine
@@ -36,6 +37,7 @@ Requires:       parallel
 Requires:       polkit
 Requires:       python3-pillow
 Requires:       sed
+Requires:       zip
 Requires:       %{_bindir}/gdk-pixbuf-pixdata
 Requires:       %{_bindir}/xrdb
 Requires:       %{_libdir}/libgtk-3.so
@@ -98,6 +100,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Fri Mar 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.1-1
+- new version
+- updated dependencies to match upstream better
+
 * Fri Mar 16 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.0-2
 - switched to tagged oomoxify
 
