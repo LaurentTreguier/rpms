@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.079.1
+Version:        2.080.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -106,9 +106,8 @@ cd %{build_dir}/%{dmd_name}
 for component in %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
-    %make_build %{?_with_bootstrap: HOST_DMD=ldmd2} \
-                %{!?_with_bootstrap: DMD=../%{dmd_name}/generated/$RPM_OS/release/%{arch_bits}/%{name}} \
-                %{make_options} -f posix.mak
+    %make_build %{make_options} -f posix.mak \
+                %DMD=../%{dmd_name}/generated/$RPM_OS/release/%{arch_bits}/%{name}
 done
 
 
@@ -193,6 +192,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed May 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.080.0-1
+- new version
+
 * Sun Apr 15 2018 Laurent Tréguier <laurent@treguier.org> - 2.079.1-1
 - new version
 
