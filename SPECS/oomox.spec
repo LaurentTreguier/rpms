@@ -7,7 +7,7 @@
 
 Name:           oomox
 Version:        1.6.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -24,6 +24,7 @@ BuildRequires:  bash
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 Requires:       bc
+Requires:       bash
 Requires:       coreutils
 Requires:       findutils
 Requires:       grep
@@ -32,6 +33,7 @@ Requires:       gtk-murrine-engine
 Requires:       ImageMagick
 Requires:       inkscape
 Requires:       librsvg2
+Requires:       make
 Requires:       optipng
 Requires:       parallel
 Requires:       polkit
@@ -54,6 +56,7 @@ Requires:       python3-gobject
 Requires:       python34-gobject
 %endif
 %endif
+AutoReq:        no
 
 %description
 Graphical application for generating different color variations of a
@@ -100,6 +103,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Tue May 08 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.1-2
+- fixed Fedora 28 compatibility
+
 * Fri Mar 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.1-1
 - new version
 - updated dependencies to match upstream better
