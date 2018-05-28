@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [[ $1 = '-dumpversion' ]]
-then
-    exec rpm -q --qf '%{VERSION}\n' gcc
-else
-    exec %{_bindir}/gcc $@
-fi
