@@ -1,7 +1,7 @@
 %global         debug_package       %{nil}
 
 Name:           ponyc
-Version:        0.22.5
+Version:        0.22.6
 Release:        1%{?dist}
 Summary:        An open-source, actor-model, capabilities-secure, high performance programming language
 
@@ -62,6 +62,9 @@ cp %SOURCE1 $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
 %changelog
+* Thu Jun 07 2018 Laurent Tréguier <laurent@treguier.org> - 0.22.6-1
+- new version
+
 * Tue Jun 05 2018 Laurent Tréguier <laurent@treguier.org> - 0.22.5-1
 - new version
 
