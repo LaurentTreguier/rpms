@@ -5,13 +5,13 @@
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    RELEASE=1 MODEL=%{arch_bits}
+%global         make_options    --always-make ENABLE_RELEASE=1 MODEL=%{arch_bits}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.080.1
+Version:        2.081.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -103,11 +103,10 @@ cd %{build_dir}/%{dmd_name}
 %make_build %{?_with_bootstrap: AUTO_BOOTSTRAP=1} \
             %{make_options} -f posix.mak
 
-for component in %{drt_name} %{phb_name} %{dto_name}
+for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
-    %make_build %{make_options} -f posix.mak \
-                %DMD=../%{dmd_name}/generated/$RPM_OS/release/%{arch_bits}/%{name}
+    %make_build %{make_options} -f posix.mak
 done
 
 
@@ -192,6 +191,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jul 04 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.0-1
+- new version
+
 * Fri Jun 08 2018 Laurent Tréguier <laurent@treguier.org> - 2.080.1-1
 - new version
 
