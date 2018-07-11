@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.081.0
+Version:        2.081.1
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -24,6 +24,7 @@ Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#
 Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
 
+BuildRequires:  gcc-c++
 %if 0%{?_with_bootstrap}
 BuildRequires:  curl
 %else
@@ -103,7 +104,7 @@ cd %{build_dir}/%{dmd_name}
 %make_build %{?_with_bootstrap: AUTO_BOOTSTRAP=1} \
             %{make_options} -f posix.mak
 
-for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
+for component in %{drt_name} %{phb_name} %{dto_name}
 do
     cd %{build_dir}/$component
     %make_build %{make_options} -f posix.mak
@@ -191,6 +192,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jul 11 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.1-1
+- new version
+
 * Wed Jul 04 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.0-1
 - new version
 
