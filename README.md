@@ -18,20 +18,12 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |libblocksruntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/status_image/last_build.png" /></a>|
 |nim|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/status_image/last_build.png" /></a>|
 |ponyc|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/ponyc/status_image/last_build.png" /></a>|
-|swift-language|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
-|swift-language-lldb|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
-|swift-language-lldb-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/swift-language/status_image/last_build.png" /></a>|
 
 |Discord||
 |---|---|
 |Discord-installer|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord-installer/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/Discord-installer/status_image/last_build.png" /></a>|
 |libcxx|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxx/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxx/status_image/last_build.png" /></a>|
 |libcxxabi|<a href="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxxabi/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/discord/package/libcxxabi/status_image/last_build.png" /></a>|
-
-|Piper||
-|---|---|
-|piper|<a href="https://copr.fedorainfracloud.org/coprs/tcg/piper/package/piper/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/piper/package/piper/status_image/last_build.png" /></a>|
-|ratbagd|<a href="https://copr.fedorainfracloud.org/coprs/tcg/piper/package/ratbagd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/piper/package/ratbagd/status_image/last_build.png" /></a>|
 
 |Themes||
 |---|---|
