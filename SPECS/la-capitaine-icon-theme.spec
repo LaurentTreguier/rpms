@@ -1,5 +1,5 @@
-%global         git_date        20180723
-%global         git_commit      b785895b8775ee96522c085255879810c5a262dd
+%global         git_date        20180730
+%global         git_commit      a3ac190d852c43e5f2ccd05c9e0510c897910106
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -9,13 +9,13 @@
                                 places/16x16
 
 Name:           la-capitaine-icon-theme
-Version:        0.5.0.%{git_date}
+Version:        0.6.0
 Release:        1%{?dist}
 Summary:        A set of icons that takes inspiration from macOS and Google's Material Design
 
 License:        GPLv3
 URL:            https://krourke.org/projects/art/la-capitaine-icon-theme
-Source0:        https://github.com/keeferrourke/%{name}/archive/%{git_commit}.zip#/%{name}-%{git_commit}.zip
+Source0:        https://github.com/keeferrourke/%{name}/archive/v%{version}.zip#/%{name}-%{version}.zip
 
 BuildArch:      noarch
 BuildRequires:  %{_bindir}/lsb_release
@@ -29,7 +29,7 @@ scalable vector graphic so it will look great at any size, on any screen.
 
 
 %prep
-%autosetup -n %{name}-%{git_commit}
+%autosetup -n %{name}-%{version}
 sed -ri 's/ln \-sf /ln -sfr /g' configure
 
 
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Mon Jul 30 2018 Laurent Tréguier <laurent@treguier.org> - 0.6.0-1
+- new version
+
 * Fri Jul 27 2018 Laurent Tréguier <laurent@treguier.org> - 0.5.0.20180723-1
 - new version
 
