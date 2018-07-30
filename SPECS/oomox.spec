@@ -8,7 +8,7 @@
 
 Name:           oomox
 Version:        1.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -98,12 +98,15 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/appdata/*.xml
 %{_datadir}/applications/*.desktop
-%{_datadir}/icons/hicolor/*/apps/*.{png,svg}
+%{_datadir}/icons/hicolor/*/apps/*
 /opt/%{name}
 
 
 
 %changelog
+* Mon Jul 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.2-2
+- fixed build on EPEL 6
+
 * Mon Jul 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.2-1
 - new version
 
