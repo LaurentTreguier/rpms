@@ -7,8 +7,8 @@
 %global         oomoxify_version        1.0
 
 Name:           oomox
-Version:        1.6.2
-Release:        2%{?dist}
+Version:        1.6.2.1
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -104,6 +104,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Wed Aug 01 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.2.1-1
+- new version
+
 * Mon Jul 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.6.2-2
 - fixed build on EPEL 6
 
