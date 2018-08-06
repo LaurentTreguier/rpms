@@ -3,16 +3,14 @@
 
 %ifarch x86_64
 %global         source_arch     x64
-%global         source_num      1
 %else
 %global         source_arch     ia32
-%global         source_num      0
 %endif
 
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
-Version:        1.24.3
+Version:        2.0.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -60,6 +58,9 @@ done
 
 
 %changelog
+* Mon Aug 06 2018 Laurent Tréguier <laurent@treguier.org> - 2.0.0-1
+- new version
+
 * Sun Dec 17 2017 Laurent Tréguier <laurent@treguier.org> - 1.24.3-1
 - new version
 
