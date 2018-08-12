@@ -7,7 +7,7 @@
 %global         oomoxify_version        1.0
 
 Name:           oomox
-Version:        1.7.0.1
+Version:        1.7.0.2
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
@@ -108,6 +108,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Aug 12 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-1
+- new version
+
 * Fri Aug 10 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.1-1
 - new version
 
