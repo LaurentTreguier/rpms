@@ -11,8 +11,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.081.1
-Release:        2%{?dist}
+Version:        2.081.2
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -199,6 +199,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Aug 12 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.2-1
+- new version
+
 * Wed Jul 11 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.1-2
 - compile with LDC on Fedora
 
