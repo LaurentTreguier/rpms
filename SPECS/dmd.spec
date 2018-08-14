@@ -12,7 +12,7 @@
 
 Name:           %{dmd_name}
 Version:        2.081.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -21,7 +21,7 @@ Source0:        https://github.com/dlang/%{dmd_name}/archive/v%{version}.tar.gz#
 Source1:        https://github.com/dlang/%{drt_name}/archive/v%{version}.tar.gz#/%{name}-%{drt_name}-%{version}.tar.gz
 Source2:        https://github.com/dlang/%{phb_name}/archive/v%{version}.tar.gz#/%{name}-%{phb_name}-%{version}.tar.gz
 Source3:        https://github.com/dlang/%{dto_name}/archive/v%{version}.tar.gz#/%{name}-%{dto_name}-%{version}.tar.gz
-Source10:       http://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
+Source10:       https://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENSE
 Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
@@ -35,6 +35,7 @@ BuildRequires:  %{name}
 %endif
 %endif
 
+Requires:       gcc
 Requires:       %{name}-%{phb_name}-devel%{?_isa}   = %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}                 < %{version}-%{release}
 Obsoletes:      %{name}-%{drt_name}-devel           < %{version}-%{release}
@@ -199,6 +200,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Tue Aug 14 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.2-2
+- added gcc dependency
+
 * Sun Aug 12 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.2-1
 - new version
 
