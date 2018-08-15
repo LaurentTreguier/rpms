@@ -2,7 +2,7 @@
 
 Name:           dub
 Version:        1.10.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -10,8 +10,13 @@ URL:            http://dlang.org/
 Source0:        https://github.com/dlang/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source10:       macros.%{name}
 
+%if 0%{?fedora}
+BuildRequires:  ldc
+BuildRequires:  pkgconfig(libcurl)
+%else
 BuildRequires:  dmd
-Requires:       dmd
+Requires:       %{_libdir}/libcurl.so.4
+%endif
 
 %description
 DUB emerged as a more general replacement for vibe.d's package manager.
@@ -53,6 +58,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Aug 15 2018 Laurent Tréguier <laurent@treguier.org> - 1.10.0-2
+- compile with LDC on Fedora
+
 * Wed Jul 04 2018 Laurent Tréguier <laurent@treguier.org> - 1.10.0-1
 - new version
 
