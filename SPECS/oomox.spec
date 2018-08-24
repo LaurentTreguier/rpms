@@ -4,11 +4,11 @@
 %global         arc_commit              c49e1f7fb0aa937789f7c2430c74479e66b6b230
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
-%global         oomoxify_version        1.0.1
+%global         oomoxify_version        1.0.0.1
 
 Name:           oomox
 Version:        1.7.0.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -108,11 +108,14 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Fri Aug 24 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-4
+- downgraded oomoxify
+
 * Fri Aug 17 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-3
-- rebuilt
+- updated oomoxify
 
 * Tue Aug 14 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-2
-- rebuilt
+- updated numix
 
 * Sun Aug 12 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-1
 - new version
