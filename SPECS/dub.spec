@@ -1,8 +1,8 @@
 %global         debug_package   %{nil}
 
 Name:           dub
-Version:        1.10.0
-Release:        2%{?dist}
+Version:        1.11.0
+Release:        1%{?dist}
 Summary:        Package and build management system for D
 
 License:        MIT
@@ -58,6 +58,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Sep 02 2018 Laurent Tréguier <laurent@treguier.org> - 1.11.0-1
+- new version
+
 * Wed Aug 15 2018 Laurent Tréguier <laurent@treguier.org> - 1.10.0-2
 - compile with LDC on Fedora
 
