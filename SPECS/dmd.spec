@@ -11,8 +11,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.081.2
-Release:        2%{?dist}
+Version:        2.082.0
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -200,6 +200,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Sep 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.082.0-1
+- new version
+
 * Tue Aug 14 2018 Laurent Tréguier <laurent@treguier.org> - 2.081.2-2
 - added gcc dependency
 
