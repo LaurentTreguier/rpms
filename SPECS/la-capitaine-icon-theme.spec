@@ -1,5 +1,5 @@
-%global         git_date        20180829
-%global         git_commit      fc9be3e043c11423ed3162a38da955449b254216
+%global         git_date        20180904
+%global         git_commit      523a220f4c09cf4a2c41061c4f484f9692229934
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Wed Sep 05 2018 Laurent Tréguier <laurent@treguier.org> - 0.6.0.20180904-1
+- new version
+
 * Sat Sep 01 2018 Laurent Tréguier <laurent@treguier.org> - 0.6.0.20180829-1
 - new version
 
