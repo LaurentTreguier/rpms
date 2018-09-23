@@ -1,23 +1,23 @@
 %global         __python                %{__python3}
-%global         numix_version           1.9.0.1
-%global         materia_commit          df30959eb068ef55db18a18ed23a4a1c79129768
-%global         arc_commit              c49e1f7fb0aa937789f7c2430c74479e66b6b230
+%global         numix_version           1.9.0.2
+%global         materia_version         20180922
+%global         arc_commit              3f6e52d526bd9f933ca1bb0c1adaacee1f6d4a60
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
 %global         oomoxify_version        1.0.0.1
 %global         base16_commit           d022b9daa5c233a08a8d3b94fd534a3041e3a8c1
 
 Name:           oomox
-Version:        1.7.0.2
-Release:        5%{?dist}
+Version:        1.7.0.3
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
 URL:            https://github.com/themix-project/oomox
 Source0:        https://github.com/themix-project/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/themix-project/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
-Source2:        https://github.com/actionless/materia-theme/archive/%{materia_commit}.tar.gz#/%{name}-materia-theme-%{materia_commit}.tar.gz
-Source3:        https://github.com/actionless/arc-theme/archive/%{arc_commit}.tar.gz#/%{name}-arc-theme-%{arc_commit}.tar.gz
+Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
+Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_commit}.tar.gz#/%{name}-arc-theme-%{arc_commit}.tar.gz
 Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_version}.tar.gz
 Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.tar.gz
 Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_version}.tar.gz#/%{name}-oomoxify-%{oomoxify_version}.tar.gz
@@ -79,7 +79,7 @@ icons.
 %setup -q -b 7
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
-cp -pr materia-theme-%{materia_commit}/* %{name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr materia-theme-%{materia_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
 cp -pr arc-theme-%{arc_commit}/* %{name}-%{version}/plugins/theme_arc/arc-theme
 cp -pr archdroid-icon-theme-%{archdroid_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
@@ -112,6 +112,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Sep 23 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.3-1
+- new version
+- switched to upstream repos for materia and arc themes
+
 * Sun Aug 26 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.2-5
 - added base16 submodule
 
