@@ -1,7 +1,7 @@
 %global         source_name         materia
 
 Name:           %{source_name}-theme
-Version:        20180922
+Version:        20180928
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -13,7 +13,6 @@ BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  bc
 BuildRequires:  glib2-devel
-BuildRequires:  %{_bindir}/gnome-shell
 Requires:       gdk-pixbuf2
 Requires:       gnome-themes-standard
 Requires:       gtk-murrine-engine
@@ -49,6 +48,9 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %changelog
+* Sun Sep 30 2018 Laurent Tréguier <laurent@treguier.org> - 20180928-1
+- new version
+
 * Sun Sep 23 2018 Laurent Tréguier <laurent@treguier.org> - 20180922-1
 - new version
 
