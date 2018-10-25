@@ -11,7 +11,7 @@
 %define         source_version  %(echo %{version} | tr '_' '\-')
 
 Name:           %{source_name}-dev-bin
-Version:        2.1.0_dev.7.1
+Version:        2.1.0_dev.8.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -61,5 +61,8 @@ done
 
 
 %changelog
-* Sat Oct 13 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0-dev.7.1-1
+* Thu Oct 25 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0_dev.8.0-1
+- new version
+
+* Sat Oct 13 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0_dev.7.1-1
 - created specfile
