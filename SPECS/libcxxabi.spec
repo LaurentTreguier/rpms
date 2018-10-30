@@ -1,13 +1,13 @@
 %global         debug_package   %{nil}
 
 Name:           libcxxabi
-Version:        5.0.1
-Release:        2%{?dist}
+Version:        6.0.1
+Release:        1%{?dist}
 Summary:        Low level support for a standard C++ library
 
 License:        MIT or NCSA
-URL:            http://libcxxabi.llvm.org/
-Source0:        http://llvm.org/releases/%{version}/%{name}-%{version}.src.tar.xz
+URL:            https://libcxxabi.llvm.org/
+Source0:        https://llvm.org/releases/%{version}/%{name}-%{version}.src.tar.xz
 
 BuildRequires:  clang
 BuildRequires:  cmake
@@ -87,6 +87,9 @@ cp -a include/* $RPM_BUILD_ROOT/%{_includedir}
 
 
 %changelog
+* Tue Oct 30 2018 Laurent Tréguier <laurent@treguier.org> - 6.0.1-1
+- new version
+
 * Sat Jan 27 2018 Laurent Tréguier <laurent@treguier.org> - 5.0.1-2
 - remove debug package
 
