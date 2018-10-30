@@ -1,13 +1,13 @@
 %global         bootstrap       0
 
 Name:           libcxx
-Version:        5.0.1
+Version:        6.0.1
 Release:        1%{?dist}
 Summary:        C++ standard library targeting C++11
 
 License:        MIT or NCSA
-URL:            http://libcxx.llvm.org/
-Source0:        http://llvm.org/releases/%{version}/%{name}-%{version}.src.tar.xz
+URL:            https://libcxx.llvm.org/
+Source0:        https://llvm.org/releases/%{version}/%{name}-%{version}.src.tar.xz
 
 BuildRequires:  clang
 BuildRequires:  cmake
@@ -95,6 +95,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Tue Oct 30 2018 Laurent Tréguier <laurent@treguier.org> - 6.0.1-1
+- new version
+
 * Thu Dec 21 2017 Laurent Tréguier <laurent@treguier.org> - 5.0.1-1
 - new version
 
