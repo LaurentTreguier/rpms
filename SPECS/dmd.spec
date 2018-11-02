@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.082.1
+Version:        2.083.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -200,6 +200,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Fri Nov 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.083.0-1
+- new version
+
 * Fri Oct 12 2018 Laurent Tréguier <laurent@treguier.org> - 2.082.1-1
 - new version
 
