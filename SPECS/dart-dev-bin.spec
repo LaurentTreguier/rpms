@@ -12,7 +12,7 @@
 
 Name:           %{source_name}-dev-bin
 Version:        2.1.0_dev.8.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
 Conflicts:      %{source_name}-bin
@@ -23,6 +23,8 @@ License:        BSD
 URL:            https://www.dartlang.org
 Source0:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{source_version}/sdk/dartsdk-linux-ia32-release.zip#/%{name}-%{version}-ia32.zip
 Source1:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{source_version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-x64.zip
+
+BuildRequires:  unzip
 
 %description
 Dart is an open-source, scalable programming language, with robust libraries and
@@ -61,6 +63,9 @@ done
 
 
 %changelog
+* Fri Nov 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0_dev.8.0-2
+- fixed build on Opensuse
+
 * Thu Oct 25 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0_dev.8.0-1
 - new version
 
