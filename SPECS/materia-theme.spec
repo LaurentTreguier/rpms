@@ -1,12 +1,10 @@
-%global         source_name         materia
-
-Name:           %{source_name}-theme
-Version:        20180928
+Name:           materia-theme
+Version:        20181115
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
-URL:            https://github.com/nana-4/materia-theme
+URL:            https://github.com/nana-4/%{name}
 Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildArch:      noarch
@@ -43,11 +41,14 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 %files
 %license COPYING
 %doc README.md
-%{_datadir}/themes/Materia*
+%{_datadir}/themes/*
 
 
 
 %changelog
+* Thu Nov 15 2018 Laurent Tréguier <laurent@treguier.org> - 20181115-1
+- new version
+
 * Sun Sep 30 2018 Laurent Tréguier <laurent@treguier.org> - 20180928-1
 - new version
 
