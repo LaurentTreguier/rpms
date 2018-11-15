@@ -9,7 +9,7 @@
                                 places/16x16
 
 Name:           la-capitaine-icon-theme
-Version:        0.6.0.%{git_date}
+Version:        0.6.1
 Release:        1%{?dist}
 Summary:        A set of icons that takes inspiration from macOS and Google's Material Design
 
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Thu Nov 15 2018 Laurent Tréguier <laurent@treguier.org> - 0.6.1-1
+- new version
+
 * Sun Nov 04 2018 Laurent Tréguier <laurent@treguier.org> - 0.6.0.20181103-1
 - new version
 
