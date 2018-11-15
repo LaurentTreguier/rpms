@@ -10,8 +10,8 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
-Version:        2.0.0
-Release:        2%{?dist}
+Version:        2.1.0
+Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
 Conflicts:      %{source_name}-dev-bin
@@ -62,6 +62,9 @@ done
 
 
 %changelog
+* Thu Nov 15 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0-1
+- new version
+
 * Fri Nov 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.0.0-2
 - added Conflicts and Provides clauses
 - fixed build on Opensuse
