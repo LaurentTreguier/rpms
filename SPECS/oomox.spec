@@ -1,14 +1,14 @@
 %global         __python                %{__python3}
-%global         numix_version           1.9.1
-%global         materia_version         20180922
-%global         arc_commit              7ff5b36c287fd50a5910a67a255a3d6bec58b679
+%global         numix_version           1.9.2
+%global         materia_version         20181115
+%global         arc_commit              e97206cf0772da5b07b982da67cc65d91884d48d
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
 %global         oomoxify_version        1.0.1
 %global         base16_commit           d022b9daa5c233a08a8d3b94fd534a3041e3a8c1
 
 Name:           oomox
-Version:        1.7.0.6
+Version:        1.7.1
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
@@ -32,21 +32,21 @@ Requires:       bash
 Requires:       coreutils
 Requires:       findutils
 Requires:       grep
-Requires:       glib2
-Requires:       gtk-murrine-engine
 Requires:       ImageMagick
 Requires:       inkscape
 Requires:       librsvg2
 Requires:       make
 Requires:       optipng
-Requires:       parallel
 Requires:       polkit
-Requires:       python3-pillow
+Requires:       python3-imaging
 Requires:       sed
 Requires:       zip
 Requires:       %{_bindir}/gdk-pixbuf-pixdata
+Requires:       %{_bindir}/parallel
 Requires:       %{_bindir}/xrdb
+Requires:       %{_libdir}/libglib-2.0.so.0
 Requires:       %{_libdir}/libgtk-3.so
+Requires:       %{_libdir}/libmurrine.so
 %if 0%{?mageia}
 Requires:       gtk2-theme-engines
 Requires:       python3-gobject3
@@ -112,6 +112,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Nov 18 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.1-1
+- new version
+
 * Thu Oct 18 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.0.6-1
 - new version
 
