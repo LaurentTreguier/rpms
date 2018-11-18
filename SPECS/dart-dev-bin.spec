@@ -8,10 +8,11 @@
 %endif
 
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
-%define         source_version  %(echo %{version} | tr '_' '\-')
+%define         dev_version     dev.9.4
 
 Name:           %{source_name}-dev-bin
-Version:        2.1.0_dev.9.4
+Epoch:          1
+Version:        2.1.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -21,8 +22,8 @@ Provides:       %{source_name}  = %{version}
 
 License:        BSD
 URL:            https://www.dartlang.org
-Source0:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{source_version}/sdk/dartsdk-linux-ia32-release.zip#/%{name}-%{version}-ia32.zip
-Source1:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{source_version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-x64.zip
+Source0:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-ia32-release.zip#/%{name}-%{version}-ia32.zip
+Source1:        https://storage.googleapis.com/dart-archive/channels/stable/release/%{version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-x64.zip
 
 BuildRequires:  unzip
 
@@ -63,6 +64,10 @@ done
 
 
 %changelog
+* Sun Nov 18 2018 Laurent Tréguier <laurent@treguier.org> - 1:2.1.0-1
+- added epoch
+- moved dev version to release
+
 * Fri Nov 09 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0_dev.9.4-1
 - new version
 
