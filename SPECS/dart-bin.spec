@@ -10,6 +10,7 @@
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
 
 Name:           dart-bin
+Epoch:          1
 Version:        2.1.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
@@ -62,6 +63,9 @@ done
 
 
 %changelog
+* Sun Nov 18 2018 Laurent Tréguier <laurent@treguier.org> - 1:2.1.0-1
+- added epoch
+
 * Thu Nov 15 2018 Laurent Tréguier <laurent@treguier.org> - 2.1.0-1
 - new version
 
