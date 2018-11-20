@@ -9,13 +9,13 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |Devel||
 |---|---|
 |dart-bin|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/status_image/last_build.png" /></a>|
+|dart-dev-bin|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-dev-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-dev-bin/status_image/last_build.png" /></a>|
 |dmd|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-phobos|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-phobos-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-tools|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dub|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/status_image/last_build.png" /></a>|
 |fsharp|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>|
-|libblocksruntime|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/libblocksruntime/status_image/last_build.png" /></a>|
 |nim|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/status_image/last_build.png" /></a>|
 
 |Discord||
@@ -26,7 +26,6 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 
 |Themes||
 |---|---|
-|arc-paper-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/arc-paper-icon-theme/status_image/last_build.png" /></a>|
 |EvoPop-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/EvoPop-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/EvoPop-theme/status_image/last_build.png" /></a>|
 |la-capitaine-cursor-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-cursor-theme/status_image/last_build.png" /></a>|
 |la-capitaine-icon-theme|<a href="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/themes/package/la-capitaine-icon-theme/status_image/last_build.png" /></a>|
