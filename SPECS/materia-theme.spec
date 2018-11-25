@@ -1,5 +1,5 @@
 Name:           materia-theme
-Version:        20181115
+Version:        20181125
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -10,10 +10,13 @@ Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{
 BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  bc
-BuildRequires:  glib2-devel
-Requires:       gdk-pixbuf2
-Requires:       gnome-themes-standard
-Requires:       gtk-murrine-engine
+Requires:       %{_bindir}/glib-compile-resources
+Requires:       %{_libdir}/libmurrine.so
+%if 0%{?suse_version}
+Requires:       gnome-themes-extras
+%else
+Requires:       gnome-themes-extra
+%endif
 Obsoletes:      Flat-Plat-theme         < %{version}
 Obsoletes:      Flat-Plat-light-theme   < %{version}
 Obsoletes:      Flat-Plat-dark-theme    < %{version}
@@ -46,6 +49,9 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %changelog
+* Sun Nov 25 2018 Laurent Tréguier <laurent@treguier.org> - 20181125-1
+- new version
+
 * Thu Nov 15 2018 Laurent Tréguier <laurent@treguier.org> - 20181115-1
 - new version
 
