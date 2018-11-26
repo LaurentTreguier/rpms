@@ -9,7 +9,7 @@
 
 Name:           oomox
 Version:        1.7.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -47,6 +47,7 @@ Requires:       %{_bindir}/xrdb
 Requires:       %{_libdir}/libglib-2.0.so.0
 Requires:       %{_libdir}/libgtk-3.so
 Requires:       %{_libdir}/libmurrine.so
+
 %if 0%{?mageia}
 Requires:       gtk2-theme-engines
 Requires:       python3-gobject3
@@ -60,6 +61,13 @@ Requires:       python3-gobject
 Requires:       python34-gobject
 %endif
 %endif
+
+%if 0%{?fedora}%{?mageia}
+Recommends:     python3-colorthief
+Recommends:     python3-colorz
+Recommends:     python3-haishoku
+%endif
+
 AutoReq:        no
 
 %description
@@ -112,6 +120,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Mon Nov 26 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.1-2
+- added new optional dependencies
+
 * Mon Nov 26 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.1-1
 - new version
 
