@@ -9,7 +9,7 @@
 
 Name:           oomox
 Version:        1.7.2.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -46,7 +46,7 @@ Requires:       %{_bindir}/parallel
 Requires:       %{_bindir}/xrdb
 Requires:       %{_libdir}/libglib-2.0.so.0
 Requires:       %{_libdir}/libgtk-3.so
-Requires:       %{_libdir}/libmurrine.so
+Requires:       %{_datadir}/gtk-engines/murrine.xml
 
 %if 0%{?mageia}
 Requires:       gtk2-theme-engines
@@ -120,6 +120,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Mon Nov 26 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.1-3
+- fixed murrine engine dependency
+
 * Mon Nov 26 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.1-2
 - added new optional dependencies
 
