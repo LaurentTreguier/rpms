@@ -15,7 +15,6 @@ A bunch of RPM specfiles that I make for random things I find interesting.
 |dmd-phobos-devel|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dmd-tools|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dmd/status_image/last_build.png" /></a>|
 |dub|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dub/status_image/last_build.png" /></a>|
-|fsharp|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/fsharp/status_image/last_build.png" /></a>|
 |nim|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/nim/status_image/last_build.png" /></a>|
 
 |Discord||
