@@ -1,6 +1,7 @@
 %global         __python                %{__python3}
 %global         numix_version           1.9.2
 %global         materia_version         20181125
+%global         materia_commit          5c9565676429e47dc6c547fbf96101af1aad6a54
 %global         arc_commit              e97206cf0772da5b07b982da67cc65d91884d48d
 %global         archdroid_version       1.0.2
 %global         gnome_colors_version    5.5.3
@@ -8,7 +9,7 @@
 %global         base16_commit           d022b9daa5c233a08a8d3b94fd534a3041e3a8c1
 
 Name:           oomox
-Version:        1.7.2.2
+Version:        1.7.2.3
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
@@ -16,7 +17,7 @@ License:        GPLv3
 URL:            https://github.com/themix-project/oomox
 Source0:        https://github.com/themix-project/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/themix-project/%{name}-gtk-theme/archive/%{numix_version}.tar.gz#/%{name}-gtk-theme-%{numix_version}.tar.gz
-Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_version}.tar.gz#/%{name}-materia-theme-%{materia_version}.tar.gz
+Source2:        https://github.com/nana-4/materia-theme/archive/%{materia_commit}.tar.gz#/%{name}-materia-theme-%{materia_commit}.tar.gz
 Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_commit}.tar.gz#/%{name}-arc-theme-%{arc_commit}.tar.gz
 Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_version}.tar.gz
 Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_version}.tar.gz
@@ -87,7 +88,7 @@ icons.
 %setup -q -b 7
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
-cp -pr materia-theme-%{materia_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr materia-theme-%{materia_commit}/* %{name}-%{version}/plugins/theme_materia/materia-theme
 cp -pr arc-theme-%{arc_commit}/* %{name}-%{version}/plugins/theme_arc/arc-theme
 cp -pr archdroid-icon-theme-%{archdroid_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
@@ -120,6 +121,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Dec 09 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.3-1
+- new version
+- updated materia-theme
+
 * Fri Dec 07 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.2-1
 - new version
 
