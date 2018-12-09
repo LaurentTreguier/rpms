@@ -5,13 +5,13 @@
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    --always-make ENABLE_RELEASE=1 MODEL=%{arch_bits}
+%global         make_options    --always-make ENABLE_RELEASE=1 ENABLE_LTO=1 MODEL=%{arch_bits}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.083.0
+Version:        2.083.1
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -28,7 +28,7 @@ BuildRequires:  gcc-c++
 %if 0%{?fedora}
 BuildRequires:  ldc
 %else
-%if 0%{?_with_bootstrap}
+%if %{defined with_bootstrap}
 BuildRequires:  curl
 %else
 BuildRequires:  %{name}
@@ -109,7 +109,7 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 export HOST_DMD=ldmd2
 %endif
 cd %{build_dir}/%{dmd_name}
-%make_build %{?_with_bootstrap: AUTO_BOOTSTRAP=1} \
+%make_build %{?with_bootstrap: AUTO_BOOTSTRAP=1} \
             %{make_options} -f posix.mak
 
 for component in %{drt_name} %{phb_name} %{dto_name}
@@ -200,6 +200,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Dec 09 2018 Laurent Tréguier <laurent@treguier.org> - 2.083.1-1
+- new version
+
 * Fri Nov 02 2018 Laurent Tréguier <laurent@treguier.org> - 2.083.0-1
 - new version
 
