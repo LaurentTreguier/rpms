@@ -7,8 +7,8 @@
 %global         source_arch     ia32
 %endif
 
-%define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{source_arch}/dart-sdk
-%define         dev_version     dev.0.0
+%define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{dev_version}-%{source_arch}/dart-sdk
+%define         dev_version     dev.1.1
 
 Name:           %{source_name}-dev-bin
 Epoch:          1
@@ -22,8 +22,8 @@ Provides:       %{source_name}  = %{version}
 
 License:        BSD
 URL:            https://www.dartlang.org
-Source0:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{version}-%{dev_version}/sdk/dartsdk-linux-ia32-release.zip#/%{name}-%{version}-ia32.zip
-Source1:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{version}-%{dev_version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-x64.zip
+Source0:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{version}-%{dev_version}/sdk/dartsdk-linux-ia32-release.zip#/%{name}-%{version}-%{dev_version}-ia32.zip
+Source1:        https://storage.googleapis.com/dart-archive/channels/dev/release/%{version}-%{dev_version}/sdk/dartsdk-linux-x64-release.zip#/%{name}-%{version}-%{dev_version}-x64.zip
 
 BuildRequires:  unzip
 
@@ -33,8 +33,8 @@ runtimes, for building web, server, and mobile apps.
 
 
 %prep
-%setup -q -a 0 -T -c -n %{name}-%{version}-ia32
-%setup -q -a 1 -T -c -n %{name}-%{version}-x64
+%setup -q -a 0 -T -c -n %{name}-%{version}-%{dev_version}-ia32
+%setup -q -a 1 -T -c -n %{name}-%{version}-%{dev_version}-x64
 
 
 %build
@@ -64,6 +64,10 @@ done
 
 
 %changelog
+
+* Fri Dec 14 2018 Laurent Tréguier <laurent@treguier.org> - 1:2.2.0-0.1.dev.1.1
+- new release
+
 * Mon Nov 19 2018 Laurent Tréguier <laurent@treguier.org> - 1:2.2.0-0.1.dev.0.0
 - new version
 
