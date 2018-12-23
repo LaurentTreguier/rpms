@@ -1,15 +1,15 @@
 %global         __python                %{__python3}
-%global         numix_version           1.9.2
+%global         numix_version           1.9.3
 %global         materia_version         20181125
 %global         materia_commit          5c9565676429e47dc6c547fbf96101af1aad6a54
-%global         arc_commit              e97206cf0772da5b07b982da67cc65d91884d48d
+%global         arc_commit              79fca35faefad6ae64c6672c7f76471e8bd7889e
 %global         archdroid_version       1.0.2
-%global         gnome_colors_version    5.5.3
+%global         gnome_colors_version    5.5.4
 %global         oomoxify_version        1.1
 %global         base16_commit           d022b9daa5c233a08a8d3b94fd534a3041e3a8c1
 
 Name:           oomox
-Version:        1.7.2.3
+Version:        1.8.0.3
 Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
@@ -121,6 +121,12 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Dec 23 2018 Laurent Tréguier <laurent@treguier.org> - 1.8.0.3-1
+- new version
+- updated oomox-gtk-theme
+- updated arc-theme
+- updated gnome-colors-icon-theme
+
 * Sun Dec 09 2018 Laurent Tréguier <laurent@treguier.org> - 1.7.2.3-1
 - new version
 - updated materia-theme
