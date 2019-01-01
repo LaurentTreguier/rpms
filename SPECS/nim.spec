@@ -3,7 +3,7 @@
 %global         koch_options    -d:release -d:useGnuReadline
 
 Name:           nim
-Version:        0.19.0
+Version:        0.19.2
 Release:        1%{?dist}
 Summary:        A compiled, garbage-collected systems programming language
 
@@ -59,6 +59,9 @@ done
 
 
 %changelog
+* Tue Jan 01 2019 Laurent Tréguier <laurent@treguier.org> - 0.19.2-1
+- new version
+
 * Thu Sep 27 2018 Laurent Tréguier <laurent@treguier.org> - 0.19.0-1
 - new version
 
