@@ -13,8 +13,8 @@
 %bcond_with     bootstrap
 
 Name:           %{dmd_name}
-Version:        2.083.1
-Release:        2%{?dist}
+Version:        2.084.0
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -27,6 +27,7 @@ Source10:       https://www.boost.org/LICENSE_1_0.txt#/%{name}-%{version}-LICENS
 Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
+BuildRequires:  git
 %if 0%{?fedora}
 BuildRequires:  ldc
 %else
@@ -205,6 +206,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed Jan 02 2019 Laurent Tréguier <laurent@treguier.org> - 2.084.0-1
+- new version
+
 * Sun Dec 09 2018 Laurent Tréguier <laurent@treguier.org> - 2.083.1-2
 - fixed build on EPEL
 
