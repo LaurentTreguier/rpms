@@ -5,14 +5,14 @@
 %global         arc_theme_commit            88d02754d11d174a7baf3db7beb857f28dac55ee
 %global         archdroid_icons_version     1.0.2
 %global         gnome_colors_icons_version  5.5.4
-%global         oomoxify_version            1.1.1
-%global         base16_commit               d022b9daa5c233a08a8d3b94fd534a3041e3a8c1
+%global         oomoxify_version            1.1.2
+%global         base16_commit               2e4112fe859ed5d33f67c177f11d369d360db9ae
 %global         numix_icons_commit          bd40be85955dcf20b15ce03e2baf0bf3dba313cb
 %global         numix_folders_icons_commit  24e5f6c6603e7f798553d2f24a00de107713c333
 
 Name:           oomox
-Version:        1.9.0.2
-Release:        4%{?dist}
+Version:        1.10
+Release:        1%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -24,7 +24,7 @@ Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_theme_commit
 Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_icons_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_version}.tar.gz
 Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
 Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_version}.tar.gz#/%{name}-oomoxify-%{oomoxify_version}.tar.gz
-Source7:        https://github.com/base16-builder/base16-builder/archive/%{base16_commit}.tar.gz#/%{name}-oomoxify-%{base16_commit}.tar.gz
+Source7:        https://github.com/themix-project/base16_mirror/archive/%{base16_commit}.tar.gz#/%{name}-base16_mirror-%{base16_commit}.tar.gz
 Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix_icons_commit}.tar.gz#/%{name}-numix-icon-theme-%{numix_icons_commit}.tar.gz
 Source9:        https://github.com/numixproject/numix-folders/archive/%{numix_folders_icons_commit}.tar.gz#/%{name}-numix-folders-%{numix_folders_icons_commit}.tar.gz
 
@@ -32,6 +32,7 @@ BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
+BuildRequires:  python3-devel
 Requires:       bc
 Requires:       bash
 Requires:       coreutils
@@ -43,9 +44,12 @@ Requires:       librsvg2
 Requires:       make
 Requires:       optipng
 Requires:       polkit
-Requires:       python3-imaging
 Requires:       sed
 Requires:       zip
+Requires:       /%{python3_sitearch}/gi
+Requires:       /%{python3_sitearch}/PIL
+Requires:       /%{python3_sitearch}/yaml
+Requires:       /%{python3_sitelib}/pystache
 Requires:       %{_bindir}/gdk-pixbuf-pixdata
 Requires:       %{_bindir}/parallel
 Requires:       %{_bindir}/xrdb
@@ -55,16 +59,10 @@ Requires:       %{_datadir}/gtk-engines/murrine.xml
 
 %if 0%{?mageia}
 Requires:       gtk2-theme-engines
-Requires:       python3-gobject3
 Requires:       ruby-sass
 %else
 Requires:       gtk2-engines
 Requires:       sassc
-%if 0%{?fedora}
-Requires:       python3-gobject
-%else
-Requires:       python34-gobject
-%endif
 %endif
 
 %if 0%{?fedora}%{?mageia}
@@ -99,7 +97,7 @@ cp -pr arc-theme-%{arc_theme_commit}/* %{name}-%{version}/plugins/theme_arc/arc-
 cp -pr archdroid-icon-theme-%{archdroid_icons_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
 cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/plugins/oomoxify
-cp -pr base16-builder-%{base16_commit}/* %{name}-%{version}/plugins/import_base16/base16-data
+cp -pr base16_mirror-%{base16_commit}/* %{name}-%{version}/plugins/base16/base16_mirror
 cp -pr numix-icon-theme-%{numix_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-icon-theme
 cp -pr numix-folders-%{numix_folders_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-folders
 
@@ -129,6 +127,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Fri Jan 04 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-1
+- new version
+- updated oomoxify
+
 * Wed Jan 02 2019 Laurent Tréguier <laurent@treguier.org> - 1.9.0.2-4
 - updated oomox-gtk-theme
 - updated materia-theme
