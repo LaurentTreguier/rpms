@@ -12,7 +12,7 @@
 
 Name:           oomox
 Version:        1.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -32,7 +32,7 @@ BuildArch:      noarch
 BuildRequires:  bash
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
-BuildRequires:  python3-devel
+BuildRequires:  pkgconfig(python3)
 Requires:       bc
 Requires:       bash
 Requires:       coreutils
@@ -127,6 +127,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Fri Jan 04 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-2
+- fixed build on EPEL
+
 * Fri Jan 04 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-1
 - new version
 - updated oomoxify
