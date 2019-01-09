@@ -4,7 +4,7 @@
 %global         materia_theme_commit        94da12f9c5dfa4e045f8f02e2c818891b13b0930
 %global         arc_theme_commit            88d02754d11d174a7baf3db7beb857f28dac55ee
 %global         archdroid_icons_version     1.0.2
-%global         gnome_colors_icons_version  5.5.4
+%global         gnome_colors_icons_version  5.5.5
 %global         oomoxify_version            1.1.2
 %global         base16_commit               2e4112fe859ed5d33f67c177f11d369d360db9ae
 %global         numix_icons_commit          bd40be85955dcf20b15ce03e2baf0bf3dba313cb
@@ -12,7 +12,7 @@
 
 Name:           oomox
 Version:        1.10
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
 
 License:        GPLv3
@@ -127,6 +127,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Wed Jan 09 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-3
+- updated gnome-colors-icon-theme
+
 * Fri Jan 04 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-2
 - fixed build on EPEL
 
