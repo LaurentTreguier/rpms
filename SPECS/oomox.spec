@@ -1,19 +1,20 @@
 %global         __python                    %{__python3}
 %global         numix_theme_version         1.10
 %global         materia_theme_version       20181125
-%global         materia_theme_commit        94da12f9c5dfa4e045f8f02e2c818891b13b0930
+%global         materia_theme_commit        6386a791691e15ae0307836d134a05e91dd8ecbf
 %global         arc_theme_commit            88d02754d11d174a7baf3db7beb857f28dac55ee
 %global         archdroid_icons_version     1.0.2
 %global         gnome_colors_icons_version  5.5.5
 %global         oomoxify_version            1.1.2
 %global         base16_commit               2e4112fe859ed5d33f67c177f11d369d360db9ae
-%global         numix_icons_commit          bd40be85955dcf20b15ce03e2baf0bf3dba313cb
+%global         numix_icons_commit          896d9100ec836245f4a4cf5e450ac5a3b0962e50
 %global         numix_folders_icons_commit  24e5f6c6603e7f798553d2f24a00de107713c333
+%global         papirus_icons_version       20190106
 
 Name:           oomox
-Version:        1.10
-Release:        3%{?dist}
-Summary:        GUI for generating variations of Numix/Materia/Arc themes, gnome-colors and ArchDroid icon themes
+Version:        1.11
+Release:        1%{?dist}
+Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
 URL:            https://github.com/themix-project/oomox
@@ -27,6 +28,7 @@ Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_ve
 Source7:        https://github.com/themix-project/base16_mirror/archive/%{base16_commit}.tar.gz#/%{name}-base16_mirror-%{base16_commit}.tar.gz
 Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix_icons_commit}.tar.gz#/%{name}-numix-icon-theme-%{numix_icons_commit}.tar.gz
 Source9:        https://github.com/numixproject/numix-folders/archive/%{numix_folders_icons_commit}.tar.gz#/%{name}-numix-folders-%{numix_folders_icons_commit}.tar.gz
+Source10:       https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/%{papirus_icons_version}.tar.gz#/%{name}-papirus-icon-theme-%{papirus_icons_version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -74,9 +76,9 @@ Recommends:     python3-haishoku
 AutoReq:        no
 
 %description
-Graphical application for generating different color variations of a
-Numix-based, Materia and Arc themes (GTK2, GTK3), Gnome-Colors and Archdroid
-icons.
+Themix: GUI for generating different color variations of Arc, Materia, Oomox
+themes (GTK2, GTK3, Cinnamon, GNOME, MATE, Openbox, Xfwm), ArchDroid,
+Gnome-Colors, Numix, Papirus icon themes, and terminal palettes.
 
 
 %prep
@@ -90,6 +92,7 @@ icons.
 %setup -q -b 7
 %setup -q -b 8
 %setup -q -b 9
+%setup -q -b 10
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_theme_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
 cp -pr materia-theme-%{materia_theme_commit}/* %{name}-%{version}/plugins/theme_materia/materia-theme
@@ -100,6 +103,7 @@ cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/plugins/oomoxify
 cp -pr base16_mirror-%{base16_commit}/* %{name}-%{version}/plugins/base16/base16_mirror
 cp -pr numix-icon-theme-%{numix_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-icon-theme
 cp -pr numix-folders-%{numix_folders_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-folders
+cp -pr papirus-icon-theme-%{papirus_icons_version}/* %{name}-%{version}/plugins/icons_papirus/papirus-icon-theme
 
 
 %build
@@ -127,6 +131,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Mon Jan 28 2019 Laurent Tréguier <laurent@treguier.org> - 1.11-1
+- new version
+
 * Wed Jan 09 2019 Laurent Tréguier <laurent@treguier.org> - 1.10-3
 - updated gnome-colors-icon-theme
 
