@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           Discord-installer
-Version:        1.5.0
+Version:        1.5.1
 Release:        1%{?dist}
 Summary:        Some systemd services to install Discord on Redhat based systems
 
@@ -77,6 +77,9 @@ fi
 
 
 %changelog
+* Sat Feb 02 2019 Laurent Tréguier <laurent@treguier.org> - 1.5.1-1
+- new version
+
 * Tue Oct 30 2018 Laurent Tréguier <laurent@treguier.org> - 1.5.0-1
 - new version
 
