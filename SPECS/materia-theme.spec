@@ -1,6 +1,6 @@
 Name:           materia-theme
-Version:        20181125
-Release:        2%{?dist}
+Version:        20190201
+Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
@@ -49,6 +49,9 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %changelog
+* Sat Feb 02 2019 Laurent Tréguier <laurent@treguier.org> - 20190201-1
+- new version
+
 * Sun Nov 25 2018 Laurent Tréguier <laurent@treguier.org> - 20181125-2
 - fixed murrine engine dependency
 
