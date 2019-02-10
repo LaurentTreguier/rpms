@@ -1,26 +1,25 @@
 %global         __python                    %{__python3}
 %global         numix_theme_version         1.10
-%global         materia_theme_version       20181125
-%global         materia_theme_commit        6386a791691e15ae0307836d134a05e91dd8ecbf
-%global         arc_theme_commit            88d02754d11d174a7baf3db7beb857f28dac55ee
+%global         materia_theme_version       20190201
+%global         arc_theme_commit            bb7cb3b8665056d933fdf4e1701a4837ec458083
 %global         archdroid_icons_version     1.0.2
 %global         gnome_colors_icons_version  5.5.5
 %global         oomoxify_version            1.1.2
 %global         base16_commit               2e4112fe859ed5d33f67c177f11d369d360db9ae
 %global         numix_icons_commit          896d9100ec836245f4a4cf5e450ac5a3b0962e50
 %global         numix_folders_icons_commit  24e5f6c6603e7f798553d2f24a00de107713c333
-%global         papirus_icons_version       20190106
+%global         papirus_icons_version       20190203
 
 Name:           oomox
 Version:        1.11
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
 URL:            https://github.com/themix-project/oomox
 Source0:        https://github.com/themix-project/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/themix-project/%{name}-gtk-theme/archive/%{numix_theme_version}.tar.gz#/%{name}-gtk-theme-%{numix_theme_version}.tar.gz
-Source2:        https://github.com/nana-4/materia-theme/archive/%{materia_theme_commit}.tar.gz#/%{name}-materia-theme-%{materia_theme_commit}.tar.gz
+Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_theme_version}.tar.gz#/%{name}-materia-theme-%{materia_theme_version}.tar.gz
 Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_theme_commit}.tar.gz#/%{name}-arc-theme-%{arc_theme_commit}.tar.gz
 Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_icons_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_version}.tar.gz
 Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
@@ -95,7 +94,7 @@ Gnome-Colors, Numix, Papirus icon themes, and terminal palettes.
 %setup -q -b 10
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_theme_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
-cp -pr materia-theme-%{materia_theme_commit}/* %{name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr materia-theme-%{materia_theme_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
 cp -pr arc-theme-%{arc_theme_commit}/* %{name}-%{version}/plugins/theme_arc/arc-theme
 cp -pr archdroid-icon-theme-%{archdroid_icons_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
@@ -131,6 +130,11 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Feb 10 2019 Laurent Tréguier <laurent@treguier.org> - 1.11-2
+- updated materia-theme
+- updated arc-theme
+- updated papirus-icon-theme
+
 * Mon Jan 28 2019 Laurent Tréguier <laurent@treguier.org> - 1.11-1
 - new version
 
