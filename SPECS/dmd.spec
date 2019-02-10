@@ -13,7 +13,7 @@
 %bcond_with     bootstrap
 
 Name:           %{dmd_name}
-Version:        2.084.0
+Version:        2.084.1
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -206,6 +206,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Feb 10 2019 Laurent Tréguier <laurent@treguier.org> - 2.084.1-1
+- new version
+
 * Wed Jan 02 2019 Laurent Tréguier <laurent@treguier.org> - 2.084.0-1
 - new version
 
