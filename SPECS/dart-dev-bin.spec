@@ -13,7 +13,7 @@
 Name:           %{source_name}-dev-bin
 Epoch:          1
 Version:        2.2.0
-Release:        0.1.%{dev_version}%{?dist}
+Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
 Conflicts:      %{source_name}-bin
@@ -64,6 +64,9 @@ done
 
 
 %changelog
+* Wed Feb 27 2019 Laurent Tréguier <laurent@treguier.org> - 1:2.2.0-1
+- new version
+
 * Tue Feb 26 2019 Laurent Tréguier <laurent@treguier.org> - 1:2.2.0-0.1.dev.2.1
 - new release
 
