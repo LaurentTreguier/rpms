@@ -2,10 +2,6 @@
 
 A bunch of RPM specfiles that I make for random things I find interesting.
 
-|Blender||
-|---|---|
-|blender-bin|<a href="https://copr.fedorainfracloud.org/coprs/tcg/blender-bin/package/blender-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/blender-bin/package/blender-bin/status_image/last_build.png" /></a>|
-
 |Devel||
 |---|---|
 |dart-bin|<a href="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/"><img src="https://copr.fedorainfracloud.org/coprs/tcg/devel/package/dart-bin/status_image/last_build.png" /></a>|
