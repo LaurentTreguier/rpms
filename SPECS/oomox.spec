@@ -12,8 +12,8 @@
 %global         suru_plus_icons_version     25.2
 
 Name:           oomox
-Version:        1.12
-Release:        2%{?dist}
+Version:        1.12.1
+Release:        1%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -134,6 +134,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Thu Mar 21 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.1-1
+- new version
+
 * Sat Mar 16 2019 Laurent Tréguier <laurent@treguier.org> - 1.12-2
 - updated materia-theme
 
