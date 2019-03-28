@@ -10,11 +10,9 @@
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
-%global         with_bootstrap  1
-
 Name:           %{dmd_name}
 Version:        2.085.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -199,6 +197,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Mar 28 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.0-3
+- dropped bootstrapping
+
 * Thu Mar 28 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.0-2
 - compile with DMD on all platforms
 
