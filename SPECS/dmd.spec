@@ -10,11 +10,11 @@
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
-%bcond_with     bootstrap
+%global         with_bootstrap  1
 
 Name:           %{dmd_name}
 Version:        2.085.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -28,14 +28,10 @@ Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
 BuildRequires:  git
-%if 0%{?fedora}
-BuildRequires:  ldc
-%else
-%if %{with bootstrap}
+%if 0%{?with_bootstrap}
 BuildRequires:  curl
 %else
 BuildRequires:  %{name}
-%endif
 %endif
 
 Requires:       gcc
@@ -108,9 +104,6 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
-%if 0%{?fedora}
-export HOST_DMD=ldmd2
-%endif
 cd %{build_dir}/%{dmd_name}
 %make_build %{?with_bootstrap:AUTO_BOOTSTRAP=1} \
             %{!?epel:ENABLE_LTO=1} \
@@ -206,6 +199,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Mar 28 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.0-2
+- compile with DMD on all platforms
+
 * Sat Mar 02 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.0-1
 - new version
 
