@@ -5,14 +5,14 @@
 %global         phb_name        phobos
 %global         dto_name        tools
 %global         arch_bits       %(getconf LONG_BIT)
-%global         make_options    --always-make ENABLE_RELEASE=1 MODEL=%{arch_bits}
+%global         make_options    ENABLE_RELEASE=1 PIC=1 MODEL=%{arch_bits}
 
 %define         build_dir       $RPM_BUILD_DIR/%{name}-%{version}-build
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.085.0
-Release:        3%{?dist}
+Version:        2.085.1
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -26,10 +26,14 @@ Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
 BuildRequires:  git
+%if 0%{?fedora}
+BuildRequires:  ldc
+%else
 %if 0%{?with_bootstrap}
 BuildRequires:  curl
 %else
 BuildRequires:  %{name}
+%endif
 %endif
 
 Requires:       gcc
@@ -68,6 +72,7 @@ jobs that need to get done
 %package %{phb_name}-devel
 Summary:        Support for developing D application
 Provides:       %{name}-%{phb_name}-static%{?_isa} = %{version}-%{release}
+Requires:       %{name}-%{phb_name}%{?_isa} = %{version}-%{release}
 
 %description %{phb_name}-devel
 The phobos-devel package contains header files for developing D
@@ -77,7 +82,7 @@ applications that use phobos.
 %package %{dto_name}
 Summary:        Ancillary tools for the D programming language compiler
 BuildRequires:  curl-devel
-Requires:       %{dmd_name}%{?_isa} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description %{dto_name}
 This repository hosts various tools redistributed with DMD or used internally
@@ -102,12 +107,15 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
-cd %{build_dir}/%{dmd_name}
-%make_build %{?with_bootstrap:AUTO_BOOTSTRAP=1} \
-            %{!?epel:ENABLE_LTO=1} \
-            %{make_options} -f posix.mak
+%if 0%{?fedora}
+export HOST_DMD=ldmd2
+%endif
 
-for component in %{drt_name} %{phb_name} %{dto_name}
+mkdir -p /tmp/bin
+ln -s %{_bindir}/ld.gold /tmp/bin/ld
+export PATH="/tmp/bin:$PATH"
+
+for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
 cd %{build_dir}/$component
 %make_build %{?with_bootstrap:AUTO_BOOTSTRAP=1} \
@@ -197,6 +205,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sat Apr 06 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.1-1
+- new version
+
 * Thu Mar 28 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.0-3
 - dropped bootstrapping
 
