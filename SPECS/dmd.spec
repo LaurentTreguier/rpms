@@ -12,7 +12,7 @@
 
 Name:           %{dmd_name}
 Version:        2.085.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -111,10 +111,6 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 export HOST_DMD=ldmd2
 %endif
 
-mkdir -p /tmp/bin
-ln -s %{_bindir}/ld.gold /tmp/bin/ld
-export PATH="/tmp/bin:$PATH"
-
 for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
 cd %{build_dir}/$component
@@ -205,6 +201,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sat Apr 06 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.1-2
+- rebuilt without ld.gold
+
 * Sat Apr 06 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.1-1
 - new version
 
