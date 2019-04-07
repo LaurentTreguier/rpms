@@ -12,8 +12,8 @@
 %global         suru_plus_icons_version     25.2
 
 Name:           oomox
-Version:        1.12.1
-Release:        3%{?dist}
+Version:        1.12.2
+Release:        1%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -134,6 +134,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-1
+- new version
+
 * Mon Apr 01 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.1-3
 - updated papirus-icon-theme
 
