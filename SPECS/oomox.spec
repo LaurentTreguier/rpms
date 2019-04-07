@@ -1,19 +1,20 @@
-%global         __python                    %{__python3}
-%global         numix_theme_version         1.10
-%global         materia_theme_version       20190315
-%global         arc_theme_version           20190330
-%global         archdroid_icons_version     1.0.2
-%global         gnome_colors_icons_version  5.5.5
-%global         oomoxify_version            1.1.2
-%global         base16_commit               2e4112fe859ed5d33f67c177f11d369d360db9ae
-%global         numix_icons_commit          88ba3654506c73f77a28629d863d1e23a553bff7
-%global         numix_folders_icons_commit  24e5f6c6603e7f798553d2f24a00de107713c333
-%global         papirus_icons_version       20190331
-%global         suru_plus_icons_version     25.2
+%global         __python                            %{__python3}
+%global         numix_theme_version                 1.10
+%global         materia_theme_version               20190315
+%global         arc_theme_version                   20190330
+%global         archdroid_icons_version             1.0.2
+%global         gnome_colors_icons_version          5.5.5
+%global         oomoxify_version                    1.1.2
+%global         base16_commit                       2e4112fe859ed5d33f67c177f11d369d360db9ae
+%global         numix_icons_commit                  88ba3654506c73f77a28629d863d1e23a553bff7
+%global         numix_folders_icons_commit          24e5f6c6603e7f798553d2f24a00de107713c333
+%global         papirus_icons_version               20190331
+%global         suru_plus_icons_version             25.3
+%global         suru_plus_aspromauros_icons_version 2.1
 
 Name:           oomox
 Version:        1.12.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -30,6 +31,7 @@ Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix
 Source9:        https://github.com/numixproject/numix-folders/archive/%{numix_folders_icons_commit}.tar.gz#/%{name}-numix-folders-%{numix_folders_icons_commit}.tar.gz
 Source10:       https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/%{papirus_icons_version}.tar.gz#/%{name}-papirus-icon-theme-%{papirus_icons_version}.tar.gz
 Source11:       https://github.com/gusbemacbe/suru-plus/archive/v%{suru_plus_icons_version}.tar.gz#/%{name}-suru-plus-icon-theme-%{suru_plus_icons_version}.tar.gz
+Source12:       https://github.com/gusbemacbe/suru-plus-aspromauros/archive/v%{suru_plus_aspromauros_icons_version}.tar.gz#/%{name}-suru-plus-aspromauros-icon-theme-%{suru_plus_icons_version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -95,6 +97,7 @@ Gnome-Colors, Numix, Papirus icon themes, and terminal palettes.
 %setup -q -b 9
 %setup -q -b 10
 %setup -q -b 11
+%setup -q -b 12
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_theme_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
 cp -pr materia-theme-%{materia_theme_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
@@ -107,6 +110,7 @@ cp -pr numix-icon-theme-%{numix_icons_commit}/* %{name}-%{version}/plugins/icons
 cp -pr numix-folders-%{numix_folders_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-folders
 cp -pr papirus-icon-theme-%{papirus_icons_version}/* %{name}-%{version}/plugins/icons_papirus/papirus-icon-theme
 cp -pr suru-plus-%{suru_plus_icons_version}/* %{name}-%{version}/plugins/icons_suruplus/suru-plus
+cp -pr suru-plus-aspromauros-%{suru_plus_aspromauros_icons_version}/* %{name}-%{version}/plugins/icons_suruplus_aspromauros/suru-plus-aspromauros
 
 
 %build
@@ -137,6 +141,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org>
+- updated suru-plus-icon-theme
+- added suru-plus-aspromauros-icon plugin
+
 * Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-2
 - Fixed build on Mageia and EPEL
 
