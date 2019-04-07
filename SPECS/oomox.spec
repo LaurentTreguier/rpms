@@ -13,7 +13,7 @@
 
 Name:           oomox
 Version:        1.12.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -125,7 +125,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 %license LICENSE
 %doc CREDITS
 %doc README.md
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/oomox*
+%if 0%{?mageia}
+%{_bindir}/sassc
+%endif
 %{_datadir}/appdata/*.xml
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/apps/*
@@ -134,6 +137,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-2
+- Fixed build on Mageia and EPEL
+
 * Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-1
 - new version
 
