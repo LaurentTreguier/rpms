@@ -14,7 +14,7 @@
 
 Name:           oomox
 Version:        1.12.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -61,6 +61,15 @@ Requires:       %{_bindir}/xrdb
 Requires:       %{_libdir}/libglib-2.0.so.0
 Requires:       %{_libdir}/libgtk-3.so
 Requires:       %{_datadir}/gtk-engines/murrine.xml
+Requires:       %{name}-theme-arc
+Requires:       %{name}-theme-materia
+Requires:       %{name}-theme-oomox
+Requires:       %{name}-icons-archdroid
+Requires:       %{name}-icons-gnome-colors
+Requires:       %{name}-icons-numix
+Requires:       %{name}-icons-papirus
+Requires:       %{name}-icons-suru-plus
+Requires:       %{name}-icons-suru-plus-aspromauros
 
 %if 0%{?mageia}
 Requires:       gtk2-theme-engines
@@ -82,6 +91,78 @@ AutoReq:        no
 Themix: GUI for generating different color variations of Arc, Materia, Oomox
 themes (GTK2, GTK3, Cinnamon, GNOME, MATE, Openbox, Xfwm), ArchDroid,
 Gnome-Colors, Numix, Papirus icon themes, and terminal palettes.
+
+
+%package theme-arc
+Summary:        Arc theme plugin for Oomox
+Requires:       %{name}
+
+%description theme-arc
+Sources of Arc theme used by Oomox
+
+
+%package theme-materia
+Summary:        Materia theme plugin for Oomox
+Requires:       %{name}
+
+%description theme-materia
+Sources of Materia theme used by Oomox
+
+
+%package theme-oomox
+Summary:        Oomox theme plugin for Oomox
+Requires:       %{name}
+
+%description theme-oomox
+Sources of Oomox theme used by Oomox
+
+
+%package icons-archdroid
+Summary:        Archdroid icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-archdroid
+Sources of Archdroid icon theme used by Oomox
+
+
+%package icons-gnome-colors
+Summary:        Gnome Colors icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-gnome-colors
+Sources of Gnome Colors icon theme used by Oomox
+
+
+%package icons-numix
+Summary:        Numix icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-numix
+Sources of Numix icon theme used by Oomox
+
+
+%package icons-papirus
+Summary:        Papirus icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-papirus
+Sources of Papirus icon theme used by Oomox
+
+
+%package icons-suru-plus
+Summary:        Suru Plus icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-suru-plus
+Sources of Suru Plus icon theme used by Oomox
+
+
+%package icons-suru-plus-aspromauros
+Summary:        Suru Plus Aspromauros icon theme plugins for Oomox
+Requires:       %{name}
+
+%description icons-suru-plus-aspromauros
+Sources of Suru Plus Aspromauros icon theme used by Oomox
 
 
 %prep
@@ -126,9 +207,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %files
-%license LICENSE
-%doc CREDITS
-%doc README.md
+%license /opt/%{name}/LICENSE
+%license /opt/%{name}/CREDITS
+%doc /opt/%{name}/README.md
 %attr(755,root,root) %{_bindir}/oomox*
 %if 0%{?mageia}
 %{_bindir}/sassc
@@ -136,11 +217,60 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 %{_datadir}/appdata/*.xml
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/apps/*
-/opt/%{name}
+/opt/%{name}/colors
+/opt/%{name}/locale
+/opt/%{name}/oomox_gui
+/opt/%{name}/po
+/opt/%{name}/scripted_colors
+/opt/%{name}/terminal_templates
+/opt/%{name}/gui.sh
+/opt/%{name}/plugins/base16
+/opt/%{name}/plugins/import_pil
+/opt/%{name}/plugins/import_random
+/opt/%{name}/plugins/oomoxify
+
+
+%files theme-arc
+/opt/%{name}/plugins/theme_arc
+
+
+%files theme-materia
+/opt/%{name}/plugins/theme_materia
+
+
+%files theme-oomox
+/opt/%{name}/plugins/theme_oomox
+
+
+%files icons-archdroid
+/opt/%{name}/plugins/icons_archdroid
+
+
+%files icons-gnome-colors
+/opt/%{name}/plugins/icons_gnomecolors
+
+
+%files icons-numix
+/opt/%{name}/plugins/icons_numix
+
+
+%files icons-papirus
+/opt/%{name}/plugins/icons_papirus
+
+
+%files icons-suru-plus
+/opt/%{name}/plugins/icons_suruplus
+
+
+%files icons-suru-plus-aspromauros
+/opt/%{name}/plugins/icons_suruplus_aspromauros
 
 
 
 %changelog
+* Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-4
+- split into multiple subpackages
+
 * Sun Apr 07 2019 Laurent Tréguier <laurent@treguier.org>
 - updated suru-plus-icon-theme
 - added suru-plus-aspromauros-icon plugin
