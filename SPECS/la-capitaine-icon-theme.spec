@@ -1,5 +1,5 @@
-%global         git_date        20190408
-%global         git_commit      78c87e59bbb971f26bad70d9bcf61da15f66bef2
+%global         git_date        20190411
+%global         git_commit      5af554f3fd9b9e149be5c7349f6396125ba2a56c
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -88,15 +88,18 @@ done
 
 %files
 %license COPYING
+%license Credits.md
 %license LICENSE
-%doc Credits.md
+%license Thanks.md
 %doc README.md
-%doc Thanks.md
 %{_datadir}/icons/*
 
 
 
 %changelog
+* Fri Apr 12 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190411-1
+- new version
+
 * Tue Apr 09 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190408-1
 - new version
 
