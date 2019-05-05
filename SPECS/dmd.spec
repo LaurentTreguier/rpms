@@ -11,8 +11,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.085.1
-Release:        2%{?dist}
+Version:        2.086.0
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -201,6 +201,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun May 05 2019 Laurent Tréguier <laurent@treguier.org> - 2.086.0-1
+- new version
+
 * Sat Apr 06 2019 Laurent Tréguier <laurent@treguier.org> - 2.085.1-2
 - rebuilt without ld.gold
 
