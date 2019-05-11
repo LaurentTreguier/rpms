@@ -1,5 +1,5 @@
-%global         git_date        20190426
-%global         git_commit      8ac03b4646df2ea854dc0c30745a7d7dcd52c0eb
+%global         git_date        20190510
+%global         git_commit      6f675442c4f4c509f03dc1fc4a497ea596b93d1d
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -10,7 +10,7 @@
 
 Name:           la-capitaine-icon-theme
 Version:        0.6.1.%{git_date}
-Release:        2%{?dist}
+Release:        1s%{?dist}
 Summary:        A set of icons that takes inspiration from macOS and Google's Material Design
 
 License:        GPLv3
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Sat May 11 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190510-1
+- new version
+
 * Sat Apr 27 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190426-1
 - new version
 
