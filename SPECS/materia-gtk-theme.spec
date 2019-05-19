@@ -1,11 +1,13 @@
-Name:           materia-theme
+%global         source_name materia-theme
+
+Name:           materia-gtk-theme
 Version:        20190315
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
-URL:            https://github.com/nana-4/%{name}
-Source0:        https://github.com/nana-4/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+URL:            https://github.com/nana-4/%{source_name}
+Source0:        https://github.com/nana-4/%{source_name}/archive/v%{version}.tar.gz#/%{source_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bash
@@ -17,9 +19,7 @@ Requires:       gnome-themes-extras
 %else
 Requires:       gnome-themes-extra
 %endif
-Obsoletes:      Flat-Plat-theme         < %{version}
-Obsoletes:      Flat-Plat-light-theme   < %{version}
-Obsoletes:      Flat-Plat-dark-theme    < %{version}
+Obsoletes:      materia-theme   < %{version}-%{release}
 
 %description
 Materia is a Material Design-like theme for GNOME/GTK+ based desktop
@@ -28,7 +28,7 @@ LightDM, GDM, Chrome theme, etc.
 
 
 %prep
-%autosetup
+%autosetup -n %{source_name}-%{version}
 
 
 %build
@@ -37,7 +37,7 @@ LightDM, GDM, Chrome theme, etc.
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_datadir}/themes
-cd $RPM_BUILD_DIR/%{name}-%{version}
+cd $RPM_BUILD_DIR/%{source_name}-%{version}
 ./install.sh --dest $RPM_BUILD_ROOT/%{_datadir}/themes
 
 
@@ -49,6 +49,9 @@ cd $RPM_BUILD_DIR/%{name}-%{version}
 
 
 %changelog
+* Sun May 19 2019 Laurent Tréguier <laurent@treguier.org> - 20190315-2
+- changed name to materia-gtk-theme for consistency with other distros
+
 * Sat Mar 16 2019 Laurent Tréguier <laurent@treguier.org> - 20190315-1
 - new version
 
