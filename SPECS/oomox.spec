@@ -8,13 +8,13 @@
 %global         base16_commit                       2e4112fe859ed5d33f67c177f11d369d360db9ae
 %global         numix_icons_commit                  88ba3654506c73f77a28629d863d1e23a553bff7
 %global         numix_folders_icons_commit          24e5f6c6603e7f798553d2f24a00de107713c333
-%global         papirus_icons_version               20190521
+%global         papirus_icons_version               20190615
 %global         suru_plus_icons_version             30.0
 %global         suru_plus_aspromauros_icons_version 3.0
 
 Name:           oomox
 Version:        1.12.2
-Release:        8%{?dist}
+Release:        9%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -268,6 +268,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Jun 16 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-9
+- updated papirus-icon-theme
+
 * Wed Jun 05 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.2-8
 - added suru-plus-aspromauros-icon plugin
 
