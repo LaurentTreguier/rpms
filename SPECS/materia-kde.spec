@@ -1,5 +1,5 @@
 Name:           materia-kde
-Version:        20190613
+Version:        20190620
 Release:        1%{?dist}
 Summary:        Materia KDE customization
 
@@ -45,6 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Jun 21 2019 Laurent Tréguier <laurent@treguier.org> - 20190620-1
+- new version
+
 * Fri Jun 14 2019 Laurent Tréguier <laurent@treguier.org> - 20190613-1
 - new version
 
