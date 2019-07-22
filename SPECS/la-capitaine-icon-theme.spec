@@ -1,5 +1,5 @@
-%global         git_date        20190713
-%global         git_commit      0299ebbdbbc4cb7dea8508059f38a895c98027f7
+%global         git_date        20190720
+%global         git_commit      2ea684e38aa9464aa979a0e66ebc7d3a6e33fba5
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Mon Jul 22 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190720-1
+- new version
+
 * Sun Jul 14 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20190713-1
 - new version
 
