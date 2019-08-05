@@ -4,7 +4,7 @@
 %global         arc_theme_version                   20190330
 %global         archdroid_icons_version             1.0.2
 %global         gnome_colors_icons_version          5.5.5
-%global         oomoxify_version                    1.1.3
+%global         oomoxify_version                    1.1.4
 %global         base16_commit                       2ddee2a03653850ed2166e7766636bf1dfb21ca5
 %global         numix_icons_commit                  1029e86ec58c387a5b3523380ee17f223f7e2de4
 %global         numix_folders_icons_commit          24e5f6c6603e7f798553d2f24a00de107713c333
@@ -14,7 +14,7 @@
 
 Name:           oomox
 Version:        1.12.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -268,6 +268,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Mon Aug 05 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.3-2
+- updated oomoxify
+
 * Mon Jul 29 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.3-1
 - new version
 
