@@ -1,6 +1,6 @@
 %global         __python                            %{__python3}
 %global         numix_theme_version                 1.10
-%global         materia_theme_commit                f1ad3125eea55f4fe88ceab1be83bd51ee5eba48
+%global         materia_theme_version               20190831
 %global         arc_theme_version                   20190330
 %global         archdroid_icons_version             1.0.2
 %global         gnome_colors_icons_version          5.5.5
@@ -14,14 +14,14 @@
 
 Name:           oomox
 Version:        1.12.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
 URL:            https://github.com/themix-project/oomox
 Source0:        https://github.com/themix-project/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        https://github.com/themix-project/%{name}-gtk-theme/archive/%{numix_theme_version}.tar.gz#/%{name}-gtk-theme-%{numix_theme_version}.tar.gz
-Source2:        https://github.com/nana-4/materia-theme/archive/%{materia_theme_commit}.tar.gz#/%{name}-materia-theme-%{materia_theme_commit}.tar.gz
+Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_theme_version}.tar.gz#/%{name}-materia-theme-%{materia_theme_version}.tar.gz
 Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_theme_version}.tar.gz#/%{name}-arc-theme-%{arc_theme_version}.tar.gz
 Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_icons_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_version}.tar.gz
 Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
@@ -181,7 +181,7 @@ Sources of Suru Plus Aspromauros icon theme used by Oomox
 %setup -q -b 12
 cd $RPM_BUILD_DIR
 cp -pr %{name}-gtk-theme-%{numix_theme_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
-cp -pr materia-theme-%{materia_theme_commit}/* %{name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr materia-theme-%{materia_theme_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
 cp -pr arc-theme-%{arc_theme_version}/* %{name}-%{version}/plugins/theme_arc/arc-theme
 cp -pr archdroid-icon-theme-%{archdroid_icons_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
@@ -268,6 +268,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Sep 01 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.3-5
+- updated materia-theme
+
 * Sun Aug 18 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.3-4
 - updated papirus-icon-theme
 
