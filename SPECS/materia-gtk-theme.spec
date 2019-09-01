@@ -1,8 +1,8 @@
 %global         source_name materia-theme
 
 Name:           materia-gtk-theme
-Version:        20190315
-Release:        2%{?dist}
+Version:        20190831
+Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
 License:        GPLv2
@@ -49,6 +49,9 @@ cd $RPM_BUILD_DIR/%{source_name}-%{version}
 
 
 %changelog
+* Sun Sep 01 2019 Laurent Tréguier <laurent@treguier.org> - 20190831-1
+- new version
+
 * Sun May 19 2019 Laurent Tréguier <laurent@treguier.org> - 20190315-2
 - changed name to materia-gtk-theme for consistency with other distros
 
