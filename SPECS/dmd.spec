@@ -11,7 +11,7 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.087.1
+Version:        2.088.0
 Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
@@ -26,14 +26,11 @@ Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
 BuildRequires:  git
-%if 0%{?fedora}
-BuildRequires:  ldc
-%else
+# bring back LDC for Fedora whenever possible
 %if 0%{?with_bootstrap}
 BuildRequires:  curl
 %else
 BuildRequires:  %{name}
-%endif
 %endif
 
 Requires:       gcc
@@ -107,15 +104,10 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
-%if 0%{?fedora}
-export HOST_DMD=ldmd2
-%endif
-
 for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
 cd %{build_dir}/$component
 %make_build %{?with_bootstrap:AUTO_BOOTSTRAP=1} \
-            %{!?epel:ENABLE_LTO=1} \
             %{make_options} -f posix.mak
 done
 
@@ -201,6 +193,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Mon Sep 02 2019 Laurent Tréguier <laurent@treguier.org> - 2.088.0-1
+- new version
+
 * Mon Aug 05 2019 Laurent Tréguier <laurent@treguier.org> - 2.087.1-1
 - new version
 
