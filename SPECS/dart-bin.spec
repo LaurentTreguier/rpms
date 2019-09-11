@@ -11,7 +11,7 @@
 
 Name:           dart-bin
 Epoch:          1
-Version:        2.4.1
+Version:        2.5.0
 Release:        1%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -63,6 +63,9 @@ done
 
 
 %changelog
+* Wed Sep 11 2019 Laurent Tréguier <laurent@treguier.org> - 1:2.5.0-1
+- new version
+
 * Wed Aug 07 2019 Laurent Tréguier <laurent@treguier.org> - 1:2.4.1-1
 - new version
 
