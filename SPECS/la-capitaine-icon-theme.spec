@@ -1,5 +1,5 @@
-%global         git_date        20191121
-%global         git_commit      4f3d48aca4b991e67d1592ace517e32d948f2ddb
+%global         git_date        20191127
+%global         git_commit      af6c6683b7a288962604c2c4f5d0df619eab28a2
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Thu Nov 28 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20191127-1
+- new version
+
 * Fri Nov 22 2019 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20191121-1
 - new version
 
