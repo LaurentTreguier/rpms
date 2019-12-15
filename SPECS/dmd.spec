@@ -12,7 +12,7 @@
 
 Name:           %{dmd_name}
 Version:        2.089.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -26,11 +26,14 @@ Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
 BuildRequires:  git
-# bring back LDC for Fedora whenever possible
+%if 0%{?fedora}
+BuildRequires:  ldc
+%else
 %if 0%{?with_bootstrap}
 BuildRequires:  curl
 %else
 BuildRequires:  %{name}
+%endif
 %endif
 
 Requires:       gcc
@@ -104,6 +107,11 @@ cp %SOURCE10 $RPM_BUILD_DIR/%{dmd_name}-%{version}/LICENSE_1_0.txt
 
 
 %build
+if which ldmd2
+then
+    export HOST_DMD=ldmd2
+fi
+
 for component in %{dmd_name} %{drt_name} %{phb_name} %{dto_name}
 do
 cd %{build_dir}/$component
@@ -193,6 +201,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Sun Dec 15 2019 Laurent Tréguier <laurent@treguier.org> - 2.089.1-2
+- rebuilt with LDC on Fedora
+
 * Sun Dec 15 2019 Laurent Tréguier <laurent@treguier.org> - 2.089.1-1
 - new version
 
