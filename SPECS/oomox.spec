@@ -6,7 +6,7 @@
 %global         gnome_colors_icons_version          5.5.5
 %global         oomoxify_version                    1.2
 %global         base16_commit                       2ddee2a03653850ed2166e7766636bf1dfb21ca5
-%global         numix_icons_commit                  cfef86f11d224fc01abad6449eb0bc9ff9928093
+%global         numix_icons_commit                  6276c6896761bde44dcc7865a491274056d31d38
 %global         numix_folders_icons_commit          24e5f6c6603e7f798553d2f24a00de107713c333
 %global         papirus_icons_version               20191201
 %global         suru_plus_icons_version             30.0
@@ -14,7 +14,7 @@
 
 Name:           oomox
 Version:        1.12.5.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -268,6 +268,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Sun Dec 29 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.5.3-2
+- updated numix-icon-theme
+
 * Fri Dec 27 2019 Laurent Tréguier <laurent@treguier.org> - 1.12.5.3-1
 - new version
 
