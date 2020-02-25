@@ -1,13 +1,15 @@
 %global         source_name capitaine-cursors
+%global         git_date    20200223
+%global         git_commit  f6281e892772b115cb7492d55979d80ee8df6952
 
 Name:           la-capitaine-cursor-theme
 Version:        4
-Release:        1%{?dist}
+Release:        2.%{git_date}%{?dist}
 Summary:        An x-cursor theme inspired by macOS and based on KDE Breeze
 
 License:        LGPLv3
 URL:            https://krourke.org/projects/art/%{source_name}
-Source0:        https://github.com/keeferrourke/%{source_name}/archive/r%{version}.tar.gz#/%{name}-r%{version}.tar.gz
+Source0:        https://github.com/keeferrourke/%{source_name}/archive/%{git_commit}.tar.gz#/%{name}-%{git_commit}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  bc
@@ -20,8 +22,7 @@ Designed to pair well with the associated icon pack, La Capitaine.
 
 
 %prep
-%autosetup -n %{source_name}-r%{version}
-sed -i'' 's/inkscape -z -e/inkscape -z -o/g' build.sh
+%autosetup -n %{source_name}-%{git_commit}
 
 
 %build
@@ -34,8 +35,8 @@ done
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p "$RPM_BUILD_ROOT/%{_datadir}/icons"
-cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/dist/light "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine Cursors"
-cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/dist/dark "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine Cursors (Dark)"
+cp -R $RPM_BUILD_DIR/%{source_name}-%{git_commit}/dist/light "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine Cursors"
+cp -R $RPM_BUILD_DIR/%{source_name}-%{git_commit}/dist/dark "$RPM_BUILD_ROOT/%{_datadir}/icons/La Capitaine Cursors (Dark)"
 
 
 %files
@@ -47,6 +48,9 @@ cp -R $RPM_BUILD_DIR/%{source_name}-r%{version}/dist/dark "$RPM_BUILD_ROOT/%{_da
 
 
 %changelog
+* Sun Feb 23 2020 Laurent Tréguier <laurent@treguier.org> - 4-2.20200223
+- new release
+
 * Fri Feb 21 2020 Laurent Tréguier <laurent@treguier.org> - 4-1
 - new version
 
