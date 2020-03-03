@@ -8,7 +8,7 @@
 %endif
 
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{dev_version}-%{source_arch}/dart-sdk
-%define         dev_version     dev.10.0
+%define         dev_version     dev.11.0
 
 Name:           %{source_name}-dev-bin
 Epoch:          1
@@ -64,6 +64,9 @@ done
 
 
 %changelog
+* Tue Mar 03 2020 Laurent Tréguier <laurent@treguier.org> - 1:2.8.0-0.2.dev.11.0
+- new release
+
 * Fri Feb 21 2020 Laurent Tréguier <laurent@treguier.org> - 1:2.8.0-0.1.dev.10.0
 - new release
 
