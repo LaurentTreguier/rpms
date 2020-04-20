@@ -1,5 +1,5 @@
-%global         git_date        20200324
-%global         git_commit      7193ad028a3a719f64d857e92169d2882c72d482
+%global         git_date        20200414
+%global         git_commit      36b97689cfaa2e20344590d4b01e079149106fc8
 %global         configure       ./configure
 %global         conflict_files  actions/22x22 \\\
                                 devices/scalable \\\
@@ -97,6 +97,9 @@ done
 
 
 %changelog
+* Mon Apr 20 2020 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20200414-1
+- new version
+
 * Fri Mar 27 2020 Laurent Tréguier <laurent@treguier.org> - 0.6.1.20200324-1
 - new version
 
