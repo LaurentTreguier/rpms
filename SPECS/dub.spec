@@ -1,7 +1,7 @@
 %global         debug_package   %{nil}
 
 Name:           dub
-Version:        1.20.1
+Version:        1.21.0
 Release:        1%{?dist}
 Summary:        Package and build management system for D
 
@@ -58,6 +58,9 @@ cp %{SOURCE10} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Wed May 13 2020 Laurent Tréguier <laurent@treguier.org> - 1.21.0-1
+- new version
+
 * Sun Apr 19 2020 Laurent Tréguier <laurent@treguier.org> - 1.20.1-1
 - new version
 
