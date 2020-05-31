@@ -1,33 +1,34 @@
+%global         source_name                         oomox
 %global         __python                            %{__python3}
-%global         numix_theme_version                 1.11.1
-%global         materia_theme_version               20191017
-%global         arc_theme_version                   20190917
-%global         archdroid_icons_version             1.0.2
+%global         numix_theme_version                 1.12
+%global         materia_theme_version               20200320
+%global         arc_theme_commit                    1fd68cc4e846e1dd0c4e2cf3fe37f67b4d098671
+%global         archdroid_icons_commit              775b8c2c03abff20a36417a26156b4103234a1ce
 %global         gnome_colors_icons_version          5.5.5
-%global         oomoxify_version                    1.2
-%global         base16_commit                       2ddee2a03653850ed2166e7766636bf1dfb21ca5
-%global         numix_icons_commit                  6276c6896761bde44dcc7865a491274056d31d38
-%global         numix_folders_icons_commit          24e5f6c6603e7f798553d2f24a00de107713c333
-%global         papirus_icons_version               20200301
+%global         oomoxify_commit                     b476c6f35bfd1dc8a813d12f2b19234dae0ec1e8
+%global         base16_version                      1.0.1
+%global         numix_icons_version                 20.03.20
+%global         numix_folders_icons_commit          c213b67a4f846f131d8eb80c00ae04e15dcbe0bb
+%global         papirus_icons_version               20200430
 %global         suru_plus_icons_version             30.0
 %global         suru_plus_aspromauros_icons_version 3.0
 
-Name:           oomox
-Version:        1.12.6
+Name:           themix
+Version:        1.13.3
 Release:        1%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
-URL:            https://github.com/themix-project/oomox
-Source0:        https://github.com/themix-project/%{name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Source1:        https://github.com/themix-project/%{name}-gtk-theme/archive/%{numix_theme_version}.tar.gz#/%{name}-gtk-theme-%{numix_theme_version}.tar.gz
+URL:            https://github.com/themix-project/%{source_name}
+Source0:        https://github.com/themix-project/%{source_name}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source1:        https://github.com/themix-project/%{source_name}-gtk-theme/archive/%{numix_theme_version}.tar.gz#/%{name}-gtk-theme-%{numix_theme_version}.tar.gz
 Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_theme_version}.tar.gz#/%{name}-materia-theme-%{materia_theme_version}.tar.gz
-Source3:        https://github.com/NicoHood/arc-theme/archive/%{arc_theme_version}.tar.gz#/%{name}-arc-theme-%{arc_theme_version}.tar.gz
-Source4:        https://github.com/themix-project/%{name}-archdroid-icon-theme/archive/%{archdroid_icons_version}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_version}.tar.gz
-Source5:        https://github.com/themix-project/%{name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
-Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_version}.tar.gz#/%{name}-oomoxify-%{oomoxify_version}.tar.gz
-Source7:        https://github.com/themix-project/base16_mirror/archive/%{base16_commit}.tar.gz#/%{name}-base16_mirror-%{base16_commit}.tar.gz
-Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix_icons_commit}.tar.gz#/%{name}-numix-icon-theme-%{numix_icons_commit}.tar.gz
+Source3:        https://github.com/arc-design/arc-theme/archive/%{arc_theme_commit}.tar.gz#/%{name}-arc-theme-%{arc_theme_commit}.tar.gz
+Source4:        https://github.com/themix-project/%{source_name}-archdroid-icon-theme/archive/%{archdroid_icons_commit}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_commit}.tar.gz
+Source5:        https://github.com/themix-project/%{source_name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
+Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_commit}.tar.gz#/%{name}-oomoxify-%{oomoxify_commit}.tar.gz
+Source7:        https://github.com/themix-project/base16_mirror/archive/%{base16_version}.tar.gz#/%{name}-base16_mirror-%{base16_version}.tar.gz
+Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix_icons_version}.tar.gz#/%{name}-numix-icon-theme-%{numix_icons_version}.tar.gz
 Source9:        https://github.com/numixproject/numix-folders/archive/%{numix_folders_icons_commit}.tar.gz#/%{name}-numix-folders-%{numix_folders_icons_commit}.tar.gz
 Source10:       https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/%{papirus_icons_version}.tar.gz#/%{name}-papirus-icon-theme-%{papirus_icons_version}.tar.gz
 Source11:       https://github.com/gusbemacbe/suru-plus/archive/v%{suru_plus_icons_version}.tar.gz#/%{name}-suru-plus-icon-theme-%{suru_plus_icons_version}.tar.gz
@@ -85,113 +86,123 @@ Recommends:     python3-colorz
 Recommends:     python3-haishoku
 %endif
 
+Obsoletes:      %{source_name} < %{version}-%{release}
 AutoReq:        no
 
 %description
-Themix: GUI for generating different color variations of Arc, Materia, Oomox
+Themix: GUI for generating different color variations of Arc, Materia, Themix
 themes (GTK2, GTK3, Cinnamon, GNOME, MATE, Openbox, Xfwm), ArchDroid,
 Gnome-Colors, Numix, Papirus icon themes, and terminal palettes.
 
 
 %package theme-arc
-Summary:        Arc theme plugin for Oomox
+Summary:        Arc theme plugin for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-theme-arc < %{version}-%{release}
 
 %description theme-arc
-Sources of Arc theme used by Oomox
+Sources of Arc theme used by Themix
 
 
 %package theme-materia
-Summary:        Materia theme plugin for Oomox
+Summary:        Materia theme plugin for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-theme-materia < %{version}-%{release}
 
 %description theme-materia
-Sources of Materia theme used by Oomox
+Sources of Materia theme used by Themix
 
 
 %package theme-oomox
-Summary:        Oomox theme plugin for Oomox
+Summary:        Oomox theme plugin for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-theme-oomox < %{version}-%{release}
 
 %description theme-oomox
-Sources of Oomox theme used by Oomox
+Sources of Themix theme used by Themix
 
 
 %package icons-archdroid
-Summary:        Archdroid icon theme plugins for Oomox
+Summary:        Archdroid icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-archdroid < %{version}-%{release}
 
 %description icons-archdroid
-Sources of Archdroid icon theme used by Oomox
+Sources of Archdroid icon theme used by Themix
 
 
 %package icons-gnome-colors
-Summary:        Gnome Colors icon theme plugins for Oomox
+Summary:        Gnome Colors icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-gnome-colors < %{version}-%{release}
 
 %description icons-gnome-colors
-Sources of Gnome Colors icon theme used by Oomox
+Sources of Gnome Colors icon theme used by Themix
 
 
 %package icons-numix
-Summary:        Numix icon theme plugins for Oomox
+Summary:        Numix icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-numix < %{version}-%{release}
 
 %description icons-numix
-Sources of Numix icon theme used by Oomox
+Sources of Numix icon theme used by Themix
 
 
 %package icons-papirus
-Summary:        Papirus icon theme plugins for Oomox
+Summary:        Papirus icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-papirus < %{version}-%{release}
 
 %description icons-papirus
-Sources of Papirus icon theme used by Oomox
+Sources of Papirus icon theme used by Themix
 
 
 %package icons-suru-plus
-Summary:        Suru Plus icon theme plugins for Oomox
+Summary:        Suru Plus icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-suru-plus < %{version}-%{release}
 
 %description icons-suru-plus
-Sources of Suru Plus icon theme used by Oomox
+Sources of Suru Plus icon theme used by Themix
 
 
 %package icons-suru-plus-aspromauros
-Summary:        Suru Plus Aspromauros icon theme plugins for Oomox
+Summary:        Suru Plus Aspromauros icon theme plugins for Themix
 Requires:       %{name}
+Obsoletes:      %{source_name}-icons-suru-plus-aspromauros < %{version}-%{release}
 
 %description icons-suru-plus-aspromauros
-Sources of Suru Plus Aspromauros icon theme used by Oomox
+Sources of Suru Plus Aspromauros icon theme used by Themix
 
 
 %prep
-%setup -q -b 0
-%setup -q -b 1
-%setup -q -b 2
-%setup -q -b 3
-%setup -q -b 4
-%setup -q -b 5
-%setup -q -b 6
-%setup -q -b 7
-%setup -q -b 8
-%setup -q -b 9
-%setup -q -b 10
-%setup -q -b 11
-%setup -q -b 12
+%setup -q -b 0 -n %{source_name}-%{version}
+%setup -q -b 1 -n %{source_name}-gtk-theme-%{numix_theme_version}
+%setup -q -b 2 -n materia-theme-%{materia_theme_version}
+%setup -q -b 3 -n arc-theme-%{arc_theme_commit}
+%setup -q -b 4 -n archdroid-icon-theme-%{archdroid_icons_commit}
+%setup -q -b 5 -n gnome-colors-icon-theme-%{gnome_colors_icons_version}
+%setup -q -b 6 -n oomoxify-%{oomoxify_commit}
+%setup -q -b 7 -n %{name}-plugin-base16-%{base16_version}
+%setup -q -b 8 -n numix-icon-theme-%{numix_icons_version}
+%setup -q -b 9 -n numix-folders-%{numix_folders_icons_commit}
+%setup -q -b 10 -n papirus-icon-theme-%{papirus_icons_version}
+%setup -q -b 11 -n suru-plus-%{suru_plus_icons_version}
+%setup -q -b 12 -n suru-plus-aspromauros-%{suru_plus_aspromauros_icons_version}
 cd $RPM_BUILD_DIR
-cp -pr %{name}-gtk-theme-%{numix_theme_version}/* %{name}-%{version}/plugins/theme_oomox/gtk-theme
-cp -pr materia-theme-%{materia_theme_version}/* %{name}-%{version}/plugins/theme_materia/materia-theme
-cp -pr arc-theme-%{arc_theme_version}/* %{name}-%{version}/plugins/theme_arc/arc-theme
-cp -pr archdroid-icon-theme-%{archdroid_icons_version}/* %{name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
-cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
-cp -pr oomoxify-%{oomoxify_version}/* %{name}-%{version}/plugins/oomoxify
-cp -pr base16_mirror-%{base16_commit}/* %{name}-%{version}/plugins/base16/base16_mirror
-cp -pr numix-icon-theme-%{numix_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-icon-theme
-cp -pr numix-folders-%{numix_folders_icons_commit}/* %{name}-%{version}/plugins/icons_numix/numix-folders
-cp -pr papirus-icon-theme-%{papirus_icons_version}/* %{name}-%{version}/plugins/icons_papirus/papirus-icon-theme
-cp -pr suru-plus-%{suru_plus_icons_version}/* %{name}-%{version}/plugins/icons_suruplus/suru-plus
-cp -pr suru-plus-aspromauros-%{suru_plus_aspromauros_icons_version}/* %{name}-%{version}/plugins/icons_suruplus_aspromauros/suru-plus-aspromauros
+cp -pr %{source_name}-gtk-theme-%{numix_theme_version}/* %{source_name}-%{version}/plugins/theme_oomox
+cp -pr materia-theme-%{materia_theme_version}/* %{source_name}-%{version}/plugins/theme_materia/materia-theme
+cp -pr arc-theme-%{arc_theme_commit}/* %{source_name}-%{version}/plugins/theme_arc/arc-theme
+cp -pr archdroid-icon-theme-%{archdroid_icons_commit}/* %{source_name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
+cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{source_name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
+cp -pr oomoxify-%{oomoxify_commit}/* %{source_name}-%{version}/plugins/oomoxify
+cp -pr %{name}-plugin-base16-%{base16_version}/* %{source_name}-%{version}/plugins/base16
+cp -pr numix-icon-theme-%{numix_icons_version}/* %{source_name}-%{version}/plugins/icons_numix/numix-icon-theme
+cp -pr numix-folders-%{numix_folders_icons_commit}/* %{source_name}-%{version}/plugins/icons_numix/numix-folders
+cp -pr papirus-icon-theme-%{papirus_icons_version}/* %{source_name}-%{version}/plugins/icons_papirus/papirus-icon-theme
+cp -pr suru-plus-%{suru_plus_icons_version}/* %{source_name}-%{version}/plugins/icons_suruplus/suru-plus
+cp -pr suru-plus-aspromauros-%{suru_plus_aspromauros_icons_version}/* %{source_name}-%{version}/plugins/icons_suruplus_aspromauros/suru-plus-aspromauros
 
 
 %build
@@ -200,6 +211,7 @@ cp -pr suru-plus-aspromauros-%{suru_plus_aspromauros_icons_version}/* %{name}-%{
 %install
 rm -rf $RPM_BUILD_ROOT/*
 install -d $RPM_BUILD_ROOT/%{_bindir}
+cd $RPM_BUILD_DIR/%{source_name}-%{version}
 %make_install APPDIR=/opt/%{name} PREFIX=%{_prefix} . $RPM_BUILD_ROOT
 %if 0%{?mageia}
 ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
@@ -210,7 +222,7 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 %license /opt/%{name}/LICENSE
 %license /opt/%{name}/CREDITS
 %doc /opt/%{name}/README.md
-%attr(755,root,root) %{_bindir}/oomox*
+%attr(755,root,root) %{_bindir}/*
 %if 0%{?mageia}
 %{_bindir}/sassc
 %endif
@@ -268,6 +280,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Wed May 27 2020 Laurent Tréguier <laurent@treguier.org> - 1.13.3-1
+- new version
+
 * Sun Mar 15 2020 Laurent Tréguier <laurent@treguier.org> - 1.12.6-1
 - new version
 
