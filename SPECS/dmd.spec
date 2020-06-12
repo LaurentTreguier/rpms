@@ -12,7 +12,7 @@
 
 Name:           %{dmd_name}
 Version:        2.092.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -26,7 +26,11 @@ Source20:       macros.%{name}
 
 BuildRequires:  gcc-c++
 BuildRequires:  git
-%if 0%{?fedora}
+BuildRequires:  /sbin/ldconfig
+%if 0%{?suse_version}
+BuildRequires:  ldc-phobos-devel
+%endif
+%if 0%{?fedora}%{?suse_version}
 BuildRequires:  ldc
 %else
 %if 0%{?with_bootstrap}
@@ -144,7 +148,7 @@ cp -R {etc,std} $RPM_BUILD_ROOT/%{_includedir}/%{name}/%{phb_name}
 cd generated/$RPM_OS/release/%{arch_bits}
 rm *.o
 cp lib%{phb_name}2.{a,so.*.*.*} $RPM_BUILD_ROOT/%{_libdir}
-ldconfig -N $RPM_BUILD_ROOT/%{_libdir}
+/sbin/ldconfig -N $RPM_BUILD_ROOT/%{_libdir}
 ln -sf lib%{phb_name}2.so.*.*.* $RPM_BUILD_ROOT/%{_libdir}/lib%{phb_name}2.so
 
 # tools
@@ -201,6 +205,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Fri Jun 12 2020 Laurent Tréguier <laurent@treguier.org> - 2.092.1-2
+- fixed Opensuse build
+
 * Fri Jun 12 2020 Laurent Tréguier <laurent@treguier.org> - 2.092.1-1
 - new version
 
