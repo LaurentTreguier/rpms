@@ -1,9 +1,9 @@
 %global         debug_package   %{nil}
-%global         nimble_version  0.11.0
+%global         nimble_version  0.11.4
 %global         koch_options    -d:release -d:useGnuReadline
 
 Name:           nim
-Version:        1.2.0
+Version:        1.2.2
 Release:        1%{?dist}
 Summary:        A compiled, garbage-collected systems programming language
 
