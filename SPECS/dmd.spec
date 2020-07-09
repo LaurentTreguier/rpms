@@ -11,8 +11,8 @@
 %define         install_dir     $RPM_BUILD_DIR/%{name}-%{version}-install
 
 Name:           %{dmd_name}
-Version:        2.092.1
-Release:        2%{?dist}
+Version:        2.093.0
+Release:        1%{?dist}
 Summary:        Digital Mars D Compiler
 
 License:        Boost
@@ -205,6 +205,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT/%{_rpmconfigdir}/macros.d
 
 
 %changelog
+* Thu Jul 09 2020 Laurent Tréguier <laurent@treguier.org> - 2.093.0-1
+- new version
+
 * Fri Jun 12 2020 Laurent Tréguier <laurent@treguier.org> - 2.092.1-2
 - fixed Opensuse build
 
