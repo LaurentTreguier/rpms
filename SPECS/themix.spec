@@ -5,9 +5,9 @@
 %global         arc_theme_commit                    1fd68cc4e846e1dd0c4e2cf3fe37f67b4d098671
 %global         archdroid_icons_commit              775b8c2c03abff20a36417a26156b4103234a1ce
 %global         gnome_colors_icons_version          5.5.5
-%global         oomoxify_commit                     b476c6f35bfd1dc8a813d12f2b19234dae0ec1e8
+%global         oomoxify_version                    1.2.1
 %global         base16_version                      1.0.1
-%global         numix_icons_version                 20.03.20
+%global         numix_icons_version                 20.06.07
 %global         numix_folders_icons_commit          c213b67a4f846f131d8eb80c00ae04e15dcbe0bb
 %global         papirus_icons_version               20200430
 %global         suru_plus_icons_version             30.0
@@ -15,7 +15,7 @@
 
 Name:           themix
 Version:        1.13.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -26,7 +26,7 @@ Source2:        https://github.com/nana-4/materia-theme/archive/v%{materia_theme
 Source3:        https://github.com/arc-design/arc-theme/archive/%{arc_theme_commit}.tar.gz#/%{name}-arc-theme-%{arc_theme_commit}.tar.gz
 Source4:        https://github.com/themix-project/%{source_name}-archdroid-icon-theme/archive/%{archdroid_icons_commit}.tar.gz#/%{name}-archdroid-icon-theme-%{archdroid_icons_commit}.tar.gz
 Source5:        https://github.com/themix-project/%{source_name}-gnome-colors-icon-theme/archive/%{gnome_colors_icons_version}.tar.gz#/%{name}-gnome-colors-icon-theme-%{gnome_colors_icons_version}.tar.gz
-Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_commit}.tar.gz#/%{name}-oomoxify-%{oomoxify_commit}.tar.gz
+Source6:        https://github.com/themix-project/oomoxify/archive/%{oomoxify_version}.tar.gz#/%{name}-oomoxify-%{oomoxify_version}.tar.gz
 Source7:        https://github.com/themix-project/base16_mirror/archive/%{base16_version}.tar.gz#/%{name}-base16_mirror-%{base16_version}.tar.gz
 Source8:        https://github.com/numixproject/numix-icon-theme/archive/%{numix_icons_version}.tar.gz#/%{name}-numix-icon-theme-%{numix_icons_version}.tar.gz
 Source9:        https://github.com/numixproject/numix-folders/archive/%{numix_folders_icons_commit}.tar.gz#/%{name}-numix-folders-%{numix_folders_icons_commit}.tar.gz
@@ -183,7 +183,7 @@ Sources of Suru Plus Aspromauros icon theme used by Themix
 %setup -q -b 3 -n arc-theme-%{arc_theme_commit}
 %setup -q -b 4 -n archdroid-icon-theme-%{archdroid_icons_commit}
 %setup -q -b 5 -n gnome-colors-icon-theme-%{gnome_colors_icons_version}
-%setup -q -b 6 -n oomoxify-%{oomoxify_commit}
+%setup -q -b 6 -n oomoxify-%{oomoxify_version}
 %setup -q -b 7 -n %{name}-plugin-base16-%{base16_version}
 %setup -q -b 8 -n numix-icon-theme-%{numix_icons_version}
 %setup -q -b 9 -n numix-folders-%{numix_folders_icons_commit}
@@ -196,7 +196,7 @@ cp -pr materia-theme-%{materia_theme_version}/* %{source_name}-%{version}/plugin
 cp -pr arc-theme-%{arc_theme_commit}/* %{source_name}-%{version}/plugins/theme_arc/arc-theme
 cp -pr archdroid-icon-theme-%{archdroid_icons_commit}/* %{source_name}-%{version}/plugins/icons_archdroid/archdroid-icon-theme
 cp -pr gnome-colors-icon-theme-%{gnome_colors_icons_version}/* %{source_name}-%{version}/plugins/icons_gnomecolors/gnome-colors-icon-theme
-cp -pr oomoxify-%{oomoxify_commit}/* %{source_name}-%{version}/plugins/oomoxify
+cp -pr oomoxify-%{oomoxify_version}/* %{source_name}-%{version}/plugins/oomoxify
 cp -pr %{name}-plugin-base16-%{base16_version}/* %{source_name}-%{version}/plugins/base16
 cp -pr numix-icon-theme-%{numix_icons_version}/* %{source_name}-%{version}/plugins/icons_numix/numix-icon-theme
 cp -pr numix-folders-%{numix_folders_icons_commit}/* %{source_name}-%{version}/plugins/icons_numix/numix-folders
@@ -280,6 +280,10 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Wed Sep 16 2020 Laurent Tréguier <laurent@treguier.org> - 1.13.3-2
+- updated oomoxify
+- updated numix-icon-theme
+
 * Wed May 27 2020 Laurent Tréguier <laurent@treguier.org> - 1.13.3-1
 - new version
 
