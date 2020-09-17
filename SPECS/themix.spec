@@ -1,7 +1,7 @@
 %global         source_name                         oomox
 %global         __python                            %{__python3}
 %global         numix_theme_version                 1.12
-%global         materia_theme_version               20200320
+%global         materia_theme_version               20200916
 %global         arc_theme_commit                    1fd68cc4e846e1dd0c4e2cf3fe37f67b4d098671
 %global         archdroid_icons_commit              775b8c2c03abff20a36417a26156b4103234a1ce
 %global         gnome_colors_icons_version          5.5.5
@@ -15,7 +15,7 @@
 
 Name:           themix
 Version:        1.13.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        GUI and command line tool for generating variations of various GTK and icon themes
 
 License:        GPLv3
@@ -280,6 +280,9 @@ ln -s sass $RPM_BUILD_ROOT/%{_bindir}/sassc
 
 
 %changelog
+* Thu Sep 17 2020 Laurent Tréguier <laurent@treguier.org> - 1.13.3-3
+- updated materia-theme
+
 * Wed Sep 16 2020 Laurent Tréguier <laurent@treguier.org> - 1.13.3-2
 - updated oomoxify
 - updated numix-icon-theme
