@@ -8,11 +8,11 @@
 %endif
 
 %define         release_dir     $RPM_BUILD_DIR/%{name}-%{version}-%{dev_version}-%{source_arch}/dart-sdk
-%define         dev_version     266.0.dev
+%define         dev_version     13.0.dev
 
 Name:           %{source_name}-dev-bin
 Epoch:          1
-Version:        2.11.0
+Version:        2.12.0
 Release:        0.1.%{dev_version}%{?dist}
 Summary:        The Dart SDK, including the VM, dart2js, core libraries, and more
 Conflicts:      %{source_name}
@@ -64,6 +64,9 @@ done
 
 
 %changelog
+* Tue Nov  3 19:49:58 CET 2020 Laurent Tréguier <laurent@treguier.org> - 1:2.12.0-0.1.13.0.dev
+- new version
+
 * Thu Oct 29 2020 Laurent Tréguier <laurent@treguier.org> - 1:2.11.0-0.1.266.0.dev
 - new release
 
