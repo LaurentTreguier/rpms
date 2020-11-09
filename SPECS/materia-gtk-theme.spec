@@ -1,7 +1,7 @@
 %global         source_name materia-theme
 
 Name:           materia-gtk-theme
-Version:        20200320
+Version:        20200916
 Release:        1%{?dist}
 Summary:        A Material Design-like theme for GNOME/GTK+ based desktop environments
 
@@ -11,9 +11,9 @@ Source0:        https://github.com/nana-4/%{source_name}/archive/v%{version}.tar
 
 BuildArch:      noarch
 BuildRequires:  bash
-BuildRequires:  bc
+BuildRequires:  sassc
 Requires:       %{_bindir}/glib-compile-resources
-Requires:       %{_datadir}/gtk-engines/murrine.xml
+Recommends:     %{_datadir}/gtk-engines/murrine.xml
 %if 0%{?suse_version}
 Requires:       gnome-themes-extras
 %else
@@ -49,6 +49,9 @@ cd $RPM_BUILD_DIR/%{source_name}-%{version}
 
 
 %changelog
+* Mon Nov  9 20:53:26 CET 2020 Laurent Tréguier <laurent@treguier.org> - 20200916-1
+- new version
+
 * Sat Apr 11 2020 Laurent Tréguier <laurent@treguier.org> - 20200320-1
 - new version
 
